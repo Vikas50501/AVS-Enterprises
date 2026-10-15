@@ -23,6 +23,30 @@
     @media (prefers-color-scheme: dark) { body { background:#0F1726; color:#EDF0F4; } }
     @keyframes avsBob { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
     @keyframes avsMarquee2 { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+    .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); column-gap:28px; }
+    .stat-item { padding:40px 0 28px; border-right:1px solid #E3E7ED; }
+    .stat-item:last-child { border-right:none; }
+    @media (max-width:900px) {
+      .stats-grid { grid-template-columns:repeat(2,1fr); row-gap:4px; }
+      .stat-item { padding:28px 0 24px; border-top:1px solid #E3E7ED; }
+      .stat-item:nth-child(2n) { border-right:none; }
+      .stat-item:nth-child(-n+2) { border-top:none; }
+    }
+    @media (max-width:560px) {
+      .stats-grid { grid-template-columns:1fr; }
+      .stat-item { border-right:none !important; padding:22px 0; }
+      .stat-item:first-child { border-top:none; }
+    }
+    .stages-scroll { overflow-x:auto; margin-bottom:48px; -webkit-overflow-scrolling:touch; scrollbar-width:thin; scrollbar-color:#4A6190 transparent; }
+    .stages-scroll::-webkit-scrollbar { height:5px; }
+    .stages-scroll::-webkit-scrollbar-thumb { background:#4A6190; border-radius:3px; }
+    .stages-row { display:grid; grid-template-columns:repeat(6,minmax(110px,1fr)); gap:4px; min-width:660px; }
+    .stage-item { background:none; border:none; cursor:pointer; padding:0 6px; text-align:center; font:inherit; }
+    .stages-track { height:3px; background:rgba(255,255,255,0.15); min-width:660px; margin-top:12px; }
+    @media (max-width:660px) {
+      .stages-row, .stages-track { min-width:560px; }
+      .stages-row { grid-template-columns:repeat(6,minmax(90px,1fr)); }
+    }
   </style>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AVS Enterprises","image":"./assets/logo-on-light-bg.png","telephone":"+91-98193-60334","address":{"@type":"PostalAddress","streetAddress":"B-14/2, Asmeeta Textile Park, Plot No. 1, Addl. Kalyan-Bhiwandi MIDC Industrial Area, Village Kon","addressLocality":"Bhiwandi","addressRegion":"Maharashtra","postalCode":"421311","addressCountry":"IN"},"taxID":"27ABCFA8291N1ZW","description":"Supplier of electrical testing, measuring and protection equipment in Bhiwandi, Maharashtra.","url":"./index.html"}</script>
 </helmet>
@@ -217,10 +241,10 @@
 
     <!-- 6 BY THE NUMBERS -->
     <section style="padding:0 0 90px; border-top:1px solid #E3E7ED;" ref="{{ registerStats }}">
-      <div style="display:flex; flex-wrap:wrap;">
+      <div class="stats-grid">
         <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
-          <div style="flex:1 1 200px; padding:40px 28px 0 0; border-right:{{ s.border }};">
-            <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:clamp(46px,7vw,86px); line-height:1; font-variant-numeric:tabular-nums;">{{ s.display }}</div>
+          <div class="stat-item">
+            <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:clamp(40px,7vw,86px); line-height:1; font-variant-numeric:tabular-nums;">{{ s.display }}</div>
             <div style="font-size:15px; color:#5E6672; margin-top:10px;">{{ s.label }}</div>
           </div>
         </sc-for>
@@ -241,25 +265,27 @@
   <section style="background:#0F2B5B; padding:110px 6vw;" ref="{{ registerReveal }}">
     <div style="max-width:1400px; margin:0 auto;">
       <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; color:#FFFFFF; font-size:clamp(28px,4vw,44px); margin:0 0 56px;">Which instruments belong at which stage</h2>
-      <div style="display:flex; gap:0; overflow-x:auto; margin-bottom:12px;">
-        <sc-for list="{{ stages }}" as="st" hint-placeholder-count="6">
-          <div onClick="{{ st.onSelect }}" style="flex:1 1 140px; min-width:120px; text-align:center; cursor:pointer; padding:0 6px;">
-            <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:40px; color:{{ st.numColor }};">{{ st.n }}</div>
-            <div style="font-size:13.5px; color:{{ st.labelColor }}; margin-top:6px;">{{ st.name }}</div>
-          </div>
-        </sc-for>
+      <div class="stages-scroll">
+        <div class="stages-row">
+          <sc-for list="{{ stages }}" as="st" hint-placeholder-count="6">
+            <button type="button" onClick="{{ st.onSelect }}" class="stage-item" style="color:{{ st.labelColor }};">
+              <span style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:clamp(28px,4vw,40px); color:{{ st.numColor }}; display:block;">{{ st.n }}</span>
+              <span style="font-size:13.5px; margin-top:6px; display:block;">{{ st.name }}</span>
+            </button>
+          </sc-for>
+        </div>
+        <div class="stages-track">
+          <div style="height:100%; width:{{ stageProgress }}; background:#D9A21B; transition:width 400ms ease;"></div>
+        </div>
       </div>
-      <div style="height:3px; background:rgba(255,255,255,0.15); margin-bottom:48px;">
-        <div style="height:100%; width:{{ stageProgress }}; background:#D9A21B; transition:width 400ms ease;"></div>
-      </div>
-      <div style="display:flex; flex-wrap:wrap; gap:40px;">
+      <div style="display:flex; flex-wrap:wrap; gap:32px 40px; margin-top:36px;">
         <div style="flex:1 1 280px;">
           <div style="font-size:13px; font-weight:700; color:#D9A21B; margin-bottom:10px;">What happens</div>
-          <div style="color:#FFFFFF; font-size:19px; line-height:1.6;">{{ activeStage.happens }}</div>
+          <div style="color:#FFFFFF; font-size:clamp(16px,2vw,19px); line-height:1.6;">{{ activeStage.happens }}</div>
         </div>
         <div style="flex:1 1 280px;">
           <div style="font-size:13px; font-weight:700; color:#D9A21B; margin-bottom:10px;">Typical instruments</div>
-          <div style="color:#FFFFFF; font-size:19px; line-height:1.6;">{{ activeStage.instruments }}</div>
+          <div style="color:#FFFFFF; font-size:clamp(16px,2vw,19px); line-height:1.6;">{{ activeStage.instruments }}</div>
         </div>
       </div>
       <a href="testing-guide.dc.html" style="display:inline-flex; align-items:center; gap:8px; margin-top:36px; font-size:15px; color:#FFFFFF; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.4); padding-bottom:3px;">
@@ -762,10 +788,10 @@ class Component extends DCLogic {
 
     const sv = this.state.statValues;
     const stats = [
-      { display: sv[0], label: 'Product categories', border: '1px solid #E3E7ED' },
-      { display: sv[1], label: 'Instrument families', border: '1px solid #E3E7ED' },
-      { display: sv[2], label: 'Testing stages', border: '1px solid #E3E7ED' },
-      { display: sv[3], label: 'Customer types', border: 'none' }
+      { display: sv[0], label: 'Product categories' },
+      { display: sv[1], label: 'Instrument families' },
+      { display: sv[2], label: 'Testing stages' },
+      { display: sv[3], label: 'Customer types' }
     ];
 
     const mobileNavDefs = [

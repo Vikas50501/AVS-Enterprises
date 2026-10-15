@@ -20,6 +20,16 @@
     html { overflow-x:clip; scroll-padding-top:100px; }
     a { color:#0F2B5B; }
     a:hover { color:#D9A21B; }
+    .stages-scroll { overflow-x:auto; margin-bottom:44px; -webkit-overflow-scrolling:touch; scrollbar-width:thin; scrollbar-color:#4A6190 transparent; }
+    .stages-scroll::-webkit-scrollbar { height:5px; }
+    .stages-scroll::-webkit-scrollbar-thumb { background:#4A6190; border-radius:3px; }
+    .stages-row { display:grid; grid-template-columns:repeat(6,minmax(110px,1fr)); gap:4px; min-width:660px; }
+    .stage-item { background:none; border:none; cursor:pointer; padding:0 6px; text-align:center; font:inherit; }
+    .stages-track { height:3px; background:rgba(255,255,255,0.15); min-width:660px; margin-top:12px; }
+    @media (max-width:660px) {
+      .stages-row, .stages-track { min-width:560px; }
+      .stages-row { grid-template-columns:repeat(6,minmax(90px,1fr)); }
+    }
   </style>
 </helmet>
 
@@ -124,18 +134,20 @@
     <section style="padding:0 0 110px;">
       <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(28px,4vw,42px); margin:0 0 48px;">Which instruments belong at which stage</h2>
       <div style="background:#0F2B5B; padding:56px 44px;">
-        <div style="display:flex; gap:0; overflow-x:auto; margin-bottom:12px;">
-          <sc-for list="{{ stages }}" as="st" hint-placeholder-count="6">
-            <div onClick="{{ st.onSelect }}" style="flex:1 1 130px; min-width:110px; text-align:center; cursor:pointer; padding:0 6px;">
-              <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:38px; color:{{ st.numColor }};">{{ st.n }}</div>
-              <div style="font-size:13px; color:{{ st.labelColor }}; margin-top:6px;">{{ st.name }}</div>
-            </div>
-          </sc-for>
+        <div class="stages-scroll">
+          <div class="stages-row">
+            <sc-for list="{{ stages }}" as="st" hint-placeholder-count="6">
+              <button type="button" onClick="{{ st.onSelect }}" class="stage-item" style="color:{{ st.labelColor }};">
+                <span style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:clamp(26px,3.6vw,38px); color:{{ st.numColor }}; display:block;">{{ st.n }}</span>
+                <span style="font-size:13px; margin-top:6px; display:block;">{{ st.name }}</span>
+              </button>
+            </sc-for>
+          </div>
+          <div class="stages-track">
+            <div style="height:100%; width:{{ stageProgress }}; background:#D9A21B; transition:width 400ms ease;"></div>
+          </div>
         </div>
-        <div style="height:3px; background:rgba(255,255,255,0.15); margin-bottom:44px;">
-          <div style="height:100%; width:{{ stageProgress }}; background:#D9A21B; transition:width 400ms ease;"></div>
-        </div>
-        <div style="display:flex; flex-wrap:wrap; gap:36px;">
+        <div style="display:flex; flex-wrap:wrap; gap:28px 36px; margin-top:36px;">
           <div style="flex:1 1 280px;">
             <div style="font-size:13px; font-weight:700; color:#D9A21B; margin-bottom:10px;">What happens</div>
             <div style="color:#FFFFFF; font-size:19px; line-height:1.6;">{{ activeStage.happens }}</div>

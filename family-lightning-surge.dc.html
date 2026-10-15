@@ -132,6 +132,26 @@
       </div>
     </section>
 
+    <section id="dinnteco-range" style="padding:0 0 80px; border-bottom:1px solid #E3E7ED;">
+      <div style="font-size:13px; font-weight:700; color:#A3780F; margin-bottom:10px;">AUTHORISED DISTRIBUTOR</div>
+      <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(26px,3.4vw,36px); margin:0 0 16px;">Dinnteco active lightning protection range</h2>
+      <p style="font-size:15.5px; line-height:1.7; color:#5E6672; max-width:70ch; margin:0 0 40px;">AVS Enterprises is an authorised distributor for Dinnteco International's early-streamer-emission (ESE) air terminals and related protection components. Full specifications and certification data are available on the manufacturer's datasheets &mdash; contact us for the current price list and delivery times.</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:32px;">
+        <sc-for list="{{ dinntecoProducts }}" as="p" hint-placeholder-count="7">
+          <div style="border:1px solid #E3E7ED;">
+            <div style="aspect-ratio:4/3; overflow:hidden; background:#F4F6F9;">
+              <img src="{{ p.image }}" alt="{{ p.name }}" style="width:100%; height:100%; object-fit:cover; display:block;"/>
+            </div>
+            <div style="padding:20px 22px 24px;">
+              <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:19px; margin-bottom:8px;">{{ p.name }}</div>
+              <div style="font-size:14.5px; line-height:1.6; color:#5E6672; margin-bottom:14px; min-height:62px;">{{ p.desc }}</div>
+              <a href="contact.dc.html" style="font-size:14px; font-weight:700; color:#0F2B5B; text-decoration:none; border-bottom:1px solid #0F2B5B; padding-bottom:2px;">Enquire &rarr;</a>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
     <section style="padding:80px 0;">
       <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(26px,3.4vw,36px); margin:0 0 36px;">Frequently asked questions</h2>
       <div style="border-top:1px solid #E3E7ED;">
@@ -250,6 +270,15 @@ class Component extends DCLogic {
       { label: 'FEATURES TO LOOK FOR', items: ['Components selected for corrosion resistance and current capacity', 'Design based on a lightning risk assessment', 'Systems intended to be installed in line with recognised standards such as the IEC 62305 series', 'Inspection and earth measurement after installation'] },
       { label: 'WHERE IT IS USED', items: ['Buildings, factories and warehouses', 'Telecom towers and data centres', 'Solar plants and wind sites', 'Fuel, chemical and storage facilities', 'Hospitals and public buildings'] }
     ];
+    const dinntecoProducts = [
+      { name: 'DDCE 50plus', image: './assets/products/ddce-50plus.jpeg', desc: 'Early-streamer-emission air terminal for general ground structures, with a protection radius of up to 60 m where local regulations permit.' },
+      { name: 'DDCE 100 plus', image: './assets/products/ddce100-plus.jpg', desc: 'Higher-output ESE air terminal for general ground structures, extending the protection radius to up to 120 m where local regulations permit.' },
+      { name: 'DDCE Marine', image: './assets/products/ddce-marine.jpg', desc: 'Passive terminal built for vessels and marine structures, designed to dissipate the electrostatic field that can trigger an upward leader.' },
+      { name: 'DDCE chemical', image: './assets/products/ddce-chemical.jpg', desc: 'ESE terminal with built-in electromagnetic pulse attenuation, for saline and corrosive environments, in 30/60/120 m radius variants.' },
+      { name: 'DDCE 100 plus UL', image: './assets/products/ddce-ul96.jpg', desc: 'UL-listed version of the 100 plus terminal, with electromagnetic pulse attenuation and a protection radius of up to 120 m where permitted.' },
+      { name: 'Dinfil ground filter', image: './assets/products/dinfil.jpg', desc: 'High-reactance earth filter that limits high-frequency surge currents entering the earthing system during a lightning or EMP event.' },
+      { name: 'Dinco connector', image: './assets/products/dinco.jpg', desc: 'In-line connector fitted on the down-conductor run to damp high-frequency induced surges before they reach the earth termination.' }
+    ];
     return {
       desktopNavDisplay: isNarrow ? 'none' : 'flex',
       mobileNavBtnDisplay: isNarrow ? 'flex' : 'none',
@@ -259,7 +288,7 @@ class Component extends DCLogic {
       openProducts: () => this.setState({ productsOpen: true }),
       closeProducts: () => this.setState({ productsOpen: false }),
       productsPanelDisplay: this.state.productsOpen && !isNarrow ? 'block' : 'none',
-      familyLinks, mobileNavItems, columns,
+      familyLinks, mobileNavItems, columns, dinntecoProducts,
       toggleFaq: () => this.setState((s) => ({ faqOpen: !s.faqOpen })),
       faqMaxHeight: this.state.faqOpen ? '400px' : '0px',
       plusOpacity: this.state.faqOpen ? 0 : 1
