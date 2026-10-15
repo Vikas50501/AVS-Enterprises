@@ -32,20 +32,24 @@
       .stat-item:nth-child(2n) { border-right:none; }
       .stat-item:nth-child(-n+2) { border-top:none; }
     }
-    @media (max-width:560px) {
-      .stats-grid { grid-template-columns:1fr; }
-      .stat-item { border-right:none !important; padding:22px 0; }
-      .stat-item:first-child { border-top:none; }
-    }
-    .stages-scroll { overflow-x:auto; margin-bottom:48px; -webkit-overflow-scrolling:touch; scrollbar-width:thin; scrollbar-color:#4A6190 transparent; }
+    .stages-scroll { position:relative; overflow-x:auto; margin-bottom:48px; -webkit-overflow-scrolling:touch; scroll-snap-type:x proximity; scrollbar-width:thin; scrollbar-color:#4A6190 transparent; }
     .stages-scroll::-webkit-scrollbar { height:5px; }
     .stages-scroll::-webkit-scrollbar-thumb { background:#4A6190; border-radius:3px; }
     .stages-row { display:grid; grid-template-columns:repeat(6,minmax(110px,1fr)); gap:4px; min-width:660px; }
-    .stage-item { background:none; border:none; cursor:pointer; padding:0 6px; text-align:center; font:inherit; }
+    .stage-item { background:none; border:none; cursor:pointer; padding:0 6px; text-align:center; font:inherit; scroll-snap-align:start; }
     .stages-track { height:3px; background:rgba(255,255,255,0.15); min-width:660px; margin-top:12px; }
     @media (max-width:660px) {
       .stages-row, .stages-track { min-width:560px; }
       .stages-row { grid-template-columns:repeat(6,minmax(90px,1fr)); }
+    }
+    .stages-fade { position:absolute; top:0; right:0; bottom:15px; width:32px; background:linear-gradient(to right, rgba(15,43,91,0), #0F2B5B); pointer-events:none; }
+    @media (min-width:701px) { .stages-fade { display:none; } }
+    .buy-steps-wrap { position:relative; }
+    .buy-step-item { flex:1 1 150px; min-width:140px; position:relative; z-index:1; padding-right:16px; }
+    @media (max-width:700px) {
+      .buy-steps-line { display:none; }
+      .buy-step-item { flex:1 1 45%; padding-top:20px; padding-bottom:12px; border-top:1px solid #E3E7ED; }
+      .buy-step-item:nth-child(-n+2) { border-top:none; padding-top:0; }
     }
   </style>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AVS Enterprises","image":"./assets/logo-on-light-bg.png","telephone":"+91-98193-60334","address":{"@type":"PostalAddress","streetAddress":"B-14/2, Asmeeta Textile Park, Plot No. 1, Addl. Kalyan-Bhiwandi MIDC Industrial Area, Village Kon","addressLocality":"Bhiwandi","addressRegion":"Maharashtra","postalCode":"421311","addressCountry":"IN"},"taxID":"27ABCFA8291N1ZW","description":"Supplier of electrical testing, measuring and protection equipment in Bhiwandi, Maharashtra.","url":"./index.html"}</script>
@@ -58,7 +62,7 @@
   <!-- HEADER -->
   <header onMouseLeave="{{ closeProducts }}" style="position:fixed; top:0; left:0; right:0; z-index:200; background:#FFFFFF; border-bottom:1px solid #E3E7ED;">
     <div style="max-width:1400px; margin:0 auto; padding:{{ headerPad }}; display:flex; align-items:center; justify-content:space-between; gap:20px; transition:padding 250ms ease;">
-      <img src="./assets/logo-on-light-bg.png" alt="AVS Enterprises" style="height:34px; width:auto;"/>
+      <img src="./assets/logo-on-light-bg.png" alt="AVS Enterprises" style="height:46px; width:auto;"/>
       <nav style="display:{{ desktopNavDisplay }}; align-items:center; gap:28px;">
         <a href="#top" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Home</a>
         <a href="about-us.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">About</a>
@@ -265,18 +269,21 @@
   <section style="background:#0F2B5B; padding:110px 6vw;" ref="{{ registerReveal }}">
     <div style="max-width:1400px; margin:0 auto;">
       <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; color:#FFFFFF; font-size:clamp(28px,4vw,44px); margin:0 0 56px;">Which instruments belong at which stage</h2>
-      <div class="stages-scroll">
-        <div class="stages-row">
-          <sc-for list="{{ stages }}" as="st" hint-placeholder-count="6">
-            <button type="button" onClick="{{ st.onSelect }}" class="stage-item" style="color:{{ st.labelColor }};">
-              <span style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:clamp(28px,4vw,40px); color:{{ st.numColor }}; display:block;">{{ st.n }}</span>
-              <span style="font-size:13.5px; margin-top:6px; display:block;">{{ st.name }}</span>
-            </button>
-          </sc-for>
+      <div style="position:relative;">
+        <div class="stages-scroll">
+          <div class="stages-row">
+            <sc-for list="{{ stages }}" as="st" hint-placeholder-count="6">
+              <button type="button" onClick="{{ st.onSelect }}" class="stage-item" style="color:{{ st.labelColor }};">
+                <span style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:clamp(28px,4vw,40px); color:{{ st.numColor }}; display:block;">{{ st.n }}</span>
+                <span style="font-size:13.5px; margin-top:6px; display:block;">{{ st.name }}</span>
+              </button>
+            </sc-for>
+          </div>
+          <div class="stages-track">
+            <div style="height:100%; width:{{ stageProgress }}; background:#D9A21B; transition:width 400ms ease;"></div>
+          </div>
         </div>
-        <div class="stages-track">
-          <div style="height:100%; width:{{ stageProgress }}; background:#D9A21B; transition:width 400ms ease;"></div>
-        </div>
+        <div class="stages-fade" aria-hidden="true"></div>
       </div>
       <div style="display:flex; flex-wrap:wrap; gap:32px 40px; margin-top:36px;">
         <div style="flex:1 1 280px;">
@@ -366,10 +373,10 @@
     <!-- 11 HOW TO BUY -->
     <section id="how-to-buy" style="padding:120px 0;" ref="{{ registerBuySteps }}">
       <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(28px,4vw,44px); margin:0 0 64px;">Six clear steps from enquiry to dispatch</h2>
-      <div style="position:relative; display:flex; flex-wrap:wrap; gap:0;">
-        <div style="position:absolute; left:0; right:0; top:22px; height:2px; background:#E3E7ED;"><div style="height:100%; width:{{ buyProgress }}; background:#D9A21B; transition:width 600ms ease;"></div></div>
+      <div class="buy-steps-wrap" style="display:flex; flex-wrap:wrap; gap:0;">
+        <div class="buy-steps-line" style="position:absolute; left:0; right:0; top:22px; height:2px; background:#E3E7ED;"><div style="height:100%; width:{{ buyProgress }}; background:#D9A21B; transition:width 600ms ease;"></div></div>
         <sc-for list="{{ buySteps }}" as="b" hint-placeholder-count="6">
-          <div style="flex:1 1 150px; min-width:140px; position:relative; z-index:1; padding-right:16px;">
+          <div class="buy-step-item">
             <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:44px; color:{{ b.numColor }}; background:#fff; width:44px;">{{ b.n }}</div>
             <div style="font-size:16px; font-weight:700; margin:14px 0 8px;">{{ b.title }}</div>
             <div style="font-size:14px; line-height:1.55; color:#5E6672;">{{ b.desc }}</div>
@@ -434,7 +441,8 @@
     <div style="max-width:1400px; margin:0 auto;">
       <div style="display:flex; flex-wrap:wrap; gap:48px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.14);">
         <div style="flex:1 1 220px;">
-          <img src="./assets/logo-on-dark-bg.png" alt="AVS Enterprises" style="height:38px; width:auto; margin-bottom:16px;"/>
+          <img src="./assets/logo-transparent-hires.png" alt="AVS Enterprises" style="height:42px; width:auto; margin-bottom:16px; display:block;"/>
+          <p style="font-size:13.5px; line-height:1.6; color:#8A95AC; max-width:32ch; margin:0;">Supplier of electrical testing, measuring and protection equipment, based in Bhiwandi, Maharashtra.</p>
         </div>
         <div style="flex:1 1 160px;">
           <div style="font-size:13px; font-weight:700; color:#8A95AC; margin-bottom:16px;">Site</div>
