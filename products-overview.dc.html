@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="./assets/favicon-32.png">
+  <script src="./image-slot.js"></script>
   <title>Electrical Test Equipment | Products | AVS Enterprises</title>
   <meta name="description" content="Installation testers, insulation and earth testers, transformer and breaker test sets, power analysers, solar test equipment and more from AVS Enterprises."/>
   <style>
@@ -118,7 +119,7 @@
             <span style="flex:2 1 320px; font-size:14.5px; color:#5E6672;">{{ c.purpose }}</span>
             <a href="{{ c.familyHref }}" style="flex:0 0 auto; font-size:13.5px; color:#0F2B5B; text-decoration:none; white-space:nowrap;">{{ c.familyName }} &rarr;</a>
             <div style="display:{{ c.previewDisplay }}; position:absolute; right:0; top:-110px; width:200px; height:150px; pointer-events:none; z-index:10;">
-              <image-slot id="cat-preview-{{ c.no }}" shape="rect" placeholder="{{ c.previewCaption }}"></image-slot>
+              <image-slot id="cat-preview-{{ c.no }}" shape="rect" src="{{ c.previewImage }}" placeholder="{{ c.previewCaption }}"></image-slot>
             </div>
           </div>
         </sc-for>
@@ -240,6 +241,15 @@ class Component extends DCLogic {
     ];
     const activeFilter = this.state.activeFilter;
     const hoveredCat = this.state.hoveredCat;
+    const familyImages = {
+      'Installation & Earthing': './assets/provided/installation-earthing-testers.png',
+      'Insulation & Resistance': './assets/provided/insulation-resistance-testers.png',
+      'Power System Test': './assets/provided/power-system-test-equipment.png',
+      'Power Quality & Solar': './assets/provided/power-quality-solar.png',
+      'Handheld & Safety': './assets/provided/handheld-safety-testers.png',
+      'Calibration, Lab & Software': './assets/provided/calibration-lab-software.png',
+      'Lightning & Surge': './assets/provided/lightning-surge-protection.png'
+    };
     const visibleCategories = catBase
       .filter((c) => activeFilter === 'All' || c.familyName === activeFilter)
       .map((c, i) => ({
@@ -249,6 +259,7 @@ class Component extends DCLogic {
         rowBg: hoveredCat === c.no ? '#F7F8FA' : 'transparent',
         markerOpacity: hoveredCat === c.no ? 1 : 0,
         previewCaption: c.name + '. Recommended 800 x 600, landscape.',
+        previewImage: familyImages[c.familyName] || '',
         previewDisplay: (hoveredCat === c.no && !isNarrow) ? 'flex' : 'none'
       }));
     const filterLabels = ['All', 'Installation & Earthing', 'Insulation & Resistance', 'Power System Test', 'Power Quality & Solar', 'Handheld & Safety', 'Calibration, Lab & Software', 'Lightning & Surge'];

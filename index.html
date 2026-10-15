@@ -91,7 +91,7 @@
           </sc-for>
         </div>
         <div style="flex:1 1 360px; aspect-ratio:4/3;">
-          <image-slot id="mega-panel-preview" shape="rect" placeholder="{{ menuFamily.imageCaptionFull }}"></image-slot>
+          <image-slot id="mega-panel-preview" shape="rect" src="{{ menuFamily.image }}" placeholder="{{ menuFamily.imageCaptionFull }}"></image-slot>
         </div>
       </div>
     </div>
@@ -187,14 +187,14 @@
       <div style="display:flex; flex-wrap:wrap; gap:0;">
         <div style="flex:1 1 380px; display:{{ familyStickyDisplay }};">
           <div style="position:sticky; top:96px; height:calc(100vh - 136px); max-height:620px; overflow:hidden;">
-            <image-slot id="families-sticky-preview" shape="rect" placeholder="{{ activeFamilyObj.imageCaptionFull }}"></image-slot>
+            <image-slot id="families-sticky-preview" shape="rect" src="{{ activeFamilyObj.image }}" placeholder="{{ activeFamilyObj.imageCaptionFull }}"></image-slot>
           </div>
         </div>
         <div style="flex:1 1 480px; padding-left:{{ familyListPad }};">
           <sc-for list="{{ families }}" as="fam" hint-placeholder-count="7">
             <div ref="{{ fam.registerRow }}" style="display:flex; flex-direction:column; min-height:{{ familyRowMinHeight }}; justify-content:center; border-bottom:1px solid #E3E7ED; padding:32px 0;">
               <div style="display:{{ familyImgInlineDisplay }}; aspect-ratio:4/5; margin-bottom:24px;">
-                <image-slot id="family-row-img-{{ fam.n }}" shape="rect" placeholder="{{ fam.imageCaptionFull }}"></image-slot>
+                <image-slot id="family-row-img-{{ fam.n }}" shape="rect" src="{{ fam.image }}" placeholder="{{ fam.imageCaptionFull }}"></image-slot>
               </div>
               <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:10px;">
                 <div style="width:0; height:0; border-top:7px solid transparent; border-bottom:7px solid transparent; border-left:11px solid #D9A21B; opacity:{{ fam.markerOpacity }};"></div>
@@ -222,7 +222,7 @@
       <sc-for list="{{ families }}" as="fam" hint-placeholder-count="7">
         <div style="display:{{ fam.tabContentDisplay }}; gap:48px; flex-wrap:wrap;">
           <div style="flex:1 1 340px; aspect-ratio:4/3; min-height:240px;">
-            <image-slot id="featured-tab-img-{{ fam.n }}" shape="rect" placeholder="{{ fam.imageCaptionFull }}"></image-slot>
+            <image-slot id="featured-tab-img-{{ fam.n }}" shape="rect" src="{{ fam.image }}" placeholder="{{ fam.imageCaptionFull }}"></image-slot>
           </div>
           <div style="flex:1 1 400px;">
             <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:28px; margin-bottom:22px;">{{ fam.name }}</div>
@@ -309,7 +309,7 @@
       <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(28px,4vw,44px); margin:0 0 56px;">Six reasons customers come back</h2>
       <div style="display:flex; flex-wrap:wrap; gap:56px;">
         <div style="flex:1 1 320px; aspect-ratio:3/4; min-height:320px;">
-          <image-slot id="why-choose-img" shape="rect" placeholder="AVS team or a tidy instrument display shelf. Recommended 1200 x 1600, portrait."></image-slot>
+          <image-slot id="why-choose-img" shape="rect" src="./assets/provided/six-reasons-customers-come-back.png" placeholder="AVS team or a tidy instrument display shelf. Recommended 1200 x 1600, portrait."></image-slot>
         </div>
         <div style="flex:1 1 420px;">
           <sc-for list="{{ reasons }}" as="r" hint-placeholder-count="6">
@@ -338,7 +338,7 @@
         </div>
         <div style="flex:1 1 360px; display:flex; flex-direction:column; gap:24px;">
           <div style="aspect-ratio:4/3;">
-            <image-slot id="finder-workbench-img" shape="rect" placeholder="Technician comparing instruments at a workbench. Recommended 1200 x 900, landscape."></image-slot>
+            <image-slot id="finder-workbench-img" shape="rect" src="./assets/provided/not-sure.png" placeholder="Technician comparing instruments at a workbench. Recommended 1200 x 900, landscape."></image-slot>
           </div>
           <div style="opacity:{{ answerOpacity }}; transition:opacity 350ms ease;">
             <div style="font-size:13px; font-weight:700; color:#5E6672; margin-bottom:8px;">Recommended</div>
@@ -358,7 +358,7 @@
       <div style="display:flex; gap:4px; height:{{ sectorHeight }}; flex-direction:{{ sectorDirection }}; overflow-x:auto;">
         <sc-for list="{{ sectors }}" as="sec" hint-placeholder-count="6">
           <div onMouseEnter="{{ sec.onHover }}" onClick="{{ sec.onHover }}" style="position:relative; flex:{{ sec.flexGrow }}; min-width:{{ sec.minWidth }}; min-height:{{ sec.minHeight }}; background:#12306A; overflow:hidden; cursor:pointer; transition:flex-grow 450ms cubic-bezier(.22,1,.36,1);">
-            <div style="position:absolute; inset:0;"><image-slot id="sector-img-{{ sec.idx }}" shape="rect" placeholder="{{ sec.imageCaptionFull }}"></image-slot></div>
+            <div style="position:absolute; inset:0;"><image-slot id="sector-img-{{ sec.idx }}" shape="rect" src="{{ sec.image }}" placeholder="{{ sec.imageCaptionFull }}"></image-slot></div>
             <div style="position:absolute; inset:0; background:rgba(10,23,48,0.5); pointer-events:none;"></div>
             <div style="position:absolute; left:18px; right:18px; bottom:18px; display:{{ sec.textDisplay }}; pointer-events:none;">
               <span style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; color:#FFFFFF; font-size:17px;">{{ sec.name }}</span>
@@ -669,6 +669,7 @@ class Component extends DCLogic {
     const families = familyBase.map((f, i) => ({
       ...f,
       imageCaptionFull: f.imageCaption.charAt(0).toUpperCase() + f.imageCaption.slice(1) + '. Recommended 1200 x 1500, portrait.',
+      image: ['./assets/provided/installation-earthing-testers.png','./assets/provided/insulation-resistance-testers.png','./assets/provided/power-system-test-equipment.png','./assets/provided/power-quality-solar.png','./assets/provided/handheld-safety-testers.png','./assets/provided/calibration-lab-software.png','./assets/provided/lightning-surge-protection.png'][i],
       onMenuHover: () => this.setState({ menuHoverFamily: i }),
       menuColor: menuHoverFamily === i ? '#D9A21B' : '#0A1730',
       registerRow: (el) => this.registerFamilyRow(i, el),
@@ -773,8 +774,9 @@ class Component extends DCLogic {
       'Hospital electrical distribution room. Recommended 1200 x 1600, portrait.',
       'Students using a test instrument in a training lab. Recommended 1200 x 1600, portrait.'
     ];
+    const sectorImages = ['./assets/provided/power-system-test-equipment.png','./assets/provided/instrument-families.png','','','',''];
     const sectors = sectorBase.map((name, i) => ({
-      name, idx: i, imageCaptionFull: sectorImageCaptions[i],
+      name, idx: i, imageCaptionFull: sectorImageCaptions[i], image: sectorImages[i],
       onHover: () => this.setState({ activeSector: i }),
       flexGrow: isNarrow ? 1 : (activeSectorIdx === i ? 3 : 1),
       minWidth: isNarrow ? '100%' : '60px',

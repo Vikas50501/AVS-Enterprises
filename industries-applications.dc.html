@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="./assets/favicon-32.png">
+  <script src="./image-slot.js"></script>
   <title>Industries & Applications We Serve | AVS Enterprises</title>
   <meta name="description" content="Test and protection equipment for utilities, renewables, buildings, manufacturing, transport, healthcare and education. See how AVS Enterprises helps."/>
   <style>
@@ -111,7 +112,7 @@
           <sc-for list="{{ sectors }}" as="sec" hint-placeholder-count="6">
             <section id="{{ sec.id }}" style="padding:60px 0; border-bottom:1px solid #E3E7ED; display:flex; flex-wrap:wrap; flex-direction:{{ sec.direction }}; gap:40px;">
               <div style="flex:1 1 280px;">
-                <image-slot id="{{ sec.id }}-img" shape="rect" placeholder="{{ sec.imageCaption }}" style="aspect-ratio:4/3; display:block;"></image-slot>
+                <image-slot id="{{ sec.id }}-img" shape="rect" src="{{ sec.image }}" placeholder="{{ sec.imageCaption }}" style="aspect-ratio:4/3; display:block;"></image-slot>
               </div>
               <div style="flex:1 1 380px;">
                 <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(22px,2.6vw,28px); margin-bottom:16px;">{{ sec.name }}</div>
@@ -248,7 +249,12 @@ class Component extends DCLogic {
         intro: 'Engineering colleges, polytechnics and training institutes use test instruments and training kits to teach safe measurement practice. Calibration and research laboratories use reference instruments and calibrators.',
         items: [] }
     ];
-    const sectors = sectorsBase.map((s) => ({ ...s, anchor: '#' + s.id, hasIntro: !!s.hasIntro }));
+    const sectorImages = {
+      'sec-energy': './assets/provided/power-system-test-equipment.png',
+      'sec-buildings': './assets/provided/instrument-families.png',
+      'sec-education': './assets/provided/calibration-lab-software.png'
+    };
+    const sectors = sectorsBase.map((s) => ({ ...s, anchor: '#' + s.id, hasIntro: !!s.hasIntro, image: sectorImages[s.id] || '' }));
     return {
       desktopNavDisplay: isNarrow ? 'none' : 'flex',
       mobileNavBtnDisplay: isNarrow ? 'flex' : 'none',
