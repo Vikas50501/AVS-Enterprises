@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,700;0,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="./assets/favicon-32.png">
+  <script src="./image-slot.js"></script>
+  <style>
+    body { margin:0; background:#F4F6FA; -webkit-font-smoothing:antialiased; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    a { color:#E0A81C; }
+    a:hover { color:#F3C94A; }
+    @keyframes avsMarquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+    @keyframes avsFloat { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
+    @keyframes avsFadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+  </style>
+</helmet>
+
+<div style="font-family:'Instrument Sans',sans-serif; background:#F4F6FA; color:#0A1F44; overflow-x:hidden;">
+
+  <!-- HEADER -->
+  <header style="position:fixed; top:0; left:0; right:0; z-index:200; background:{{ headerBg }}; backdrop-filter:{{ headerBlur }}; -webkit-backdrop-filter:{{ headerBlur }}; transition:background 300ms ease, padding 300ms ease;">
+    <div style="max-width:1360px; margin:0 auto; padding:{{ headerPad }}; display:flex; align-items:center; justify-content:space-between; gap:20px; transition:padding 300ms ease;">
+      <img src="./assets/logo-on-dark-bg.png" alt="AVS Enterprises" style="height:36px; width:auto;"/>
+      <nav style="display:{{ desktopNavDisplay }}; align-items:center; gap:30px;">
+        <a href="#top" style="font-size:14px; text-decoration:none; color:#F4F6FA; font-weight:500;">Home</a>
+        <a href="#about" style="font-size:14px; text-decoration:none; color:#F4F6FA; font-weight:500;">About</a>
+        <div style="position:relative;" onMouseEnter="{{ openProducts }}" onMouseLeave="{{ closeProducts }}">
+          <span style="font-size:14px; color:#F4F6FA; font-weight:500; cursor:default;">Products ▾</span>
+          <div style="position:absolute; top:30px; left:-40px; width:620px; background:#0A1F44; border:1px solid rgba(224,168,28,0.25); box-shadow:0 24px 60px rgba(6,20,46,0.45); padding:24px; display:{{ productsPanelDisplay }}; grid-template-columns:1fr 1fr; gap:4px 28px; border-radius:2px;">
+            <sc-for list="{{ families }}" as="fam" hint-placeholder-count="7">
+              <a href="#families" style="display:flex; align-items:center; gap:14px; padding:10px 8px; text-decoration:none; border-radius:2px;">
+                <span style="width:34px; height:34px; flex-shrink:0; background:linear-gradient(135deg,#12306A,#0A1F44); border:1px solid rgba(224,168,28,0.3); display:flex; align-items:center; justify-content:center;">
+                  <svg width="12" height="10" viewBox="0 0 12 10"><polygon points="6,0 12,10 0,10" fill="#E0A81C"></polygon></svg>
+                </span>
+                <span>
+                  <div style="font-size:13.5px; color:#F4F6FA; font-weight:600;">{{ fam.name }}</div>
+                  <div style="font-size:12px; color:#8A919C; margin-top:2px;">{{ fam.desc }}</div>
+                </span>
+              </a>
+            </sc-for>
+          </div>
+        </div>
+        <a href="#selection" style="font-size:14px; text-decoration:none; color:#F4F6FA; font-weight:500;">Selection Guide</a>
+        <a href="#industries" style="font-size:14px; text-decoration:none; color:#F4F6FA; font-weight:500;">Industries</a>
+        <a href="#services" style="font-size:14px; text-decoration:none; color:#F4F6FA; font-weight:500;">Services</a>
+        <a href="#how-to-buy" style="font-size:14px; text-decoration:none; color:#F4F6FA; font-weight:500;">How to Buy</a>
+        <a href="#contact" style="font-size:14px; text-decoration:none; color:#F4F6FA; font-weight:500;">Contact</a>
+      </nav>
+      <div style="display:{{ desktopNavDisplay }}; align-items:center; gap:18px;">
+        <a href="#contact" style="font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:0.06em; text-transform:uppercase; background:#E0A81C; color:#0A1F44; font-weight:600; padding:12px 22px; text-decoration:none; border-radius:2px;">Get a Quotation</a>
+        <a href="tel:+919819360334" style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#C7CEDB; text-decoration:none; white-space:nowrap;">+91 98193 60334</a>
+      </div>
+      <button onClick="{{ toggleMobileNav }}" aria-label="Open menu" style="display:{{ mobileNavBtnDisplay }}; background:none; border:1px solid rgba(244,246,250,0.3); border-radius:2px; width:44px; height:44px; align-items:center; justify-content:center; cursor:pointer;">
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none"><line x1="0" y1="1" x2="18" y2="1" stroke="#F4F6FA" stroke-width="1.5"></line><line x1="0" y1="7" x2="18" y2="7" stroke="#F4F6FA" stroke-width="1.5"></line><line x1="0" y1="13" x2="18" y2="13" stroke="#F4F6FA" stroke-width="1.5"></line></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- MOBILE FULLSCREEN MENU -->
+  <div style="position:fixed; inset:0; z-index:300; background:#06142E; display:{{ mobileOverlayDisplay }}; flex-direction:column; padding:28px 28px 40px;">
+    <div style="display:flex; justify-content:flex-end; margin-bottom:24px;">
+      <button onClick="{{ toggleMobileNav }}" aria-label="Close menu" style="background:none; border:none; font-size:28px; cursor:pointer; color:#F4F6FA;">×</button>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:22px; flex:1; justify-content:center;">
+      <sc-for list="{{ mobileNavItems }}" as="item" hint-placeholder-count="8">
+        <a href="{{ item.href }}" onClick="{{ toggleMobileNav }}" style="font-family:'Archivo',sans-serif; font-weight:700; font-size:30px; text-decoration:none; color:#F4F6FA; opacity:{{ mobileNavOpenNum }}; transform:{{ item.transform }}; transition:opacity 420ms ease {{ item.delay }}, transform 420ms ease {{ item.delay }};">{{ item.label }}</a>
+      </sc-for>
+    </div>
+    <a href="#contact" onClick="{{ toggleMobileNav }}" style="text-align:center; font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:0.06em; text-transform:uppercase; background:#E0A81C; color:#0A1F44; font-weight:600; padding:16px; text-decoration:none; border-radius:2px;">Get a Quotation</a>
+  </div>
+
+  <!-- MOBILE STICKY BOTTOM BAR -->
+  <div style="display:{{ mobileBarDisplay }}; position:fixed; left:0; right:0; bottom:0; z-index:150; padding-bottom:env(safe-area-inset-bottom);">
+    <div style="display:flex;">
+      <a href="tel:+919819360334" style="flex:1; text-align:center; background:#12306A; color:#F4F6FA; text-decoration:none; padding:15px; font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:0.05em;">Call Now</a>
+      <a href="#contact" style="flex:1; text-align:center; background:#E0A81C; color:#0A1F44; text-decoration:none; padding:15px; font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:0.05em; font-weight:600;">Get a Quotation</a>
+    </div>
+  </div>
+
+  <!-- 01 HERO -->
+  <section id="top" style="position:relative; background:linear-gradient(170deg,#0A1F44 0%,#06142E 70%); min-height:92vh; display:flex; align-items:center; overflow:hidden; padding-bottom:{{ mobileBarPad }};">
+    <div style="position:absolute; top:-10%; right:-8%; width:60%; height:70%; background:radial-gradient(circle, rgba(243,201,74,0.22) 0%, rgba(243,201,74,0) 65%); pointer-events:none;"></div>
+    <div style="max-width:1360px; margin:0 auto; padding:120px 28px 64px; display:flex; flex-wrap:wrap-reverse; gap:48px; align-items:center; width:100%;">
+      <div style="flex:1 1 440px;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#E0A81C; margin-bottom:22px;">Electrical Testing · Measurement · Protection</div>
+        <h1 style="font-family:'Archivo',sans-serif; font-weight:800; font-variation-settings:'wdth' 118; color:#F4F6FA; font-size:clamp(34px,5.4vw,64px); line-height:1.08; letter-spacing:-0.01em; margin:0 0 26px; overflow:hidden;">
+          <span style="display:block; overflow:hidden;"><span style="display:block; transform:{{ heroLine1T }}; transition:transform 800ms cubic-bezier(.22,1,.36,1);">Reliable Testing and</span></span>
+          <span style="display:block; overflow:hidden;"><span style="display:block; transform:{{ heroLine2T }}; transition:transform 800ms cubic-bezier(.22,1,.36,1) 120ms;">Measuring Instruments</span></span>
+          <span style="display:block; overflow:hidden;"><span style="display:block; transform:{{ heroLine3T }}; transition:transform 800ms cubic-bezier(.22,1,.36,1) 240ms; color:#E0A81C;">for Safer Electrical Work</span></span>
+        </h1>
+        <p style="font-size:17px; line-height:1.7; color:#C7CEDB; max-width:48ch; margin:0 0 36px;">AVS Enterprises supplies electrical testing, measuring and protection equipment from Bhiwandi, Maharashtra. We help contractors, factories, utilities, solar developers and laboratories choose the right instruments and support them after the sale.</p>
+        <div style="display:flex; align-items:center; gap:28px; flex-wrap:wrap;">
+          <a href="#contact" style="display:inline-flex; align-items:center; gap:10px; font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:0.05em; text-transform:uppercase; background:#E0A81C; color:#0A1F44; font-weight:600; padding:17px 30px; text-decoration:none; border-radius:2px;" style-hover="background:#F3C94A;">
+            Get a Quotation <span>→</span>
+          </a>
+          <a href="#families" style="font-size:15px; color:#F4F6FA; text-decoration:none; border-bottom:1px solid rgba(244,246,250,0.4); padding-bottom:3px;">Browse Instruments</a>
+        </div>
+      </div>
+      <div style="flex:1 1 360px; position:relative; max-width:460px; margin:0 auto;">
+        <div style="position:relative; aspect-ratio:4/5; clip-path:polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%); overflow:hidden;">
+          <image-slot id="hero-visual" shape="rect" placeholder="Technician checking a switchboard with an installation tester — cinematic navy tone, 4:5 portrait"></image-slot>
+        </div>
+        <div style="position:absolute; left:-18px; top:14%; background:#0A1F44; border:1px solid rgba(224,168,28,0.3); padding:12px 18px; animation:avsFloat 5s ease-in-out infinite;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.04em; color:#F4F6FA;">14 product categories</div>
+        </div>
+        <div style="position:absolute; right:-16px; top:46%; background:#0A1F44; border:1px solid rgba(224,168,28,0.3); padding:12px 18px; animation:avsFloat 6s ease-in-out infinite 1s;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.04em; color:#F4F6FA;">Itemised quotations</div>
+        </div>
+        <div style="position:absolute; left:6%; bottom:-20px; background:#0A1F44; border:1px solid rgba(224,168,28,0.3); padding:12px 18px; animation:avsFloat 5.5s ease-in-out infinite 0.5s;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.04em; color:#F4F6FA;">After-sales support</div>
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute; bottom:28px; left:0; right:0; display:flex; justify-content:center;">
+      <div style="width:1px; height:40px; background:linear-gradient(#E0A81C, transparent); animation:avsFloat 2.4s ease-in-out infinite;"></div>
+    </div>
+  </section>
+
+  <!-- 02 TRUST MARQUEE -->
+  <section style="background:#06142E; padding:28px 0; overflow:hidden;">
+    <div style="display:flex; width:max-content; animation:avsMarquee 32s linear infinite;" style-hover="animation-play-state:paused;">
+      <sc-for list="{{ marqueeItems }}" as="m" hint-placeholder-count="16">
+        <div style="display:flex; align-items:center; gap:18px; padding:0 28px; white-space:nowrap;">
+          <span style="font-family:'Archivo',sans-serif; font-weight:700; font-size:18px; color:#C7CEDB;">{{ m }}</span>
+          <svg width="12" height="10" viewBox="0 0 12 10"><polygon points="6,0 12,10 0,10" fill="#E0A81C"></polygon></svg>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- 03 TAGLINE BAND -->
+  <section style="position:relative; background:#0A1F44; padding:100px 28px; clip-path:polygon(0 0,100% 6%,100% 94%,0 100%);">
+    <div style="max-width:1200px; margin:0 auto; text-align:center;">
+      <h2 style="font-family:'Archivo',sans-serif; font-weight:800; font-variation-settings:'wdth' 120; font-size:clamp(30px,6vw,64px); line-height:1.15; margin:0;">
+        <span style="color:#F4F6FA;">Test with Confidence.</span><br/>
+        <span style="-webkit-text-stroke:1.5px #E0A81C; color:transparent;">Measure with Accuracy.</span>
+      </h2>
+    </div>
+  </section>
+
+  <main style="max-width:1360px; margin:0 auto; padding:0 28px;">
+
+    <!-- 04 WHO WE SERVE -->
+    <section id="about" style="padding:110px 0;" ref="{{ registerReveal }}">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:#8A919C; margin-bottom:16px;">Who we serve</div>
+      <h2 style="font-family:'Archivo',sans-serif; font-weight:800; font-variation-settings:'wdth' 115; font-size:clamp(26px,3.8vw,42px); max-width:20ch; line-height:1.25; margin:0 0 48px;">Built for the people who build, inspect and maintain India's electrical infrastructure</h2>
+      <div style="columns:4 220px; column-gap:20px;">
+        <sc-for list="{{ audienceCards }}" as="aud" hint-placeholder-count="8">
+          <div style="break-inside:avoid; margin-bottom:20px; position:relative; aspect-ratio:{{ aud.ratio }}; overflow:hidden; border-radius:2px;">
+            <div style="position:absolute; inset:0; transition:transform 500ms cubic-bezier(.22,1,.36,1);" style-hover="transform:scale(1.05);">
+              <image-slot id="{{ aud.slotId }}" shape="rect" placeholder="{{ aud.name }}"></image-slot>
+            </div>
+            <div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(6,20,46,0.88) 0%, rgba(6,20,46,0.05) 55%); pointer-events:none;"></div>
+            <div style="position:absolute; left:16px; right:16px; bottom:14px; display:flex; align-items:center; justify-content:space-between; pointer-events:none;">
+              <span style="font-family:'Archivo',sans-serif; font-weight:700; color:#F4F6FA; font-size:15px;">{{ aud.name }}</span>
+              <svg width="14" height="12" viewBox="0 0 14 12"><polygon points="7,0 14,12 0,12" fill="#E0A81C"></polygon></svg>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <p style="font-size:16px; line-height:1.7; color:#3C4454; max-width:72ch; margin:36px 0 0;">From a single multimeter for a technician to a complete substation test kit for a utility, we help customers choose equipment that fits their work, their standards and their budget.</p>
+    </section>
+
+    <!-- 05 INSTRUMENT FAMILIES -->
+    <section id="families" style="padding:0 0 110px;" ref="{{ registerReveal }}">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:#8A919C; margin-bottom:16px;">Instrument families</div>
+      <h2 style="font-family:'Archivo',sans-serif; font-weight:800; font-variation-settings:'wdth' 115; font-size:clamp(26px,3.8vw,42px); margin:0 0 40px;">Explore our instrument families</h2>
+      <div style="display:{{ familyRowDisplay }}; gap:4px; height:{{ familyRowHeight }}; overflow-x:{{ familyOverflowX }}; scroll-snap-type:{{ familySnap }};">
+        <sc-for list="{{ families }}" as="fam" hint-placeholder-count="7">
+          <div onMouseEnter="{{ fam.onActivate }}" onClick="{{ fam.onActivate }}" style="position:relative; flex:{{ fam.flexGrow }}; min-width:{{ fam.minWidth }}; scroll-snap-align:start; background:{{ fam.bg }}; cursor:pointer; overflow:hidden; transition:flex-grow 500ms cubic-bezier(.22,1,.36,1); display:flex; flex-direction:column; justify-content:flex-end; padding:24px;">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#E0A81C; margin-bottom:10px;">{{ fam.n }}</div>
+            <div style="font-family:'Archivo',sans-serif; font-weight:700; color:#F4F6FA; font-size:{{ fam.nameSize }}; line-height:1.15; margin-bottom:10px; writing-mode:{{ fam.writingMode }};">{{ fam.name }}</div>
+            <div style="display:{{ fam.detailDisplay }}; color:#C7CEDB; font-size:14.5px; line-height:1.6; max-width:34ch; margin-bottom:16px;">{{ fam.desc }}</div>
+            <a href="#families" style="display:{{ fam.detailDisplay }}; font-family:'JetBrains Mono',monospace; font-size:12.5px; color:#E0A81C; text-decoration:none;">View family →</a>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- 06 FEATURED CATEGORIES (TABS) -->
+    <section style="padding:0 0 110px;" ref="{{ registerReveal }}">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:#8A919C; margin-bottom:16px;">Featured categories</div>
+      <h2 style="font-family:'Archivo',sans-serif; font-weight:800; font-variation-settings:'wdth' 115; font-size:clamp(26px,3.8vw,42px); margin:0 0 36px;">A closer look at what each family covers</h2>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:36px; border-bottom:1px solid #D9DEE8; padding-bottom:16px;">
+        <sc-for list="{{ families }}" as="fam" hint-placeholder-count="7">
+          <button onClick="{{ fam.onSelectTab }}" style="font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:0.03em; padding:10px 16px; border-radius:2px; border:1px solid {{ fam.tabBorder }}; background:{{ fam.tabBg }}; color:{{ fam.tabColor }}; cursor:pointer;">{{ fam.shortName }}</button>
+        </sc-for>
+      </div>
+      <sc-for list="{{ families }}" as="fam" hint-placeholder-count="7">
+        <div style="display:{{ fam.tabContentDisplay }}; gap:40px; flex-wrap:wrap; animation:avsFadeUp 450ms ease-out;">
+          <div style="flex:1 1 340px; aspect-ratio:16/10; background:linear-gradient(135deg,#12306A,#06142E); position:relative; min-height:220px;">
+            <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center; padding:20px;">
+              <span style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#8A919C; letter-spacing:0.04em;">[IMAGE: {{ fam.imageCaption }}]</span>
+            </div>
+          </div>
+          <div style="flex:1 1 400px;">
+            <div style="font-family:'Archivo',sans-serif; font-weight:700; font-size:24px; margin-bottom:18px;">{{ fam.name }}</div>
+            <div style="margin-bottom:16px;">
+              <div style="font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.08em; text-transform:uppercase; color:#8A919C; margin-bottom:6px;">What it measures</div>
+              <div style="font-size:15px; line-height:1.65; color:#3C4454;">{{ fam.whatMeasures }}</div>
+            </div>
+            <div style="margin-bottom:20px;">
+              <div style="font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.08em; text-transform:uppercase; color:#8A919C; margin-bottom:6px;">Where it's used</div>
+              <div style="font-size:15px; line-height:1.65; color:#3C4454;">{{ fam.whereUsed }}</div>
+            </div>
+            <div style="border-left:3px solid #E0A81C; padding:12px 18px; background:#FBF4E2;">
+              <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:#A3780F; margin-bottom:4px;">Buying tip</div>
+              <div style="font-size:14.5px; line-height:1.6; color:#5C4A12;">{{ fam.buyingTip }}</div>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </section>
+
+    <!-- 07 BY THE NUMBERS -->
+    <section style="padding:70px 0 110px; border-top:1px solid #D9DEE8;" ref="{{ registerStats }}">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(190px,1fr)); gap:32px;">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+          <div style="text-align:left;">
+            <div style="font-family:'Archivo',sans-serif; font-weight:800; font-variation-settings:'wdth' 110; font-size:clamp(42px,6vw,72px); color:#0A1F44; line-height:1;">{{ s.display }}</div>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:0.06em; text-transform:uppercase; color:#8A919C; margin-top:10px;">{{ s.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- 08 TESTING STAGES -->
+    <section style="padding:0 0 110px;" ref="{{ registerReveal }}">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:#8A919C; margin-bottom:16px;">Testing stages</div>
+      <h2 style="font-family:'Archivo',sans-serif; font-weight:800; font-variation-settings:'wdth' 115; font-size:clamp(26px,3.8vw,42px); margin:0 0 44px;">Which instruments belong at which stage</h2>
+      <div style="position:relative; display:flex; gap:0; overflow-x:auto; padding-bottom:8px;">
+        <div style="position:absolute; left:0; right:0; top:19px; height:2px; background:#D9DEE8; z-index:0;"></div>
+        <sc-for list="{{ stages }}" as="st" hint-placeholder-count="6">
+          <div onClick="{{ st.onSelect }}" style="position:relative; z-index:1; flex:1 1 140px; min-width:130px; text-align:center; cursor:pointer; padding:0 8px;">
+            <div style="width:40px; height:40px; border-radius:50%; background:{{ st.dotBg }}; border:2px solid {{ st.dotBorder }}; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; font-family:'JetBrains Mono',monospace; font-size:13px; color:{{ st.dotColor }}; transition:all 300ms ease;">{{ st.n }}</div>
+            <div style="font-family:'Archivo',sans-serif; font-weight:700; font-size:13.5px; color:{{ st.labelColor }};">{{ st.name }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:40px; background:#0A1F44; padding:36px; display:flex; flex-wrap:wrap; gap:28px;">
+        <div style="flex:1 1 240px;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.08em; text-transform:uppercase; color:#E0A81C; margin-bottom:10px;">What happens</div>
+          <div style="color:#F4F6FA; font-size:15.5px; line-height:1.65;">{{ activeStage.happens }}</div>
+        </div>
+        <div style="flex:1 1 240px;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.08em; text-transform:uppercase; color:#E0A81C; margin-bottom:10px;">Typical instruments</div>
+          <div style="color:#F4F6FA; font-size:15.5px; line-height:1.65;">{{ activeStage.instruments }}</div>
+        </div>
+      </div>
+      <a href="#testing-guide" style="display:inline-block; margin-top:24px; font-size:15px; color:#0A1F44; text-decoration:none; border-bottom:1px solid #0A1F44;">Read the Testing Guide →</a>
+    </section>
+
+    <!-- 09 WHY CUSTOMERS CHOOSE US -->
+  </main>
+
+  <section style="background:#06142E; padding:110px 28px;" ref="{{ registerReveal }}">
+    <div style="max-width:1360px; margin:0 auto;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:#8A919C; margin-bottom:16px;">Why AVS Enterprises</div>
+      <h2 style="font-family:'Archivo',sans-serif; font-weight:800; font-variation-settings:'wdth' 115; font-size:clamp(26px,3.8vw,42px); color:#F4F6FA; margin:0 0 44px;">Six reasons customers come back</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:1px; background:rgba(244,246,250,0.1);">
+        <sc-for list="{{ reasons }}" as="r" hint-placeholder-count="6">
+          <div style="background:#06142E; padding:36px 28px; position:relative; overflow:hidden; transition:transform 300ms ease;" style-hover="transform:translateY(-6px);">
+            <div style="font-family:'Archivo',sans-serif; font-weight:800; font-size:56px; color:rgba(244,246,250,0.1); line-height:1; margin-bottom:18px;">{{ r.n }}</div>
+            <div style="color:#F4F6FA; font-size:15.5px; line-height:1.6; margin-bottom:16px;">{{ r.text }}</div>
+            <div style="width:32px; height:2px; background:#E0A81C; transition:width 300ms ease;" style-hover="width:64px;"></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <main style="max-width:1360px; margin:0 auto; padding:0 28px;">
+
+    <!-- 10 INSTRUMENT FINDER -->
+    <section id="selection" style="padding:110px 0;" ref="{{ registerReveal }}">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:#8A919C; margin-bottom:16px;">Instrument finder</div>
+      <div style="display:flex; flex-wrap:wrap; gap:56px;">
+        <div style="flex:1 1 420px;">
+          <h2 style="font-family:'Archivo',sans-serif; font-weight:800; font-variation-settings:'wdth' 115; font-size:clamp(26px,3.4vw,36px); margin:0 0 10px;">Not sure which instrument you need?</h2>
+          <p style="font-size:15.5px; color:#8A919C; margin:0 0 28px;">Select a task to see the matching instrument.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:28px;">
+            <sc-for list="{{ tasks }}" as="tsk" hint-placeholder-count="6">
+              <button onClick="{{ tsk.onSelect }}" style="font-size:14px; padding:12px 18px; border-radius:2px; border:1px solid {{ tsk.border }}; background:{{ tsk.bg }}; color:{{ tsk.color }}; cursor:pointer; text-align:left;">{{ tsk.task }}</button>
+            </sc-for>
+          </div>
+          <div style="background:#0A1F44; padding:28px; display:{{ resultDisplay }}; align-items:center; gap:16px; animation:avsFadeUp 400ms ease-out;">
+            <svg width="16" height="22" viewBox="0 0 16 22" style="flex-shrink:0;"><polygon points="0,0 16,11 0,22" fill="#E0A81C"></polygon></svg>
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#8A919C; margin-bottom:6px;">Recommended</div>
+              <div style="color:#F4F6FA; font-size:17px; font-weight:600; margin-bottom:4px;">{{ activeTaskResult.instrument }}</div>
+              <a href="#families" style="font-size:13.5px; color:#E0A81C;">{{ activeTaskResult.family }} →</a>
+            </div>
+          </div>
+        </div>
+        <div style="flex:1 1 300px; aspect-ratio:4/3; background:linear-gradient(135deg,#12306A,#06142E); display:flex; align-items:center; justify-content:center; text-align:center; padding:20px;">
+          <span style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#8A919C;">[IMAGE: technician comparing instruments at a workbench]</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 INDUSTRIES & APPLICATIONS -->
+    <section id="industries" style="padding:0 0 110px;" ref="{{ registerReveal }}">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:#8A919C; margin-bottom:16px;">Industries &amp; applications</div>
+      <h2 style="font-family:'Archivo',sans-serif; font-weight:800; font-variation-settings:'wdth' 115; font-size:clamp(26px,3.8vw,42px); margin:0 0 40px;">Test and protection equipment for every electrical environment</h2>
+      <div style="display:flex; gap:6px; height:460px; overflow-x:auto;">
+        <sc-for list="{{ sectors }}" as="sec" hint-placeholder-count="6">
+          <div onMouseEnter="{{ sec.onHover }}" style="position:relative; flex:{{ sec.flexGrow }}; min-width:70px; overflow:hidden; cursor:pointer; transition:flex-grow 450ms cubic-bezier(.22,1,.36,1);">
+            <image-slot id="{{ sec.slotId }}" shape="rect" placeholder="{{ sec.name }}"></image-slot>
+            <div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(6,20,46,0.9) 0%, rgba(6,20,46,0.1) 60%); pointer-events:none;"></div>
+            <div style="position:absolute; left:16px; right:16px; bottom:16px; pointer-events:none;">
+              <span style="font-family:'Archivo',sans-serif; font-weight:700; color:#F4F6FA; font-size:15px; writing-mode:{{ sec.writingMode }};">{{ sec.name }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- 12 HOW TO BUY -->
+    <section id="how-to-buy" style="padding:0 0 110px;" ref="{{ registerReveal }}">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:#8A919C; margin-bottom:16px;">How to buy</div>
+      <h2 style="font-family:'Archivo',sans-serif; font-weight:800; font-variation-settings:'wdth' 115; font-size:clamp(26px,3.8vw,42px); margin:0 0 44px;">Six clear steps from enquiry to dispatch</h2>
+      <div style="position:relative; display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:20px;" ref="{{ registerBuySteps }}">
+        <sc-for list="{{ buySteps }}" as="b" hint-placeholder-count="6">
+          <div style="padding:22px 18px; border:1px solid {{ b.border }}; background:{{ b.bg }}; transition:all 400ms ease;">
+            <div style="width:38px; height:38px; border-radius:50%; background:{{ b.dotBg }}; color:{{ b.dotColor }}; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:13px; margin-bottom:14px; transition:all 400ms ease;">{{ b.n }}</div>
+            <div style="font-family:'Archivo',sans-serif; font-weight:700; font-size:15.5px; margin-bottom:8px;">{{ b.title }}</div>
+            <div style="font-size:13.5px; line-height:1.55; color:#5C6577;">{{ b.desc }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 13 CTA + QUICK ENQUIRY -->
+  <section id="contact" style="position:relative; background:#0A1F44; padding:110px 28px; clip-path:polygon(0 4%,100% 0,100% 100%,0 100%); overflow:hidden;">
+    <div style="position:absolute; top:-20%; left:-10%; width:50%; height:80%; background:radial-gradient(circle, rgba(224,168,28,0.18) 0%, rgba(224,168,28,0) 65%); pointer-events:none;"></div>
+    <div style="max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; gap:56px;">
+      <div style="flex:1 1 320px;">
+        <h2 style="font-family:'Archivo',sans-serif; font-weight:800; font-variation-settings:'wdth' 115; color:#F4F6FA; font-size:clamp(26px,3.6vw,38px); margin:0 0 18px;">Tell us what you want to test.</h2>
+        <p style="color:#C7CEDB; font-size:15.5px; line-height:1.7; margin:0 0 28px;">Share your application, the voltage or current range and any standards you follow. We will reply with suitable options.</p>
+        <a href="tel:+919819360334" style="display:inline-flex; align-items:center; gap:10px; font-size:16px; color:#F4F6FA; text-decoration:none;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 2h3l1.5 4-2 1.5a10 10 0 0 0 4.5 4.5L11.5 10l4 1.5v3c0 .8-.7 1.5-1.5 1.5C7.3 16 0 8.7 0 3.5 0 2.7.7 2 1.5 2Z" fill="#E0A81C"/></svg>
+          Call +91 98193 60334
+        </a>
+      </div>
+      <div style="flex:1 1 420px;">
+        <div style="display:{{ formDisplay }}; flex-direction:column; gap:22px;">
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:22px;">
+            <label style="display:flex; flex-direction:column; gap:8px;">
+              <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:#8A919C;">Name</span>
+              <input type="text" style="background:transparent; border:none; border-bottom:1px solid rgba(244,246,250,0.3); color:#F4F6FA; font-size:15px; padding:8px 0; outline:none;" style-focus="border-bottom-color:#E0A81C;"/>
+            </label>
+            <label style="display:flex; flex-direction:column; gap:8px;">
+              <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:#8A919C;">Company</span>
+              <input type="text" style="background:transparent; border:none; border-bottom:1px solid rgba(244,246,250,0.3); color:#F4F6FA; font-size:15px; padding:8px 0; outline:none;" style-focus="border-bottom-color:#E0A81C;"/>
+            </label>
+            <label style="display:flex; flex-direction:column; gap:8px;">
+              <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:#8A919C;">Phone</span>
+              <input type="tel" style="background:transparent; border:none; border-bottom:1px solid rgba(244,246,250,0.3); color:#F4F6FA; font-size:15px; padding:8px 0; outline:none;" style-focus="border-bottom-color:#E0A81C;"/>
+            </label>
+            <label style="display:flex; flex-direction:column; gap:8px;">
+              <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:#8A919C;">Email</span>
+              <input type="email" style="background:transparent; border:none; border-bottom:1px solid rgba(244,246,250,0.3); color:#F4F6FA; font-size:15px; padding:8px 0; outline:none;" style-focus="border-bottom-color:#E0A81C;"/>
+            </label>
+          </div>
+          <label style="display:flex; flex-direction:column; gap:8px;">
+            <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:#8A919C;">Category</span>
+            <select style="background:#0A1F44; border:none; border-bottom:1px solid rgba(244,246,250,0.3); color:#F4F6FA; font-size:15px; padding:8px 0; outline:none;" style-focus="border-bottom-color:#E0A81C;">
+              <sc-for list="{{ families }}" as="fam" hint-placeholder-count="7">
+                <option style="background:#0A1F44;">{{ fam.name }}</option>
+              </sc-for>
+            </select>
+          </label>
+          <label style="display:flex; flex-direction:column; gap:8px;">
+            <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:#8A919C;">What you want to test</span>
+            <textarea rows="3" style="background:transparent; border:none; border-bottom:1px solid rgba(244,246,250,0.3); color:#F4F6FA; font-size:15px; padding:8px 0; outline:none; resize:vertical; font-family:inherit;" style-focus="border-bottom-color:#E0A81C;"></textarea>
+          </label>
+          <button onClick="{{ submitForm }}" style="align-self:flex-start; font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:0.05em; text-transform:uppercase; background:#E0A81C; color:#0A1F44; font-weight:600; padding:16px 30px; border:none; border-radius:2px; cursor:pointer;" style-hover="background:#F3C94A;">Request My Quotation</button>
+        </div>
+        <div style="display:{{ successDisplay }}; align-items:center; gap:14px; background:rgba(224,168,28,0.1); border:1px solid rgba(224,168,28,0.3); padding:24px;">
+          <svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="none" stroke="#E0A81C" stroke-width="1.5"></circle><path d="M6 11l3 3 7-7" fill="none" stroke="#E0A81C" stroke-width="1.5"></path></svg>
+          <div style="color:#F4F6FA; font-size:15px;">Thank you. We will review your requirement and reply shortly.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="position:relative; background:#06142E; color:#C7CEDB; padding:90px 28px 32px; clip-path:polygon(0 3%,100% 0,100% 100%,0 100%); margin-top:-1px;">
+    <div style="max-width:1360px; margin:0 auto;">
+      <div style="display:flex; flex-wrap:wrap; gap:48px; padding-bottom:48px; border-bottom:1px solid rgba(244,246,250,0.1);">
+        <div style="flex:1 1 220px;">
+          <img src="./assets/logo-on-dark-bg.png" alt="AVS Enterprises" style="height:38px; width:auto; margin-bottom:16px;"/>
+        </div>
+        <div style="flex:1 1 160px;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.08em; text-transform:uppercase; color:#5C6577; margin-bottom:16px;">Site</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="#top" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Home</a>
+            <a href="#about" style="color:#C7CEDB; text-decoration:none; font-size:14px;">About</a>
+            <a href="#selection" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Selection Guide</a>
+            <a href="#industries" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Industries</a>
+            <a href="#how-to-buy" style="color:#C7CEDB; text-decoration:none; font-size:14px;">How to Buy</a>
+            <a href="#contact" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Contact</a>
+          </div>
+        </div>
+        <div style="flex:1 1 220px;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.08em; text-transform:uppercase; color:#5C6577; margin-bottom:16px;">Instrument families</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <sc-for list="{{ families }}" as="fam" hint-placeholder-count="7">
+              <a href="#families" style="color:#C7CEDB; text-decoration:none; font-size:14px;">{{ fam.name }}</a>
+            </sc-for>
+          </div>
+        </div>
+        <div style="flex:1 1 260px;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.08em; text-transform:uppercase; color:#5C6577; margin-bottom:16px;">Contact</div>
+          <div style="font-size:14px; line-height:1.7; color:#C7CEDB;">
+            B-14/2, Asmeeta Textile Park, Plot No. 1,<br/>Addl. Kalyan-Bhiwandi MIDC Industrial Area,<br/>Village Kon, Bhiwandi - 421311, Maharashtra<br/><br/>
+            Phone: +91 98193 60334<br/>
+            Email: [your email]<br/>
+            GSTIN: 27ABCFA8291N1ZW
+          </div>
+        </div>
+      </div>
+      <div style="padding-top:28px; font-size:13px; color:#5C6577;">© 2026 AVS Enterprises. All rights reserved.</div>
+      <p style="font-size:12px; line-height:1.6; color:#45506A; max-width:900px; margin:18px 0 0;">All product names, logos and brands mentioned on this website are the property of their respective owners. Specifications are indicative and may change. Please refer to the manufacturer's datasheet for exact details.</p>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.reducedMotion = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.state = {
+      isNarrow: typeof matchMedia === 'function' ? matchMedia('(max-width: 1040px)').matches : false,
+      mobileNavOpen: false,
+      scrolled: false,
+      productsOpen: false,
+      heroRevealed: this.reducedMotion,
+      activeFamily: 0,
+      activeTab: 0,
+      activeTask: 0,
+      activeStage: 2,
+      activeSector: 0,
+      statsStarted: this.reducedMotion,
+      statValues: [0,0,0,0],
+      buyStepsLit: this.reducedMotion ? 6 : 0,
+      formSubmitted: false
+    };
+    this._revealEls = []; this._revealed = new Set();
+  }
+
+  componentDidMount() {
+    this._mql = matchMedia('(max-width: 1040px)');
+    this._onMql = (e) => this.setState({ isNarrow: e.matches });
+    if (this._mql.addEventListener) this._mql.addEventListener('change', this._onMql);
+    this._onScroll = () => this.setState({ scrolled: window.scrollY > 10 });
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+
+    if (!this.reducedMotion) {
+      setTimeout(() => this.setState({ heroRevealed: true }), 250);
+      this._io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'none'; this._io.unobserve(e.target); }
+        });
+      }, { threshold: 0.1 });
+      setTimeout(() => this._revealEls.forEach((el) => this._io.observe(el)), 50);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this._mql && this._mql.removeEventListener) this._mql.removeEventListener('change', this._onMql);
+    window.removeEventListener('scroll', this._onScroll);
+    if (this._io) this._io.disconnect();
+    if (this._statInterval) clearInterval(this._statInterval);
+    if (this._buyInterval) clearInterval(this._buyInterval);
+  }
+
+  registerReveal(el) {
+    if (!el || this.reducedMotion || this._revealed.has(el)) return;
+    this._revealed.add(el);
+    el.style.opacity = '0'; el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 550ms ease-out, transform 550ms ease-out';
+    this._revealEls.push(el);
+  }
+
+  registerStats(el) {
+    if (!el || this._statsObs) return;
+    this._statsObs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting && !this.state.statsStarted) { this.startStats(); this._statsObs.disconnect(); } });
+    }, { threshold: 0.3 });
+    this._statsObs.observe(el);
+  }
+
+  startStats() {
+    if (this.reducedMotion) { this.setState({ statsStarted: true, statValues: [14,7,6,8] }); return; }
+    this.setState({ statsStarted: true });
+    const targets = [14,7,6,8]; const steps = 30; let i = 0;
+    this._statInterval = setInterval(() => {
+      i++;
+      this.setState({ statValues: targets.map((t) => Math.round(t * Math.min(1, i / steps))) });
+      if (i >= steps) clearInterval(this._statInterval);
+    }, 30);
+  }
+
+  registerBuySteps(el) {
+    if (!el || this._buyObs || this.reducedMotion) return;
+    this._buyObs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting && this.state.buyStepsLit === 0) { this.litBuySteps(); this._buyObs.disconnect(); } });
+    }, { threshold: 0.3 });
+    this._buyObs.observe(el);
+  }
+
+  litBuySteps() {
+    let n = 0;
+    this._buyInterval = setInterval(() => {
+      n++; this.setState({ buyStepsLit: n });
+      if (n >= 6) clearInterval(this._buyInterval);
+    }, 180);
+  }
+
+  renderVals() {
+    const isNarrow = this.state.isNarrow;
+    const familyBase = [
+      { n:'01', name:'Installation & Earthing Testers', shortName:'Installation', desc:'Prove wiring and earthing safe.',
+        whatMeasures:'Insulation resistance, continuity of protective conductors, earth loop and line impedance, prospective short-circuit current, RCD trip time and trip current, earth resistance.',
+        whereUsed:'Testing and commissioning of new wiring, periodic inspection, fault finding on tripping breakers and RCDs.',
+        buyingTip:'Choose a multifunction model if you inspect many types of installations. Choose single-function units if your team always performs the same one or two tests.',
+        imageCaption:'installation tester connected to a socket, earth rod kit beside it' },
+      { n:'02', name:'Insulation & Resistance Testers', shortName:'Insulation', desc:'Spot weak insulation and poor joints.',
+        whatMeasures:'Insulation resistance at selectable test voltages, polarisation index, and micro-ohm/milli-ohm contact resistance across bonds, joints and busbars.',
+        whereUsed:'Motors, generators, cables, transformers, switchgear and busbar joints.',
+        buyingTip:'Match the test voltage to the equipment rating. For breaker and busbar work, look for at least 100 A on a micro-ohmmeter.',
+        imageCaption:'insulation tester on a motor terminal box, micro-ohmmeter on a breaker' },
+      { n:'03', name:'Power System Test Equipment', shortName:'Power System', desc:'Transformers, breakers and protection.',
+        whatMeasures:'Transformer turns ratio, winding resistance and vector group; breaker contact timing and synchronism; CT ratio and relay pickup via primary injection.',
+        whereUsed:'Factory and site acceptance testing, pre-energisation checks, substation breaker maintenance, protection scheme verification.',
+        buyingTip:'Winding resistance test current should be matched to transformer size — larger transformers need higher test current to stabilise in reasonable time.',
+        imageCaption:'field engineer testing a transformer with a TTR kit in a substation yard' },
+      { n:'04', name:'Power Quality, Energy & Solar', shortName:'Power Quality & Solar', desc:'Understand supply quality and PV performance.',
+        whatMeasures:'Voltage, current, harmonics, flicker, dips and swells; string open-circuit voltage, I-V curves and insulation resistance of DC cables.',
+        whereUsed:'Energy audits, troubleshooting sensitive equipment, rooftop and ground-mounted solar commissioning and maintenance.',
+        buyingTip:'If results may be used in a contract or regulatory dispute, choose a Class A analyser; Class S is usually sufficient for maintenance work.',
+        imageCaption:'power analyser at an incoming panel, I-V curve tracer on a rooftop string' },
+      { n:'05', name:'Handheld & Safety Testers', shortName:'Handheld & Safety', desc:'Everyday meters, cameras and appliance testers.',
+        whatMeasures:'Voltage, current, resistance, temperature, presence of voltage, and protective earth resistance, insulation resistance and leakage currents on appliances and machines.',
+        whereUsed:'Routine maintenance, panel checks, hot-spot detection, workplace appliance inspection programmes.',
+        buyingTip:'Always select the safety category (CAT III or CAT IV) that matches the highest-risk point where you will work.',
+        imageCaption:'clamp meter in a panel, thermal camera view of a breaker' },
+      { n:'06', name:'Calibration, Lab & Software', shortName:'Calibration & Lab', desc:'References, training kits, reporting and accessories.',
+        whatMeasures:'Generation and measurement of voltage, current, resistance and frequency for checking other instruments; reporting and data handling for test records.',
+        whereUsed:'Calibration laboratories, instrumentation departments, technical colleges and ITIs.',
+        buyingTip:'A reference should be several times more accurate than the instrument you are checking.',
+        imageCaption:'calibrator on a lab bench next to a laptop showing a test report' },
+      { n:'07', name:'Lightning & Surge Protection', shortName:'Lightning & Surge', desc:'Components for protecting structures and electronics.',
+        whatMeasures:'Not a measuring category — components are designed, installed and verified against standards; the earth system is verified with earth testers.',
+        whereUsed:'Buildings, factories, telecom towers, data centres, solar plants and hospitals.',
+        buyingTip:'Protection design should come from a qualified designer. We supply the components and testing equipment, and can help with selection.',
+        imageCaption:'air terminal on a rooftop and a surge protective device inside a panel' }
+    ];
+    const activeFamily = this.state.activeFamily, activeTab = this.state.activeTab;
+    const families = familyBase.map((f, i) => ({
+      ...f,
+      onActivate: () => this.setState({ activeFamily: i }),
+      flexGrow: isNarrow ? 1 : (activeFamily === i ? 4 : 1),
+      minWidth: isNarrow ? '240px' : '60px',
+      bg: i % 2 === 0 ? 'linear-gradient(160deg,#12306A,#0A1F44)' : 'linear-gradient(160deg,#0A1F44,#06142E)',
+      nameSize: (!isNarrow && activeFamily !== i) ? '14px' : '20px',
+      writingMode: (!isNarrow && activeFamily !== i) ? 'vertical-rl' : 'horizontal-tb',
+      detailDisplay: (isNarrow || activeFamily === i) ? 'block' : 'none',
+      onSelectTab: () => this.setState({ activeTab: i }),
+      tabContentDisplay: activeTab === i ? 'flex' : 'none',
+      tabBg: activeTab === i ? '#0A1F44' : 'transparent',
+      tabColor: activeTab === i ? '#F4F6FA' : '#5C6577',
+      tabBorder: activeTab === i ? '#0A1F44' : '#D9DEE8'
+    }));
+
+    const audienceNames = ['Electrical contractors','Panel builders','Factories','Power utilities','Solar developers','Inspection agencies','Calibration laboratories','Technical institutes'];
+    const audienceCards = audienceNames.map((name, i) => ({ name, slotId: 'audience-' + i, ratio: i % 3 === 0 ? '3/4.4' : '3/4' }));
+    const marqueeItems = audienceNames.concat(audienceNames);
+
+    const reasonTexts = [
+      'Advice matched to your application and your budget',
+      'A broad range covering installation testing, power system diagnostics, power quality, solar and lightning protection',
+      'Clear, itemised quotations and straightforward answers on availability',
+      'Help with set-up, usage questions, accessories and spares after purchase',
+      'Support for bulk, project and repeat orders',
+      "A location in the Bhiwandi industrial belt, well connected to Mumbai's industrial and logistics network"
+    ];
+    const reasons = reasonTexts.map((text, i) => ({ n: String(i + 1).padStart(2, '0'), text }));
+
+    const stageBase = [
+      { name:'Design & survey', happens:'Soil, load and site measurements before construction.', instruments:'Soil resistivity tester, power analyser.' },
+      { name:'Installation', happens:'Checks on wiring and equipment as it is built.', instruments:'Continuity and insulation testers.' },
+      { name:'Commissioning', happens:'Full verification before energising.', instruments:'Installation tester, earth tester, primary injection set.' },
+      { name:'Routine maintenance', happens:'Scheduled checks to track condition.', instruments:'Insulation, contact resistance, transformer and breaker testers.' },
+      { name:'Fault finding', happens:'Investigating a trip, failure or poor performance.', instruments:'Clamp meter, thermal camera, power quality analyser.' },
+      { name:'Calibration', happens:'Verifying the instruments themselves.', instruments:'Calibrators and reference meters.' }
+    ];
+    const activeStageIdx = this.state.activeStage;
+    const stages = stageBase.map((s, i) => ({
+      ...s, n: String(i + 1).padStart(2, '0'),
+      onSelect: () => this.setState({ activeStage: i }),
+      dotBg: activeStageIdx === i ? '#E0A81C' : '#F4F6FA',
+      dotBorder: activeStageIdx === i ? '#E0A81C' : '#D9DEE8',
+      dotColor: activeStageIdx === i ? '#0A1F44' : '#5C6577',
+      labelColor: activeStageIdx === i ? '#0A1F44' : '#8A919C'
+    }));
+    const activeStage = stages[activeStageIdx];
+
+    const taskBase = [
+      { task:'Check new wiring before power-up', instrument:'Multifunction installation tester', family:'Installation & Earthing' },
+      { task:'Measure the resistance of an earth pit', instrument:'Earth resistance tester, or clamp-on earth tester', family:'Installation & Earthing' },
+      { task:'Find overheated joints in a panel', instrument:'Thermal camera, then micro-ohmmeter to confirm', family:'Handheld & Safety / Insulation & Resistance' },
+      { task:'Test a transformer before commissioning', instrument:'Turns ratio tester, winding resistance meter, insulation tester', family:'Power System Test' },
+      { task:'Investigate voltage dips or harmonics', instrument:'Power quality analyser', family:'Power Quality & Solar' },
+      { task:'Inspect portable appliances in a workplace', instrument:'PAT tester', family:'Handheld & Safety' }
+    ];
+    const activeTaskIdx = this.state.activeTask;
+    const tasks = taskBase.map((t, i) => ({
+      ...t,
+      onSelect: () => this.setState({ activeTask: i }),
+      bg: activeTaskIdx === i ? '#0A1F44' : 'transparent',
+      color: activeTaskIdx === i ? '#F4F6FA' : '#0A1F44',
+      border: activeTaskIdx === i ? '#0A1F44' : '#D9DEE8'
+    }));
+    const activeTaskResult = taskBase[activeTaskIdx];
+
+    const sectorBase = [
+      'Electrical Energy & Utilities','Buildings & Facilities','Electrical Equipment & Manufacturing','Transportation','Healthcare Facilities','Education & Laboratories'
+    ];
+    const activeSectorIdx = this.state.activeSector;
+    const sectors = sectorBase.map((name, i) => ({
+      name, slotId: 'sector-' + i,
+      onHover: () => this.setState({ activeSector: i }),
+      flexGrow: isNarrow ? 1 : (activeSectorIdx === i ? 3 : 1),
+      writingMode: (!isNarrow && activeSectorIdx !== i) ? 'vertical-rl' : 'horizontal-tb'
+    }));
+
+    const buyBase = [
+      { title:'Contact us', desc:'By phone, email or enquiry form with your requirement.' },
+      { title:'Get advice', desc:'We ask a few questions and recommend suitable options.' },
+      { title:'Receive quotation', desc:'A written quotation with specification, price and delivery time.' },
+      { title:'Confirm & pay', desc:'You confirm the order and make payment as per agreed terms.' },
+      { title:'Dispatch', desc:'We dispatch the goods with a GST invoice and documentation.' },
+      { title:'Support', desc:'We remain available for support after delivery.' }
+    ];
+    const buyStepsLit = this.state.buyStepsLit;
+    const buySteps = buyBase.map((b, i) => ({
+      ...b, n: i + 1,
+      border: i < buyStepsLit ? '#E0A81C' : '#D9DEE8',
+      bg: i < buyStepsLit ? '#FBF4E2' : '#fff',
+      dotBg: i < buyStepsLit ? '#E0A81C' : '#F4F6FA',
+      dotColor: i < buyStepsLit ? '#0A1F44' : '#5C6577'
+    }));
+
+    const sv = this.state.statValues;
+    const stats = [
+      { display: sv[0], label: 'Product categories' },
+      { display: sv[1], label: 'Instrument families' },
+      { display: sv[2], label: 'Testing stages' },
+      { display: sv[3], label: 'Customer types' }
+    ];
+
+    const mobileNavDefs = [
+      { href:'#top', label:'Home' }, { href:'#about', label:'About' }, { href:'#families', label:'Products' },
+      { href:'#selection', label:'Selection Guide' }, { href:'#industries', label:'Industries' },
+      { href:'#how-to-buy', label:'How to Buy' }, { href:'#contact', label:'Contact' }
+    ];
+    const mobileNavOpenNum = this.state.mobileNavOpen ? 1 : 0;
+    const mobileNavItems = mobileNavDefs.map((m, i) => ({
+      ...m, delay: (this.state.mobileNavOpen ? i * 50 : 0) + 'ms',
+      transform: this.state.mobileNavOpen ? 'translateY(0)' : 'translateY(14px)'
+    }));
+
+    return {
+      headerBg: this.state.scrolled ? 'rgba(10,31,68,0.88)' : 'transparent',
+      headerBlur: this.state.scrolled ? 'blur(14px)' : 'none',
+      headerPad: this.state.scrolled ? '12px 0' : '22px 0',
+      desktopNavDisplay: isNarrow ? 'none' : 'flex',
+      mobileNavBtnDisplay: isNarrow ? 'flex' : 'none',
+      mobileBarDisplay: isNarrow ? 'block' : 'none',
+      mobileBarPad: isNarrow ? '64px' : '0',
+      mobileOverlayDisplay: this.state.mobileNavOpen ? 'flex' : 'none',
+      mobileNavOpenNum, mobileNavItems,
+      toggleMobileNav: () => this.setState((s) => ({ mobileNavOpen: !s.mobileNavOpen })),
+      openProducts: () => this.setState({ productsOpen: true }),
+      closeProducts: () => this.setState({ productsOpen: false }),
+      productsPanelDisplay: this.state.productsOpen ? 'grid' : 'none',
+      heroLine1T: this.state.heroRevealed ? 'translateY(0)' : 'translateY(100%)',
+      heroLine2T: this.state.heroRevealed ? 'translateY(0)' : 'translateY(100%)',
+      heroLine3T: this.state.heroRevealed ? 'translateY(0)' : 'translateY(100%)',
+      registerReveal: (el) => this.registerReveal(el),
+      registerStats: (el) => this.registerStats(el),
+      registerBuySteps: (el) => this.registerBuySteps(el),
+      families, marqueeItems, audienceCards, reasons, stages, activeStage,
+      tasks, activeTaskResult, resultDisplay: 'flex',
+      sectors, buySteps, stats,
+      familyRowDisplay: isNarrow ? 'flex' : 'flex',
+      familyRowHeight: isNarrow ? 'auto' : '460px',
+      familyOverflowX: isNarrow ? 'auto' : 'visible',
+      familySnap: isNarrow ? 'x mandatory' : 'none',
+      formDisplay: this.state.formSubmitted ? 'none' : 'flex',
+      successDisplay: this.state.formSubmitted ? 'flex' : 'none',
+      submitForm: () => this.setState({ formSubmitted: true })
+    };
+  }
+}
+
+</script>
+</body>
+</html>

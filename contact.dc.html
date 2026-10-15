@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="./assets/favicon-32.png">
+  <title>Contact AVS Enterprises | Bhiwandi</title>
+  <meta name="description" content="Contact AVS Enterprises at Asmeeta Textile Park, Bhiwandi for quotations and technical enquiries. Call +91 98193 60334."/>
+  <style>
+    :focus-visible { outline:2px solid #D9A21B; outline-offset:2px; }
+    body { margin:0; background:#FFFFFF; color:#0A1730; -webkit-font-smoothing:antialiased; }
+    * { box-sizing:border-box; }
+    html { overflow-x:clip; scroll-padding-top:100px; }
+    a { color:#0F2B5B; }
+    a:hover { color:#D9A21B; }
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"AVS Enterprises","image":"./assets/logo-on-light-bg.png","telephone":"+91-98193-60334","address":{"@type":"PostalAddress","streetAddress":"B-14/2, Asmeeta Textile Park, Plot No. 1, Addl. Kalyan-Bhiwandi MIDC Industrial Area, Village Kon","addressLocality":"Bhiwandi","addressRegion":"Maharashtra","postalCode":"421311","addressCountry":"IN"},"taxID":"27ABCFA8291N1ZW","description":"Supplier of electrical testing, measuring and protection equipment in Bhiwandi, Maharashtra."}</script>
+</helmet>
+
+<div style="font-family:'Schibsted Grotesk',system-ui,sans-serif; background:#FFFFFF; color:#0A1730; overflow-x:hidden;">
+
+  <a href="#main-content" style="position:absolute; left:-9999px; top:0; background:#D9A21B; color:#0A1730; padding:12px 20px; font-size:14px; font-weight:700; text-decoration:none; z-index:999;" style-focus="left:12px; top:12px;">Skip to content</a>
+
+  <header style="position:fixed; top:0; left:0; right:0; z-index:200; background:#FFFFFF; border-bottom:1px solid #E3E7ED;">
+    <div style="max-width:1400px; margin:0 auto; padding:16px 6vw; display:flex; align-items:center; justify-content:space-between; gap:20px;">
+      <a href="index.html"><img src="./assets/logo-on-light-bg.png" alt="AVS Enterprises" style="height:32px; width:auto;"/></a>
+      <nav style="display:{{ desktopNavDisplay }}; align-items:center; gap:26px;">
+        <a href="index.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Home</a>
+        <a href="about-us.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">About</a>
+        <div onMouseEnter="{{ openProducts }}" onMouseLeave="{{ closeProducts }}" style="position:relative;">
+          <a href="products-overview.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Products</a>
+        </div>
+        <a href="instrument-selection-guide.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Selection Guide</a>
+        <a href="industries-applications.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Industries</a>
+        <a href="services-support.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Services</a>
+        <a href="how-to-buy.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">How to Buy</a>
+        <span style="display:inline-flex; align-items:center; gap:7px; font-size:15px; font-weight:700; color:#0A1730;"><span style="width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:8px solid #D9A21B;"></span>Contact</span>
+      </nav>
+      <div style="display:{{ desktopNavDisplay }}; align-items:center; gap:18px;">
+        <a href="contact.dc.html" style="font-size:14px; font-weight:700; background:#D9A21B; color:#0A1730; padding:13px 24px; text-decoration:none;">Get a Quotation</a>
+        <a href="tel:+919819360334" style="font-size:14px; color:#5E6672; text-decoration:none; white-space:nowrap;">+91 98193 60334</a>
+      </div>
+      <button onClick="{{ toggleMobileNav }}" aria-label="Open menu" style="display:{{ mobileNavBtnDisplay }}; background:none; border:1px solid #0A1730; width:44px; height:44px; align-items:center; justify-content:center; cursor:pointer;">
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none"><line x1="0" y1="1" x2="18" y2="1" stroke="#0A1730" stroke-width="1.5"></line><line x1="0" y1="7" x2="18" y2="7" stroke="#0A1730" stroke-width="1.5"></line><line x1="0" y1="13" x2="18" y2="13" stroke="#0A1730" stroke-width="1.5"></line></svg>
+      </button>
+    </div>
+    <div style="display:{{ productsPanelDisplay }}; position:absolute; top:100%; left:0; right:0; background:#FFFFFF; border-bottom:1px solid #E3E7ED;" onMouseEnter="{{ openProducts }}" onMouseLeave="{{ closeProducts }}">
+      <div style="max-width:1400px; margin:0 auto; padding:36px 6vw; display:flex; flex-wrap:wrap; gap:14px 40px;">
+        <sc-for list="{{ familyLinks }}" as="fam" hint-placeholder-count="7">
+          <a href="{{ fam.href }}" style="padding:10px 0; text-decoration:none; color:#0A1730; font-family:'Big Shoulders Display',sans-serif; font-weight:700; font-size:19px;">{{ fam.name }}</a>
+        </sc-for>
+      </div>
+    </div>
+  </header>
+
+  <div style="position:fixed; inset:0; z-index:300; background:#0F2B5B; display:{{ mobileOverlayDisplay }}; flex-direction:column; padding:28px 28px 40px;">
+    <div style="display:flex; justify-content:flex-end; margin-bottom:24px;">
+      <button onClick="{{ toggleMobileNav }}" aria-label="Close menu" style="background:none; border:none; font-size:30px; cursor:pointer; color:#FFFFFF;">&times;</button>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:18px; flex:1; justify-content:center;">
+      <sc-for list="{{ mobileNavItems }}" as="item" hint-placeholder-count="8">
+        <a href="{{ item.href }}" style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:32px; text-decoration:none; color:#FFFFFF;">{{ item.label }}</a>
+      </sc-for>
+    </div>
+    <a href="contact.dc.html" style="text-align:center; font-size:15px; font-weight:700; background:#D9A21B; color:#0A1730; padding:17px; text-decoration:none;">Get a Quotation</a>
+  </div>
+
+  <div style="display:{{ mobileBarDisplay }}; position:fixed; left:0; right:0; bottom:0; z-index:150; padding-bottom:env(safe-area-inset-bottom);">
+    <div style="display:flex;">
+      <a href="tel:+919819360334" style="flex:1; text-align:center; background:#0F2B5B; color:#FFFFFF; text-decoration:none; padding:16px; font-size:14px; font-weight:600;">Call Now</a>
+      <a href="contact.dc.html" style="flex:1; text-align:center; background:#D9A21B; color:#0A1730; text-decoration:none; padding:16px; font-size:14px; font-weight:700;">Get a Quotation</a>
+    </div>
+  </div>
+
+  <section id="main-content" style="display:flex; flex-wrap:wrap; min-height:52vh; padding-top:86px;">
+    <div style="flex:1 1 480px; background:#0A1730; display:flex; flex-direction:column; justify-content:center; padding:48px 6vw;">
+      <div style="font-size:13.5px; color:#8A95AC; margin-bottom:18px;">AVS Enterprises / Contact</div>
+      <h1 style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; text-transform:uppercase; color:#FFFFFF; font-size:clamp(26px,4vw,46px); line-height:1.06; letter-spacing:-0.01em; margin:0 0 22px; max-width:17ch;">Send Your Requirement. Get a Clear Quotation.</h1>
+      <p style="font-size:17px; line-height:1.65; color:#C7CEDB; max-width:48ch; margin:0 0 32px;">Have a question or need a quotation? Send us your requirement and we will get back to you as soon as possible.</p>
+      <div style="display:flex; align-items:center; gap:28px; flex-wrap:wrap;">
+        <a href="tel:+919819360334" style="font-size:15px; font-weight:700; background:#D9A21B; color:#0A1730; padding:16px 28px; text-decoration:none;">Call +91 98193 60334</a>
+        <a href="#enquiry-form" style="display:inline-flex; align-items:center; gap:8px; font-size:16px; color:#FFFFFF; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.4); padding-bottom:3px;">Send an Enquiry
+          <svg width="13" height="9" viewBox="0 0 13 9"><path d="M0 4.5h11M7 0.5l4 4-4 4" stroke="#FFFFFF" stroke-width="1.4" fill="none"></path></svg>
+        </a>
+      </div>
+    </div>
+    <div style="flex:1 1 400px; position:relative; min-height:34vh; clip-path:polygon(8% 0,100% 0,100% 100%,0 100%);">
+      <image-slot id="contact-map" shape="rect" placeholder="Map-style graphic of Bhiwandi MIDC industrial area with a pin. Recommended 1200 x 900, landscape."></image-slot>
+      <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-70%); pointer-events:none;">
+        <div style="width:0;height:0;border-left:11px solid transparent;border-right:11px solid transparent;border-bottom:20px solid #D9A21B;"></div>
+      </div>
+    </div>
+  </section>
+
+  <main style="max-width:1400px; margin:0 auto; padding:0 6vw;">
+    <section style="padding:90px 0 60px; display:flex; flex-wrap:wrap; gap:64px;">
+
+      <!-- CONTACT DETAILS -->
+      <div style="flex:1 1 360px;">
+        <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(24px,3vw,32px); margin:0 0 32px;">Contact details</h2>
+        <div style="border-top:1px solid #E3E7ED;">
+          <sc-for list="{{ contactRows }}" as="row" hint-placeholder-count="7">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 0; border-bottom:1px solid #E3E7ED;">
+              <div>
+                <div style="font-size:12.5px; color:#8A95AC; margin-bottom:4px;">{{ row.label }}</div>
+                <div style="font-size:15.5px; color:#0A1730;">{{ row.value }}</div>
+              </div>
+              <sc-if value="{{ row.hasAction }}" hint-placeholder-val="{{ true }}">
+                <button onClick="{{ row.onAction }}" style="flex-shrink:0; background:#EDF0F4; border:none; padding:9px 16px; font-size:13px; font-weight:600; color:#0A1730; cursor:pointer;">{{ row.actionLabel }}</button>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Asmeeta+Textile+Park+Bhiwandi+Maharashtra" target="_blank" rel="noopener" style="display:inline-block; margin-top:24px; font-size:14.5px; font-weight:600; text-decoration:none;">Get Directions &rarr;</a>
+      </div>
+
+      <!-- ENQUIRY FORM -->
+      <div style="flex:1 1 460px;" id="enquiry-form">
+        <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(24px,3vw,32px); margin:0 0 20px;">Request a quotation</h2>
+        <div style="margin-bottom:28px;">
+          <div style="font-size:13px; font-weight:700; color:#5E6672; margin-bottom:10px;">WHAT TO INCLUDE IN YOUR ENQUIRY</div>
+          <sc-for list="{{ checklist }}" as="c" hint-placeholder-count="6">
+            <div style="display:flex; gap:10px; align-items:flex-start; padding:5px 0; font-size:14px; color:#5E6672; line-height:1.5;">
+              <div style="width:0; height:0; flex-shrink:0; margin-top:6px; border-top:4px solid transparent; border-bottom:4px solid transparent; border-left:6px solid #D9A21B;"></div>
+              <span>{{ c }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display:{{ formDisplay }}; flex-direction:column; gap:24px;">
+          <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:24px;">
+            <label style="display:flex; flex-direction:column; gap:8px;">
+              <span style="font-size:13px; font-weight:600; color:#5E6672;">Name *</span>
+              <input type="text" value="{{ formData.name }}" onInput="{{ setField_name }}" style="background:transparent; border:none; border-bottom:1px solid #0A1730; color:#0A1730; font-size:16px; padding:8px 0; outline:none;"/>
+            </label>
+            <label style="display:flex; flex-direction:column; gap:8px;">
+              <span style="font-size:13px; font-weight:600; color:#5E6672;">Company</span>
+              <input type="text" value="{{ formData.company }}" onInput="{{ setField_company }}" style="background:transparent; border:none; border-bottom:1px solid #0A1730; color:#0A1730; font-size:16px; padding:8px 0; outline:none;"/>
+            </label>
+            <label style="display:flex; flex-direction:column; gap:8px;">
+              <span style="font-size:13px; font-weight:600; color:#5E6672;">Phone *</span>
+              <input type="tel" value="{{ formData.phone }}" onInput="{{ setField_phone }}" style="background:transparent; border:none; border-bottom:1px solid #0A1730; color:#0A1730; font-size:16px; padding:8px 0; outline:none;"/>
+            </label>
+            <label style="display:flex; flex-direction:column; gap:8px;">
+              <span style="font-size:13px; font-weight:600; color:#5E6672;">Email</span>
+              <input type="email" value="{{ formData.email }}" onInput="{{ setField_email }}" style="background:transparent; border:none; border-bottom:1px solid #0A1730; color:#0A1730; font-size:16px; padding:8px 0; outline:none;"/>
+            </label>
+          </div>
+          <label style="display:flex; flex-direction:column; gap:8px;">
+            <span style="font-size:13px; font-weight:600; color:#5E6672;">Category of interest</span>
+            <select value="{{ formData.category }}" onChange="{{ setField_category }}" style="background:transparent; border:none; border-bottom:1px solid #0A1730; color:#0A1730; font-size:16px; padding:8px 0; outline:none;">
+              <sc-for list="{{ familyLinks }}" as="fam" hint-placeholder-count="7">
+                <option>{{ fam.name }}</option>
+              </sc-for>
+            </select>
+          </label>
+          <label style="display:flex; flex-direction:column; gap:8px;">
+            <span style="font-size:13px; font-weight:600; color:#5E6672;">What you want to test, quantity, location, standards</span>
+            <textarea rows="4" value="{{ formData.details }}" onInput="{{ setField_details }}" style="background:transparent; border:none; border-bottom:1px solid #0A1730; color:#0A1730; font-size:16px; padding:8px 0; outline:none; resize:vertical; font-family:inherit;"></textarea>
+          </label>
+          <div style="display:{{ formErrorDisplay }}; color:#B33A1E; font-size:14px;">Please fill in your name and phone number.</div>
+          <button onClick="{{ submitForm }}" disabled="{{ isSubmitting }}" style="align-self:flex-start; font-size:15px; font-weight:700; background:#0A1730; color:#FFFFFF; padding:16px 30px; border:none; cursor:pointer;">{{ submitLabel }}</button>
+        </div>
+
+        <div style="display:{{ successDisplay }}; align-items:center; gap:14px; background:#EDF0F4; padding:28px;">
+          <div style="color:#0A1730; font-size:15.5px;">Thank you. We will review your requirement and reply shortly.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="background:#0F2B5B; color:#C7CEDB; padding:72px 6vw 32px;">
+    <div style="max-width:1400px; margin:0 auto;">
+      <div style="display:flex; flex-wrap:wrap; gap:48px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.14);">
+        <div style="flex:1 1 220px;">
+          <img src="./assets/logo-on-dark-bg.png" alt="AVS Enterprises" style="height:36px; width:auto; margin-bottom:16px;"/>
+        </div>
+        <div style="flex:1 1 160px;">
+          <div style="font-size:13px; font-weight:700; color:#8A95AC; margin-bottom:16px;">Site</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="index.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Home</a>
+            <a href="about-us.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">About</a>
+            <a href="products-overview.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Products</a>
+            <a href="instrument-selection-guide.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Selection Guide</a>
+            <a href="industries-applications.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Industries</a>
+            <a href="services-support.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Services</a>
+            <a href="how-to-buy.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">How to Buy</a>
+            <a href="faq.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">FAQ</a>
+            <a href="contact.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Contact</a>
+          </div>
+        </div>
+        <div style="flex:1 1 220px;">
+          <div style="font-size:13px; font-weight:700; color:#8A95AC; margin-bottom:16px;">Instrument families</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <sc-for list="{{ familyLinks }}" as="fam" hint-placeholder-count="7">
+              <a href="{{ fam.href }}" style="color:#C7CEDB; text-decoration:none; font-size:14px;">{{ fam.name }}</a>
+            </sc-for>
+          </div>
+        </div>
+        <div style="flex:1 1 260px;">
+          <div style="font-size:13px; font-weight:700; color:#8A95AC; margin-bottom:16px;">Contact</div>
+          <div style="font-size:14px; line-height:1.7; color:#C7CEDB;">
+            B-14/2, Asmeeta Textile Park, Plot No. 1,<br/>Addl. Kalyan-Bhiwandi MIDC Industrial Area,<br/>Village Kon, Bhiwandi - 421311, Maharashtra<br/><br/>
+            Phone: +91 98193 60334<br/>Email: [your email]<br/>GSTIN: 27ABCFA8291N1ZW
+          </div>
+        </div>
+      </div>
+      <div style="padding-top:28px; font-size:13px; color:#8A95AC;">&copy; 2026 AVS Enterprises. All rights reserved.</div>
+      <p style="font-size:12px; line-height:1.6; color:#5E6B85; max-width:900px; margin:18px 0 0;">All product names, logos and brands mentioned on this website are the property of their respective owners. Specifications are indicative and may change. Please refer to the manufacturer's datasheet for exact details.</p>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isNarrow: typeof matchMedia === 'function' ? matchMedia('(max-width: 1040px)').matches : false,
+      mobileNavOpen: false, productsOpen: false, copiedPhone: false, copiedGst: false,
+      formData: { name: '', company: '', phone: '', email: '', category: '', details: '' },
+      formError: false, isSubmitting: false, formSubmitted: false
+    };
+  }
+  componentDidMount() {
+    this._mql = matchMedia('(max-width: 1040px)');
+    this._onMql = (e) => this.setState({ isNarrow: e.matches });
+    if (this._mql.addEventListener) this._mql.addEventListener('change', this._onMql);
+  }
+  componentWillUnmount() {
+    if (this._mql && this._mql.removeEventListener) this._mql.removeEventListener('change', this._onMql);
+    clearTimeout(this._copyTimeout);
+    clearTimeout(this._submitTimeout);
+  }
+  copyText(text, key) {
+    if (navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {});
+    this.setState({ [key]: true });
+    clearTimeout(this._copyTimeout);
+    this._copyTimeout = setTimeout(() => this.setState({ [key]: false }), 1800);
+  }
+  renderVals() {
+    const isNarrow = this.state.isNarrow;
+    const familyLinks = [
+      { name: 'Installation & Earthing Testers', href: 'family-installation-earthing.dc.html' },
+      { name: 'Insulation & Resistance Testers', href: 'family-insulation-resistance.dc.html' },
+      { name: 'Power System Test Equipment', href: 'family-power-system-test.dc.html' },
+      { name: 'Power Quality, Energy & Solar', href: 'family-power-quality-solar.dc.html' },
+      { name: 'Handheld & Safety Testers', href: 'family-handheld-safety.dc.html' },
+      { name: 'Calibration, Lab & Software', href: 'family-calibration-lab-software.dc.html' },
+      { name: 'Lightning & Surge Protection', href: 'family-lightning-surge.dc.html' }
+    ];
+    const mobileNavItems = [
+      { href: 'index.html', label: 'Home' },
+      { href: 'about-us.dc.html', label: 'About' },
+      { href: 'products-overview.dc.html', label: 'Products' },
+      { href: 'instrument-selection-guide.dc.html', label: 'Selection Guide' },
+      { href: 'industries-applications.dc.html', label: 'Industries' },
+      { href: 'services-support.dc.html', label: 'Services' },
+      { href: 'how-to-buy.dc.html', label: 'How to Buy' },
+      { href: 'contact.dc.html', label: 'Contact' }
+    ];
+    const contactRows = [
+      { label: 'COMPANY', value: 'AVS Enterprises', hasAction: false },
+      { label: 'ADDRESS', value: 'B-14/2, Asmeeta Textile Park, Plot No. 1, Addl. Kalyan-Bhiwandi MIDC Industrial Area, Village Kon, Bhiwandi - 421311, Maharashtra', hasAction: false },
+      { label: 'PHONE', value: '+91 98193 60334', hasAction: true, actionLabel: this.state.copiedPhone ? 'Copied' : 'Call', onAction: () => { window.location.href = 'tel:+919819360334'; } },
+      { label: 'WHATSAPP', value: '[add if used]', hasAction: false },
+      { label: 'EMAIL', value: '[your email address]', hasAction: false },
+      { label: 'BUSINESS HOURS', value: '[e.g., Monday to Saturday, 10:00 AM to 6:00 PM]', hasAction: false },
+      { label: 'GST NUMBER', value: '27ABCFA8291N1ZW', hasAction: true, actionLabel: this.state.copiedGst ? 'Copied' : 'Copy', onAction: () => this.copyText('27ABCFA8291N1ZW', 'copiedGst') }
+    ];
+    const checklist = [
+      'Your name and company', 'Phone and email', 'Instrument or category of interest',
+      'What you plan to test and the voltage or current range', 'Quantity and delivery location',
+      'Any standards or reports you need to comply with'
+    ];
+    const fd = this.state.formData;
+    const setters = {};
+    ['name', 'company', 'phone', 'email', 'category', 'details'].forEach((key) => {
+      setters['setField_' + key] = (e) => this.setState({ formData: { ...this.state.formData, [key]: e.target.value } });
+    });
+    return {
+      desktopNavDisplay: isNarrow ? 'none' : 'flex',
+      mobileNavBtnDisplay: isNarrow ? 'flex' : 'none',
+      mobileBarDisplay: isNarrow ? 'block' : 'none',
+      mobileOverlayDisplay: this.state.mobileNavOpen ? 'flex' : 'none',
+      toggleMobileNav: () => this.setState((s) => ({ mobileNavOpen: !s.mobileNavOpen })),
+      openProducts: () => this.setState({ productsOpen: true }),
+      closeProducts: () => this.setState({ productsOpen: false }),
+      productsPanelDisplay: this.state.productsOpen && !isNarrow ? 'block' : 'none',
+      familyLinks, mobileNavItems, contactRows, checklist,
+      formData: fd, ...setters,
+      formDisplay: this.state.formSubmitted ? 'none' : 'flex',
+      successDisplay: this.state.formSubmitted ? 'flex' : 'none',
+      formErrorDisplay: this.state.formError ? 'block' : 'none',
+      isSubmitting: this.state.isSubmitting,
+      submitLabel: this.state.isSubmitting ? 'Sending...' : 'Request My Quotation',
+      submitForm: () => {
+        if (!fd.name || !fd.phone) { this.setState({ formError: true }); return; }
+        this.setState({ formError: false, isSubmitting: true });
+        this._submitTimeout = setTimeout(() => this.setState({ isSubmitting: false, formSubmitted: true }), 900);
+      }
+    };
+  }
+}
+
+</script>
+</body>
+</html>

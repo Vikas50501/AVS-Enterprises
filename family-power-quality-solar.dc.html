@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="./assets/favicon-32.png">
+  <title>Power Quality Analysers & Solar PV Test Equipment | AVS</title>
+  <meta name="description" content="Class A and Class S power quality analysers, energy loggers, I-V curve tracers and PV test instruments for audits, plants and commissioning."/>
+  <style>
+    :focus-visible { outline:2px solid #D9A21B; outline-offset:2px; }
+    body { margin:0; background:#FFFFFF; color:#0A1730; -webkit-font-smoothing:antialiased; }
+    * { box-sizing:border-box; }
+    html { overflow-x:clip; scroll-behavior:smooth; scroll-padding-top:100px; }
+    a { color:#0F2B5B; }
+    a:hover { color:#D9A21B; }
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between Class A and Class S power quality analysers?","acceptedAnswer":{"@type":"Answer","text":"Class A is intended for compliance and dispute-resolution measurements. Class S is suitable for surveys and general troubleshooting."}}]}</script>
+</helmet>
+
+<div style="font-family:'Schibsted Grotesk',system-ui,sans-serif; background:#FFFFFF; color:#0A1730; overflow-x:hidden;">
+
+  <a href="#main-content" style="position:absolute; left:-9999px; top:0; background:#D9A21B; color:#0A1730; padding:12px 20px; font-size:14px; font-weight:700; text-decoration:none; z-index:999;" style-focus="left:12px; top:12px;">Skip to content</a>
+
+  <header style="position:fixed; top:0; left:0; right:0; z-index:200; background:#FFFFFF; border-bottom:1px solid #E3E7ED;">
+    <div style="max-width:1400px; margin:0 auto; padding:16px 6vw; display:flex; align-items:center; justify-content:space-between; gap:20px;">
+      <a href="index.html"><img src="./assets/logo-on-light-bg.png" alt="AVS Enterprises" style="height:32px; width:auto;"/></a>
+      <nav style="display:{{ desktopNavDisplay }}; align-items:center; gap:26px;">
+        <a href="index.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Home</a>
+        <a href="about-us.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">About</a>
+        <div onMouseEnter="{{ openProducts }}" onMouseLeave="{{ closeProducts }}" style="position:relative;">
+          <a href="products-overview.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Products</a>
+        </div>
+        <a href="instrument-selection-guide.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Selection Guide</a>
+        <a href="industries-applications.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Industries</a>
+        <a href="services-support.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Services</a>
+        <a href="how-to-buy.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">How to Buy</a>
+        <a href="contact.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Contact</a>
+      </nav>
+      <div style="display:{{ desktopNavDisplay }}; align-items:center; gap:18px;">
+        <a href="contact.dc.html" style="font-size:14px; font-weight:700; background:#D9A21B; color:#0A1730; padding:13px 24px; text-decoration:none;">Get a Quotation</a>
+        <a href="tel:+919819360334" style="font-size:14px; color:#5E6672; text-decoration:none; white-space:nowrap;">+91 98193 60334</a>
+      </div>
+      <button onClick="{{ toggleMobileNav }}" aria-label="Open menu" style="display:{{ mobileNavBtnDisplay }}; background:none; border:1px solid #0A1730; width:44px; height:44px; align-items:center; justify-content:center; cursor:pointer;">
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none"><line x1="0" y1="1" x2="18" y2="1" stroke="#0A1730" stroke-width="1.5"></line><line x1="0" y1="7" x2="18" y2="7" stroke="#0A1730" stroke-width="1.5"></line><line x1="0" y1="13" x2="18" y2="13" stroke="#0A1730" stroke-width="1.5"></line></svg>
+      </button>
+    </div>
+    <div style="display:{{ productsPanelDisplay }}; position:absolute; top:100%; left:0; right:0; background:#FFFFFF; border-bottom:1px solid #E3E7ED;" onMouseEnter="{{ openProducts }}" onMouseLeave="{{ closeProducts }}">
+      <div style="max-width:1400px; margin:0 auto; padding:36px 6vw; display:flex; flex-wrap:wrap; gap:14px 40px;">
+        <sc-for list="{{ familyLinks }}" as="fam" hint-placeholder-count="7">
+          <a href="{{ fam.href }}" style="padding:10px 0; text-decoration:none; color:{{ fam.color }}; font-family:'Big Shoulders Display',sans-serif; font-weight:700; font-size:19px;">{{ fam.name }}</a>
+        </sc-for>
+      </div>
+    </div>
+  </header>
+
+  <div style="position:fixed; inset:0; z-index:300; background:#0F2B5B; display:{{ mobileOverlayDisplay }}; flex-direction:column; padding:28px 28px 40px;">
+    <div style="display:flex; justify-content:flex-end; margin-bottom:24px;">
+      <button onClick="{{ toggleMobileNav }}" aria-label="Close menu" style="background:none; border:none; font-size:30px; cursor:pointer; color:#FFFFFF;">&times;</button>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:18px; flex:1; justify-content:center;">
+      <sc-for list="{{ mobileNavItems }}" as="item" hint-placeholder-count="8">
+        <a href="{{ item.href }}" style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:32px; text-decoration:none; color:#FFFFFF;">{{ item.label }}</a>
+      </sc-for>
+    </div>
+    <a href="contact.dc.html" style="text-align:center; font-size:15px; font-weight:700; background:#D9A21B; color:#0A1730; padding:17px; text-decoration:none;">Get a Quotation</a>
+  </div>
+
+  <div style="display:{{ mobileBarDisplay }}; position:fixed; left:0; right:0; bottom:0; z-index:150; padding-bottom:env(safe-area-inset-bottom);">
+    <div style="display:flex;">
+      <a href="tel:+919819360334" style="flex:1; text-align:center; background:#0F2B5B; color:#FFFFFF; text-decoration:none; padding:16px; font-size:14px; font-weight:600;">Call Now</a>
+      <a href="contact.dc.html" style="flex:1; text-align:center; background:#D9A21B; color:#0A1730; text-decoration:none; padding:16px; font-size:14px; font-weight:700;">Get a Quotation</a>
+    </div>
+  </div>
+
+  <section id="main-content" style="display:flex; flex-wrap:wrap; min-height:60vh; padding-top:86px;">
+    <div style="flex:1 1 480px; background:#0A1730; display:flex; flex-direction:column; justify-content:center; padding:48px 6vw;">
+      <div style="font-size:13.5px; color:#8A95AC; margin-bottom:18px;"><a href="products-overview.dc.html" style="color:#8A95AC; text-decoration:none;">Products</a> / Power Quality, Energy &amp; Solar</div>
+      <h1 style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; text-transform:uppercase; color:#FFFFFF; font-size:clamp(28px,4.2vw,50px); line-height:1.04; letter-spacing:-0.01em; margin:0 0 22px; max-width:17ch;">Measure Power Quality and Solar Performance with Confidence</h1>
+      <p style="font-size:17px; line-height:1.65; color:#C7CEDB; max-width:48ch; margin:0 0 32px;">Explain unexplained failures and high bills, and prove that your solar plant performs as designed.</p>
+      <div style="display:flex; align-items:center; gap:28px; flex-wrap:wrap; margin-bottom:40px;">
+        <a href="contact.dc.html" style="font-size:15px; font-weight:700; background:#D9A21B; color:#0A1730; padding:16px 28px; text-decoration:none;">Request a Quotation</a>
+        <a href="#cat-10" style="display:inline-flex; align-items:center; gap:8px; font-size:16px; color:#FFFFFF; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.4); padding-bottom:3px;">View Categories
+          <svg width="13" height="9" viewBox="0 0 13 9"><path d="M0 4.5h11M7 0.5l4 4-4 4" stroke="#FFFFFF" stroke-width="1.4" fill="none"></path></svg>
+        </a>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; border-top:1px solid rgba(255,255,255,0.22); padding:20px 0;">
+        <div style="padding-right:26px; border-right:1px solid rgba(255,255,255,0.22); margin-right:26px; color:#FFFFFF; font-size:14px;">Categories 9 and 10</div>
+        <div style="color:#FFFFFF; font-size:14px;">Audit-grade and field-grade</div>
+      </div>
+    </div>
+    <div style="flex:1 1 400px; position:relative; min-height:40vh; clip-path:polygon(8% 0,100% 0,100% 100%,0 100%);">
+      <image-slot id="family4-hero" shape="rect" placeholder="Power analyser recording at an incoming panel; I-V curve tracer on a rooftop string"></image-slot>
+    </div>
+  </section>
+
+  <main style="max-width:1400px; margin:0 auto; padding:0 6vw;">
+
+    <div style="position:sticky; top:72px; z-index:50; background:#FFFFFF; display:flex; gap:28px; border-bottom:1px solid #E3E7ED; padding:50px 0 18px;">
+      <a href="#cat-09" style="font-size:14.5px; font-weight:600; color:#0A1730; text-decoration:none;">09 Power Quality & Energy</a>
+      <a href="#cat-10" style="font-size:14.5px; font-weight:600; color:#0A1730; text-decoration:none;">10 Solar (PV) Test Equipment</a>
+    </div>
+
+    <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="2">
+      <section id="{{ cat.anchor }}" style="padding:70px 0; border-bottom:1px solid #E3E7ED;">
+        <div style="display:flex; flex-wrap:wrap; flex-direction:{{ cat.direction }}; gap:48px; margin-bottom:44px;">
+          <div style="flex:1 1 320px;">
+            <image-slot id="{{ cat.anchor }}-img" shape="rect" placeholder="{{ cat.imageCaption }}" style="aspect-ratio:4/3; display:block;"></image-slot>
+          </div>
+          <div style="flex:1 1 420px;">
+            <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:52px; color:#D9A21B; line-height:1;">{{ cat.no }}</div>
+            <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(24px,2.8vw,32px); margin:8px 0 18px;">{{ cat.title }}</div>
+            <div style="font-size:16px; line-height:1.7; color:#5E6672;">{{ cat.intro }}</div>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:36px; border-top:1px solid #E3E7ED; padding-top:36px; margin-bottom:30px;">
+          <sc-for list="{{ cat.columns }}" as="col" hint-placeholder-count="4">
+            <div>
+              <div style="font-size:13px; font-weight:700; color:#0A1730; margin-bottom:14px;">{{ col.label }}</div>
+              <sc-for list="{{ col.items }}" as="item" hint-placeholder-count="4">
+                <div style="display:flex; gap:10px; align-items:flex-start; padding:7px 0; font-size:14.5px; color:#5E6672; line-height:1.5;">
+                  <div style="width:0; height:0; flex-shrink:0; margin-top:6px; border-top:4px solid transparent; border-bottom:4px solid transparent; border-left:6px solid #D9A21B;"></div>
+                  <span>{{ item }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+        <div style="background:#D9A21B; padding:22px 28px;">
+          <div style="font-size:13px; font-weight:700; color:#0A1730; margin-bottom:4px;">BUYING TIP</div>
+          <div style="font-size:15px; color:#0A1730; line-height:1.6;">{{ cat.buyingTip }}</div>
+        </div>
+      </section>
+    </sc-for>
+
+    <section style="padding:80px 0;">
+      <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(26px,3.4vw,36px); margin:0 0 36px;">Frequently asked questions</h2>
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="1">
+        <div style="border-top:1px solid #E3E7ED;">
+          <button onClick="{{ f.onToggle }}" style="width:100%; display:flex; align-items:center; justify-content:space-between; gap:20px; background:none; border:none; padding:22px 0; cursor:pointer; text-align:left;">
+            <span style="font-size:17px; font-weight:700; color:#0A1730;">{{ f.q }}</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" style="flex-shrink:0;"><line x1="1" y1="8" x2="15" y2="8" stroke="#0A1730" stroke-width="1.6"></line><line x1="8" y1="1" x2="8" y2="15" stroke="#0A1730" stroke-width="1.6" style="opacity:{{ f.plusOpacity }};"></line></svg>
+          </button>
+          <div style="max-height:{{ f.maxHeight }}; overflow:hidden; transition:max-height 320ms ease;">
+            <p style="font-size:15.5px; line-height:1.7; color:#5E6672; margin:0 0 26px; max-width:70ch;">{{ f.a }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </section>
+
+    <section style="padding:0 0 70px; border-top:1px solid #E3E7ED; padding-top:36px;">
+      <div style="font-size:13px; font-weight:700; color:#5E6672; margin-bottom:14px;">RELATED</div>
+      <div style="display:flex; gap:28px; flex-wrap:wrap;">
+        <a href="family-installation-earthing.dc.html" style="font-size:15px; text-decoration:none;">Solar installations also need installation testing &rarr;</a>
+        <a href="instrument-selection-guide.dc.html" style="font-size:15px; text-decoration:none;">Not sure which tester you need? &rarr;</a>
+      </div>
+    </section>
+  </main>
+
+  <section style="position:relative; background:#D9A21B; padding:100px 6vw; clip-path:polygon(0 4%,100% 0,100% 100%,0 100%);">
+    <div style="max-width:1200px; margin:0 auto;">
+      <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; color:#0A1730; font-size:clamp(26px,3.6vw,38px); margin:0 0 16px;">Planning an energy audit or solar commissioning?</h2>
+      <p style="color:#4A3A0F; font-size:16px; line-height:1.6; margin:0 0 26px; max-width:50ch;">Share your plant size, voltage levels and the reports you need.</p>
+      <div style="display:flex; gap:28px; align-items:center; flex-wrap:wrap;">
+        <a href="contact.dc.html" style="font-size:15px; font-weight:700; background:#0A1730; color:#FFFFFF; padding:16px 30px; text-decoration:none;">Request a Quotation</a>
+        <a href="tel:+919819360334" style="font-size:16px; font-weight:700; color:#0A1730; text-decoration:none;">Call +91 98193 60334</a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:#0F2B5B; color:#C7CEDB; padding:72px 6vw 32px;">
+    <div style="max-width:1400px; margin:0 auto;">
+      <div style="display:flex; flex-wrap:wrap; gap:48px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.14);">
+        <div style="flex:1 1 220px;">
+          <img src="./assets/logo-on-dark-bg.png" alt="AVS Enterprises" style="height:36px; width:auto; margin-bottom:16px;"/>
+        </div>
+        <div style="flex:1 1 160px;">
+          <div style="font-size:13px; font-weight:700; color:#8A95AC; margin-bottom:16px;">Site</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="index.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Home</a>
+            <a href="about-us.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">About</a>
+            <a href="products-overview.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Products</a>
+            <a href="instrument-selection-guide.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Selection Guide</a>
+            <a href="industries-applications.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Industries</a>
+            <a href="services-support.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Services</a>
+            <a href="how-to-buy.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">How to Buy</a>
+            <a href="faq.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">FAQ</a>
+            <a href="contact.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Contact</a>
+          </div>
+        </div>
+        <div style="flex:1 1 220px;">
+          <div style="font-size:13px; font-weight:700; color:#8A95AC; margin-bottom:16px;">Instrument families</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <sc-for list="{{ familyLinks }}" as="fam" hint-placeholder-count="7">
+              <a href="{{ fam.href }}" style="color:#C7CEDB; text-decoration:none; font-size:14px;">{{ fam.name }}</a>
+            </sc-for>
+          </div>
+        </div>
+        <div style="flex:1 1 260px;">
+          <div style="font-size:13px; font-weight:700; color:#8A95AC; margin-bottom:16px;">Contact</div>
+          <div style="font-size:14px; line-height:1.7; color:#C7CEDB;">
+            B-14/2, Asmeeta Textile Park, Plot No. 1,<br/>Addl. Kalyan-Bhiwandi MIDC Industrial Area,<br/>Village Kon, Bhiwandi - 421311, Maharashtra<br/><br/>
+            Phone: +91 98193 60334<br/>Email: [your email]<br/>GSTIN: 27ABCFA8291N1ZW
+          </div>
+        </div>
+      </div>
+      <div style="padding-top:28px; font-size:13px; color:#8A95AC;">&copy; 2026 AVS Enterprises. All rights reserved.</div>
+      <p style="font-size:12px; line-height:1.6; color:#5E6B85; max-width:900px; margin:18px 0 0;">All product names, logos and brands mentioned on this website are the property of their respective owners. Specifications are indicative and may change. Please refer to the manufacturer's datasheet for exact details.</p>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { isNarrow: typeof matchMedia === 'function' ? matchMedia('(max-width: 1040px)').matches : false, mobileNavOpen: false, productsOpen: false, openFaq: 0 };
+  }
+  componentDidMount() {
+    this._mql = matchMedia('(max-width: 1040px)');
+    this._onMql = (e) => this.setState({ isNarrow: e.matches });
+    if (this._mql.addEventListener) this._mql.addEventListener('change', this._onMql);
+  }
+  componentWillUnmount() {
+    if (this._mql && this._mql.removeEventListener) this._mql.removeEventListener('change', this._onMql);
+  }
+  renderVals() {
+    const isNarrow = this.state.isNarrow;
+    const familyLinks = [
+      { name: 'Installation & Earthing Testers', href: 'family-installation-earthing.dc.html', color: '#0A1730' },
+      { name: 'Insulation & Resistance Testers', href: 'family-insulation-resistance.dc.html', color: '#0A1730' },
+      { name: 'Power System Test Equipment', href: 'family-power-system-test.dc.html', color: '#0A1730' },
+      { name: 'Power Quality, Energy & Solar', href: 'family-power-quality-solar.dc.html', color: '#D9A21B' },
+      { name: 'Handheld & Safety Testers', href: 'family-handheld-safety.dc.html', color: '#0A1730' },
+      { name: 'Calibration, Lab & Software', href: 'family-calibration-lab-software.dc.html', color: '#0A1730' },
+      { name: 'Lightning & Surge Protection', href: 'family-lightning-surge.dc.html', color: '#0A1730' }
+    ];
+    const mobileNavItems = [
+      { href: 'index.html', label: 'Home' },
+      { href: 'about-us.dc.html', label: 'About' },
+      { href: 'products-overview.dc.html', label: 'Products' },
+      { href: 'instrument-selection-guide.dc.html', label: 'Selection Guide' },
+      { href: 'industries-applications.dc.html', label: 'Industries' },
+      { href: 'services-support.dc.html', label: 'Services' },
+      { href: 'how-to-buy.dc.html', label: 'How to Buy' },
+      { href: 'contact.dc.html', label: 'Contact' }
+    ];
+    const categories = [
+      {
+        no: '09', anchor: 'cat-09', direction: 'row',
+        title: 'Power Quality Analysers, Energy Loggers and Power Calibrators',
+        intro: 'Voltage dips, harmonics, flicker, imbalance and wasted energy are common causes of unexplained equipment failures and high bills. Power quality analysers record and explain them.',
+        imageCaption: 'Power quality analyser logging at an incoming panel',
+        columns: [
+          { label: 'WHAT IT MEASURES OR CHECKS', items: ['Voltage, current, power, energy, power factor', 'Harmonics, interharmonics, flicker', 'Dips, swells, transients, unbalance and frequency'] },
+          { label: 'PRODUCT TYPES WE SUPPLY', items: ['Class A power quality analysers for compliance and dispute-grade measurement', 'Class S analysers for surveys and troubleshooting', 'Energy and power loggers for load profiling', 'Flexible current probes and clamps in several ranges', 'Power calibrators and simulators for verifying meters and analysers', 'Software for analysis and automatic reports'] },
+          { label: 'FEATURES TO LOOK FOR', items: ['Long recording periods with large memory', 'Waveform capture and event triggers', 'Compatibility with common power quality standards and report formats', 'Remote access and cloud data transfer on selected models', 'Multi-channel inputs for three-phase plus neutral'] },
+          { label: 'WHERE IT IS USED', items: ['Energy audits and savings projects', 'Troubleshooting of drives, UPS and sensitive equipment', 'Verifying supply quality at connection points', 'Monitoring of renewable plants', 'Utility and compliance measurement'] }
+        ],
+        buyingTip: 'If results may be used in a contract or regulatory dispute, choose a Class A analyser. Class S is usually sufficient for maintenance work.'
+      },
+      {
+        no: '10', anchor: 'cat-10', direction: 'row-reverse',
+        title: 'Solar (Photovoltaic) Test Equipment',
+        intro: 'Solar plants need testing at commissioning and in service to confirm that strings, inverters and protective devices perform as designed. PV test instruments are made to handle DC voltages and currents safely.',
+        imageCaption: 'I-V curve tracer connected to a rooftop solar string',
+        columns: [
+          { label: 'WHAT IT MEASURES OR CHECKS', items: ['String open-circuit voltage and short-circuit current', 'I-V curves', 'Insulation resistance of DC cables', 'Earth continuity, irradiance and module temperature'] },
+          { label: 'PRODUCT TYPES WE SUPPLY', items: ['PV analysers and I-V curve tracers', 'PV and electrical installation combination testers', 'Irradiance and temperature meters', 'DC clamp meters and PV test leads', 'Software for generating commissioning reports'] },
+          { label: 'FEATURES TO LOOK FOR', items: ['Rated for high DC voltages used in modern strings', 'Automatic correction to standard test conditions', 'Wireless irradiance sensors', 'Report-ready data export'] },
+          { label: 'WHERE IT IS USED', items: ['Rooftop and ground-mounted solar plants', 'Commissioning and handover', 'Annual maintenance and fault finding', 'Performance and warranty investigation'] }
+        ],
+        buyingTip: "Check that the instrument's maximum voltage and current rating exceed your plant's string values."
+      }
+    ];
+    const openFaq = this.state.openFaq;
+    const faqBase = [
+      { q: 'What is the difference between Class A and Class S power quality analysers?', a: 'These classes describe how precisely and consistently an analyser measures. Class A is intended for compliance and dispute-resolution measurements. Class S is suitable for surveys and general troubleshooting.' }
+    ];
+    const faqs = faqBase.map((f, i) => ({
+      ...f,
+      onToggle: () => this.setState({ openFaq: openFaq === i ? -1 : i }),
+      maxHeight: openFaq === i ? '400px' : '0px',
+      plusOpacity: openFaq === i ? 0 : 1
+    }));
+    return {
+      desktopNavDisplay: isNarrow ? 'none' : 'flex',
+      mobileNavBtnDisplay: isNarrow ? 'flex' : 'none',
+      mobileBarDisplay: isNarrow ? 'block' : 'none',
+      mobileOverlayDisplay: this.state.mobileNavOpen ? 'flex' : 'none',
+      toggleMobileNav: () => this.setState((s) => ({ mobileNavOpen: !s.mobileNavOpen })),
+      openProducts: () => this.setState({ productsOpen: true }),
+      closeProducts: () => this.setState({ productsOpen: false }),
+      productsPanelDisplay: this.state.productsOpen && !isNarrow ? 'block' : 'none',
+      familyLinks, mobileNavItems, categories, faqs
+    };
+  }
+}
+
+</script>
+</body>
+</html>

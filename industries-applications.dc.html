@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="./assets/favicon-32.png">
+  <title>Industries & Applications We Serve | AVS Enterprises</title>
+  <meta name="description" content="Test and protection equipment for utilities, renewables, buildings, manufacturing, transport, healthcare and education. See how AVS Enterprises helps."/>
+  <style>
+    :focus-visible { outline:2px solid #D9A21B; outline-offset:2px; }
+    body { margin:0; background:#FFFFFF; color:#0A1730; -webkit-font-smoothing:antialiased; }
+    * { box-sizing:border-box; }
+    html { overflow-x:clip; scroll-behavior:smooth; scroll-padding-top:100px; }
+    a { color:#0F2B5B; }
+    a:hover { color:#D9A21B; }
+  </style>
+</helmet>
+
+<div style="font-family:'Schibsted Grotesk',system-ui,sans-serif; background:#FFFFFF; color:#0A1730; overflow-x:hidden;">
+
+  <a href="#main-content" style="position:absolute; left:-9999px; top:0; background:#D9A21B; color:#0A1730; padding:12px 20px; font-size:14px; font-weight:700; text-decoration:none; z-index:999;" style-focus="left:12px; top:12px;">Skip to content</a>
+
+  <header style="position:fixed; top:0; left:0; right:0; z-index:200; background:#FFFFFF; border-bottom:1px solid #E3E7ED;">
+    <div style="max-width:1400px; margin:0 auto; padding:16px 6vw; display:flex; align-items:center; justify-content:space-between; gap:20px;">
+      <a href="index.html"><img src="./assets/logo-on-light-bg.png" alt="AVS Enterprises" style="height:32px; width:auto;"/></a>
+      <nav style="display:{{ desktopNavDisplay }}; align-items:center; gap:26px;">
+        <a href="index.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Home</a>
+        <a href="about-us.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">About</a>
+        <div onMouseEnter="{{ openProducts }}" onMouseLeave="{{ closeProducts }}" style="position:relative;">
+          <a href="products-overview.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Products</a>
+        </div>
+        <a href="instrument-selection-guide.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Selection Guide</a>
+        <span style="display:inline-flex; align-items:center; gap:7px; font-size:15px; font-weight:700; color:#0A1730;"><span style="width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:8px solid #D9A21B;"></span>Industries</span>
+        <a href="services-support.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Services</a>
+        <a href="how-to-buy.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">How to Buy</a>
+        <a href="contact.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Contact</a>
+      </nav>
+      <div style="display:{{ desktopNavDisplay }}; align-items:center; gap:18px;">
+        <a href="contact.dc.html" style="font-size:14px; font-weight:700; background:#D9A21B; color:#0A1730; padding:13px 24px; text-decoration:none;">Get a Quotation</a>
+        <a href="tel:+919819360334" style="font-size:14px; color:#5E6672; text-decoration:none; white-space:nowrap;">+91 98193 60334</a>
+      </div>
+      <button onClick="{{ toggleMobileNav }}" aria-label="Open menu" style="display:{{ mobileNavBtnDisplay }}; background:none; border:1px solid #0A1730; width:44px; height:44px; align-items:center; justify-content:center; cursor:pointer;">
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none"><line x1="0" y1="1" x2="18" y2="1" stroke="#0A1730" stroke-width="1.5"></line><line x1="0" y1="7" x2="18" y2="7" stroke="#0A1730" stroke-width="1.5"></line><line x1="0" y1="13" x2="18" y2="13" stroke="#0A1730" stroke-width="1.5"></line></svg>
+      </button>
+    </div>
+    <div style="display:{{ productsPanelDisplay }}; position:absolute; top:100%; left:0; right:0; background:#FFFFFF; border-bottom:1px solid #E3E7ED;" onMouseEnter="{{ openProducts }}" onMouseLeave="{{ closeProducts }}">
+      <div style="max-width:1400px; margin:0 auto; padding:36px 6vw; display:flex; flex-wrap:wrap; gap:14px 40px;">
+        <sc-for list="{{ familyLinks }}" as="fam" hint-placeholder-count="7">
+          <a href="{{ fam.href }}" style="padding:10px 0; text-decoration:none; color:#0A1730; font-family:'Big Shoulders Display',sans-serif; font-weight:700; font-size:19px;">{{ fam.name }}</a>
+        </sc-for>
+      </div>
+    </div>
+  </header>
+
+  <div style="position:fixed; inset:0; z-index:300; background:#0F2B5B; display:{{ mobileOverlayDisplay }}; flex-direction:column; padding:28px 28px 40px;">
+    <div style="display:flex; justify-content:flex-end; margin-bottom:24px;">
+      <button onClick="{{ toggleMobileNav }}" aria-label="Close menu" style="background:none; border:none; font-size:30px; cursor:pointer; color:#FFFFFF;">&times;</button>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:18px; flex:1; justify-content:center;">
+      <sc-for list="{{ mobileNavItems }}" as="item" hint-placeholder-count="8">
+        <a href="{{ item.href }}" style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:32px; text-decoration:none; color:#FFFFFF;">{{ item.label }}</a>
+      </sc-for>
+    </div>
+    <a href="contact.dc.html" style="text-align:center; font-size:15px; font-weight:700; background:#D9A21B; color:#0A1730; padding:17px; text-decoration:none;">Get a Quotation</a>
+  </div>
+
+  <div style="display:{{ mobileBarDisplay }}; position:fixed; left:0; right:0; bottom:0; z-index:150; padding-bottom:env(safe-area-inset-bottom);">
+    <div style="display:flex;">
+      <a href="tel:+919819360334" style="flex:1; text-align:center; background:#0F2B5B; color:#FFFFFF; text-decoration:none; padding:16px; font-size:14px; font-weight:600;">Call Now</a>
+      <a href="contact.dc.html" style="flex:1; text-align:center; background:#D9A21B; color:#0A1730; text-decoration:none; padding:16px; font-size:14px; font-weight:700;">Get a Quotation</a>
+    </div>
+  </div>
+
+  <section id="main-content" style="display:flex; flex-wrap:wrap; min-height:60vh; padding-top:86px;">
+    <div style="flex:1 1 480px; background:#0A1730; display:flex; flex-direction:column; justify-content:center; padding:48px 6vw;">
+      <div style="font-size:13.5px; color:#8A95AC; margin-bottom:18px;">AVS Enterprises / Industries &amp; Applications</div>
+      <h1 style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; text-transform:uppercase; color:#FFFFFF; font-size:clamp(28px,4.2vw,50px); line-height:1.04; letter-spacing:-0.01em; margin:0 0 22px; max-width:17ch;">Test and Protection Equipment for Every Electrical Environment</h1>
+      <p style="font-size:17px; line-height:1.65; color:#C7CEDB; max-width:48ch; margin:0 0 32px;">From generating stations to classrooms, the right instrument depends on where the work happens.</p>
+      <div style="display:flex; align-items:center; gap:28px; flex-wrap:wrap; margin-bottom:40px;">
+        <a href="contact.dc.html" style="font-size:15px; font-weight:700; background:#D9A21B; color:#0A1730; padding:16px 28px; text-decoration:none;">Discuss Your Application</a>
+        <a href="products-overview.dc.html" style="display:inline-flex; align-items:center; gap:8px; font-size:16px; color:#FFFFFF; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.4); padding-bottom:3px;">Browse Products
+          <svg width="13" height="9" viewBox="0 0 13 9"><path d="M0 4.5h11M7 0.5l4 4-4 4" stroke="#FFFFFF" stroke-width="1.4" fill="none"></path></svg>
+        </a>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; border-top:1px solid rgba(255,255,255,0.22); padding:20px 0;">
+        <div style="padding-right:26px; border-right:1px solid rgba(255,255,255,0.22); margin-right:26px; color:#FFFFFF; font-size:14px;">6 sector groups</div>
+        <div style="color:#FFFFFF; font-size:14px;">Utilities to classrooms</div>
+      </div>
+    </div>
+    <div style="flex:1 1 400px; position:relative; min-height:40vh; clip-path:polygon(8% 0,100% 0,100% 100%,0 100%);">
+      <image-slot id="industries-hero" shape="rect" placeholder="Collage strip: substation, solar plant, hospital corridor, EV charger, workshop"></image-slot>
+    </div>
+  </section>
+
+  <main style="max-width:1400px; margin:0 auto; padding:0 6vw;">
+    <section style="padding:90px 0;">
+      <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(28px,4vw,42px); margin:0 0 50px;">Where our customers use their instruments</h2>
+
+      <div style="display:flex; gap:48px; align-items:flex-start;">
+        <div style="flex:0 0 220px; display:{{ miniNavDisplay }}; position:sticky; top:110px; flex-direction:column; gap:16px;">
+          <sc-for list="{{ sectors }}" as="s" hint-placeholder-count="6">
+            <a href="{{ s.anchor }}" style="font-size:14.5px; font-weight:600; color:#5E6672; text-decoration:none;">{{ s.name }}</a>
+          </sc-for>
+        </div>
+
+        <div style="flex:1 1 600px;">
+          <sc-for list="{{ sectors }}" as="sec" hint-placeholder-count="6">
+            <section id="{{ sec.id }}" style="padding:60px 0; border-bottom:1px solid #E3E7ED; display:flex; flex-wrap:wrap; flex-direction:{{ sec.direction }}; gap:40px;">
+              <div style="flex:1 1 280px;">
+                <image-slot id="{{ sec.id }}-img" shape="rect" placeholder="{{ sec.imageCaption }}" style="aspect-ratio:4/3; display:block;"></image-slot>
+              </div>
+              <div style="flex:1 1 380px;">
+                <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(22px,2.6vw,28px); margin-bottom:16px;">{{ sec.name }}</div>
+                <sc-if value="{{ sec.hasIntro }}">
+                  <p style="font-size:15.5px; line-height:1.7; color:#5E6672; margin:0 0 18px;">{{ sec.intro }}</p>
+                </sc-if>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:4px 28px; border-top:1px solid #E3E7ED; padding-top:14px;">
+                  <sc-for list="{{ sec.items }}" as="it" hint-placeholder-count="4">
+                    <div style="display:flex; gap:10px; align-items:flex-start; padding:9px 0; font-size:14.5px; color:#5E6672; line-height:1.5;">
+                      <div style="width:0; height:0; flex-shrink:0; margin-top:6px; border-top:4px solid transparent; border-bottom:4px solid transparent; border-left:6px solid #D9A21B;"></div>
+                      <span>{{ it }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </section>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section style="position:relative; background:#D9A21B; padding:100px 6vw; clip-path:polygon(0 4%,100% 0,100% 100%,0 100%);">
+    <div style="max-width:1200px; margin:0 auto;">
+      <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; color:#0A1730; font-size:clamp(26px,3.6vw,38px); margin:0 0 16px;">Working in a sector not listed here?</h2>
+      <p style="color:#4A3A0F; font-size:16px; line-height:1.6; margin:0 0 26px; max-width:50ch;">Describe your application and we will tell you what we can supply.</p>
+      <div style="display:flex; gap:28px; align-items:center; flex-wrap:wrap;">
+        <a href="contact.dc.html" style="font-size:15px; font-weight:700; background:#0A1730; color:#FFFFFF; padding:16px 30px; text-decoration:none;">Send an Enquiry</a>
+        <a href="tel:+919819360334" style="font-size:16px; font-weight:700; color:#0A1730; text-decoration:none;">Call +91 98193 60334</a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:#0F2B5B; color:#C7CEDB; padding:72px 6vw 32px;">
+    <div style="max-width:1400px; margin:0 auto;">
+      <div style="display:flex; flex-wrap:wrap; gap:48px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.14);">
+        <div style="flex:1 1 220px;">
+          <img src="./assets/logo-on-dark-bg.png" alt="AVS Enterprises" style="height:36px; width:auto; margin-bottom:16px;"/>
+        </div>
+        <div style="flex:1 1 160px;">
+          <div style="font-size:13px; font-weight:700; color:#8A95AC; margin-bottom:16px;">Site</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="index.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Home</a>
+            <a href="about-us.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">About</a>
+            <a href="products-overview.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Products</a>
+            <a href="instrument-selection-guide.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Selection Guide</a>
+            <a href="industries-applications.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Industries</a>
+            <a href="services-support.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Services</a>
+            <a href="how-to-buy.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">How to Buy</a>
+            <a href="faq.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">FAQ</a>
+            <a href="contact.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Contact</a>
+          </div>
+        </div>
+        <div style="flex:1 1 220px;">
+          <div style="font-size:13px; font-weight:700; color:#8A95AC; margin-bottom:16px;">Instrument families</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <sc-for list="{{ familyLinks }}" as="fam" hint-placeholder-count="7">
+              <a href="{{ fam.href }}" style="color:#C7CEDB; text-decoration:none; font-size:14px;">{{ fam.name }}</a>
+            </sc-for>
+          </div>
+        </div>
+        <div style="flex:1 1 260px;">
+          <div style="font-size:13px; font-weight:700; color:#8A95AC; margin-bottom:16px;">Contact</div>
+          <div style="font-size:14px; line-height:1.7; color:#C7CEDB;">
+            B-14/2, Asmeeta Textile Park, Plot No. 1,<br/>Addl. Kalyan-Bhiwandi MIDC Industrial Area,<br/>Village Kon, Bhiwandi - 421311, Maharashtra<br/><br/>
+            Phone: +91 98193 60334<br/>Email: [your email]<br/>GSTIN: 27ABCFA8291N1ZW
+          </div>
+        </div>
+      </div>
+      <div style="padding-top:28px; font-size:13px; color:#8A95AC;">&copy; 2026 AVS Enterprises. All rights reserved.</div>
+      <p style="font-size:12px; line-height:1.6; color:#5E6B85; max-width:900px; margin:18px 0 0;">All product names, logos and brands mentioned on this website are the property of their respective owners. Specifications are indicative and may change. Please refer to the manufacturer's datasheet for exact details.</p>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isNarrow: typeof matchMedia === 'function' ? matchMedia('(max-width: 1040px)').matches : false,
+      isMiniNavNarrow: typeof matchMedia === 'function' ? matchMedia('(max-width: 900px)').matches : false,
+      mobileNavOpen: false, productsOpen: false
+    };
+  }
+  componentDidMount() {
+    this._mql = matchMedia('(max-width: 1040px)');
+    this._onMql = (e) => this.setState({ isNarrow: e.matches });
+    if (this._mql.addEventListener) this._mql.addEventListener('change', this._onMql);
+    this._mql2 = matchMedia('(max-width: 900px)');
+    this._onMql2 = (e) => this.setState({ isMiniNavNarrow: e.matches });
+    if (this._mql2.addEventListener) this._mql2.addEventListener('change', this._onMql2);
+  }
+  componentWillUnmount() {
+    if (this._mql && this._mql.removeEventListener) this._mql.removeEventListener('change', this._onMql);
+    if (this._mql2 && this._mql2.removeEventListener) this._mql2.removeEventListener('change', this._onMql2);
+  }
+  renderVals() {
+    const isNarrow = this.state.isNarrow;
+    const familyLinks = [
+      { name: 'Installation & Earthing Testers', href: 'family-installation-earthing.dc.html' },
+      { name: 'Insulation & Resistance Testers', href: 'family-insulation-resistance.dc.html' },
+      { name: 'Power System Test Equipment', href: 'family-power-system-test.dc.html' },
+      { name: 'Power Quality, Energy & Solar', href: 'family-power-quality-solar.dc.html' },
+      { name: 'Handheld & Safety Testers', href: 'family-handheld-safety.dc.html' },
+      { name: 'Calibration, Lab & Software', href: 'family-calibration-lab-software.dc.html' },
+      { name: 'Lightning & Surge Protection', href: 'family-lightning-surge.dc.html' }
+    ];
+    const mobileNavItems = [
+      { href: 'index.html', label: 'Home' },
+      { href: 'about-us.dc.html', label: 'About' },
+      { href: 'products-overview.dc.html', label: 'Products' },
+      { href: 'instrument-selection-guide.dc.html', label: 'Selection Guide' },
+      { href: 'industries-applications.dc.html', label: 'Industries' },
+      { href: 'services-support.dc.html', label: 'Services' },
+      { href: 'how-to-buy.dc.html', label: 'How to Buy' },
+      { href: 'contact.dc.html', label: 'Contact' }
+    ];
+    const sectorsBase = [
+      { id: 'sec-energy', name: 'Electrical Energy & Utilities', direction: 'row', imageCaption: 'Substation with transformers and switchgear',
+        items: ['Power generation: generators, transformers, switchgear and auxiliary systems tested during outages and overhauls', 'Renewable energy: solar and wind plants need commissioning, performance checks and long-term fault finding', 'Power transmission and distribution: substations, cables, transformers and protection relays require routine tests', 'Industrial installations: planned testing of motors, drives, panels and process equipment avoids production stops'] },
+      { id: 'sec-buildings', name: 'Buildings & Facilities', direction: 'row-reverse', imageCaption: 'Electrical riser and distribution board in a commercial building',
+        items: ['Low voltage installation safety: verification and periodic inspection of wiring, RCDs and earthing in homes, offices, malls and campuses', 'Earthing and lightning protection: measurement of earth electrodes and checking of bonding for towers, buildings and data centres', 'Power quality in buildings: monitoring of power factor, harmonics and voltage stability for sensitive equipment', 'Special locations: swimming pools, construction sites, temporary installations and hazardous areas which require additional care'] },
+      { id: 'sec-manufacturing', name: 'Electrical Equipment & Manufacturing', direction: 'row', imageCaption: 'Production line with safety testing station',
+        items: ['Machine safety testing for machine builders and users', 'Appliance testing: portable and fixed appliance testing programmes', 'End-of-line safety testing for manufactured products', 'Switchboard and control panel verification'] },
+      { id: 'sec-transport', name: 'Transportation', direction: 'row-reverse', imageCaption: 'EV charging point being tested',
+        items: ['Electric vehicle charging infrastructure: testing of charging points and installations', 'Railways and metro systems: earthing and bonding verification and equipment testing', 'Airports and ports: ground power, earthing and lighting installations', 'Ships and marine installations: insulation and earthing tests in shipyards and on vessels'] },
+      { id: 'sec-health', name: 'Healthcare Facilities', direction: 'row', imageCaption: 'Hospital electrical distribution room',
+        items: ['Hospital earthing and lightning protection', 'Power supply and distribution reliability checks', 'Electrical safety in operating theatres and patient care areas', 'Periodic testing of medical electrical equipment'] },
+      { id: 'sec-education', name: 'Education & Laboratories', direction: 'row-reverse', imageCaption: 'Students using a test instrument in a training lab', hasIntro: true,
+        intro: 'Engineering colleges, polytechnics and training institutes use test instruments and training kits to teach safe measurement practice. Calibration and research laboratories use reference instruments and calibrators.',
+        items: [] }
+    ];
+    const sectors = sectorsBase.map((s) => ({ ...s, anchor: '#' + s.id, hasIntro: !!s.hasIntro }));
+    return {
+      desktopNavDisplay: isNarrow ? 'none' : 'flex',
+      mobileNavBtnDisplay: isNarrow ? 'flex' : 'none',
+      mobileBarDisplay: isNarrow ? 'block' : 'none',
+      mobileOverlayDisplay: this.state.mobileNavOpen ? 'flex' : 'none',
+      toggleMobileNav: () => this.setState((s) => ({ mobileNavOpen: !s.mobileNavOpen })),
+      openProducts: () => this.setState({ productsOpen: true }),
+      closeProducts: () => this.setState({ productsOpen: false }),
+      productsPanelDisplay: this.state.productsOpen && !isNarrow ? 'block' : 'none',
+      familyLinks, mobileNavItems, sectors,
+      miniNavDisplay: this.state.isMiniNavNarrow ? 'none' : 'flex'
+    };
+  }
+}
+
+</script>
+</body>
+</html>

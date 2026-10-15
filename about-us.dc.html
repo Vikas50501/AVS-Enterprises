@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="./assets/favicon-32.png">
+  <title>About AVS Enterprises | Electrical Test Equipment Supplier</title>
+  <meta name="description" content="AVS Enterprises is a partnership firm in Bhiwandi supplying electrical testing, measuring and protection equipment with honest advice and after-sales care."/>
+  <style>
+    :focus-visible { outline:2px solid #D9A21B; outline-offset:2px; }
+    body { margin:0; background:#FFFFFF; color:#0A1730; -webkit-font-smoothing:antialiased; }
+    * { box-sizing:border-box; }
+    html { overflow-x:clip; scroll-padding-top:100px; }
+    a { color:#0F2B5B; }
+    a:hover { color:#D9A21B; }
+  </style>
+</helmet>
+
+<div style="font-family:'Schibsted Grotesk',system-ui,sans-serif; background:#FFFFFF; color:#0A1730; overflow-x:hidden;">
+
+  <a href="#main-content" style="position:absolute; left:-9999px; top:0; background:#D9A21B; color:#0A1730; padding:12px 20px; font-size:14px; font-weight:700; text-decoration:none; z-index:999;" style-focus="left:12px; top:12px;">Skip to content</a>
+
+  <header style="position:fixed; top:0; left:0; right:0; z-index:200; background:#FFFFFF; border-bottom:1px solid #E3E7ED;">
+    <div style="max-width:1400px; margin:0 auto; padding:16px 6vw; display:flex; align-items:center; justify-content:space-between; gap:20px;">
+      <a href="index.html"><img src="./assets/logo-on-light-bg.png" alt="AVS Enterprises" style="height:32px; width:auto;"/></a>
+      <nav style="display:{{ desktopNavDisplay }}; align-items:center; gap:26px;">
+        <a href="index.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Home</a>
+        <span style="display:inline-flex; align-items:center; gap:7px; font-size:15px; font-weight:700; color:#0A1730;"><span style="width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:8px solid #D9A21B;"></span>About</span>
+        <div onMouseEnter="{{ openProducts }}" onMouseLeave="{{ closeProducts }}" style="position:relative;">
+          <a href="products-overview.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Products</a>
+        </div>
+        <a href="instrument-selection-guide.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Selection Guide</a>
+        <a href="industries-applications.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Industries</a>
+        <a href="services-support.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Services</a>
+        <a href="how-to-buy.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">How to Buy</a>
+        <a href="contact.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Contact</a>
+      </nav>
+      <div style="display:{{ desktopNavDisplay }}; align-items:center; gap:18px;">
+        <a href="contact.dc.html" style="font-size:14px; font-weight:700; background:#D9A21B; color:#0A1730; padding:13px 24px; text-decoration:none;">Get a Quotation</a>
+        <a href="tel:+919819360334" style="font-size:14px; color:#5E6672; text-decoration:none; white-space:nowrap;">+91 98193 60334</a>
+      </div>
+      <button onClick="{{ toggleMobileNav }}" aria-label="Open menu" style="display:{{ mobileNavBtnDisplay }}; background:none; border:1px solid #0A1730; width:44px; height:44px; align-items:center; justify-content:center; cursor:pointer;">
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none"><line x1="0" y1="1" x2="18" y2="1" stroke="#0A1730" stroke-width="1.5"></line><line x1="0" y1="7" x2="18" y2="7" stroke="#0A1730" stroke-width="1.5"></line><line x1="0" y1="13" x2="18" y2="13" stroke="#0A1730" stroke-width="1.5"></line></svg>
+      </button>
+    </div>
+    <div style="display:{{ productsPanelDisplay }}; position:absolute; top:100%; left:0; right:0; background:#FFFFFF; border-bottom:1px solid #E3E7ED;" onMouseEnter="{{ openProducts }}" onMouseLeave="{{ closeProducts }}">
+      <div style="max-width:1400px; margin:0 auto; padding:36px 6vw; display:flex; flex-wrap:wrap; gap:14px 40px;">
+        <sc-for list="{{ familyLinks }}" as="fam" hint-placeholder-count="7">
+          <a href="{{ fam.href }}" style="padding:10px 0; text-decoration:none; color:#0A1730; font-family:'Big Shoulders Display',sans-serif; font-weight:700; font-size:19px;">{{ fam.name }}</a>
+        </sc-for>
+      </div>
+    </div>
+  </header>
+
+  <div style="position:fixed; inset:0; z-index:300; background:#0F2B5B; display:{{ mobileOverlayDisplay }}; flex-direction:column; padding:28px 28px 40px;">
+    <div style="display:flex; justify-content:flex-end; margin-bottom:24px;">
+      <button onClick="{{ toggleMobileNav }}" aria-label="Close menu" style="background:none; border:none; font-size:30px; cursor:pointer; color:#FFFFFF;">&times;</button>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:18px; flex:1; justify-content:center;">
+      <sc-for list="{{ mobileNavItems }}" as="item" hint-placeholder-count="8">
+        <a href="{{ item.href }}" style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:32px; text-decoration:none; color:#FFFFFF;">{{ item.label }}</a>
+      </sc-for>
+    </div>
+    <a href="contact.dc.html" style="text-align:center; font-size:15px; font-weight:700; background:#D9A21B; color:#0A1730; padding:17px; text-decoration:none;">Get a Quotation</a>
+  </div>
+
+  <div style="display:{{ mobileBarDisplay }}; position:fixed; left:0; right:0; bottom:0; z-index:150; padding-bottom:env(safe-area-inset-bottom);">
+    <div style="display:flex;">
+      <a href="tel:+919819360334" style="flex:1; text-align:center; background:#0F2B5B; color:#FFFFFF; text-decoration:none; padding:16px; font-size:14px; font-weight:600;">Call Now</a>
+      <a href="contact.dc.html" style="flex:1; text-align:center; background:#D9A21B; color:#0A1730; text-decoration:none; padding:16px; font-size:14px; font-weight:700;">Get a Quotation</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section id="main-content" style="display:flex; flex-wrap:wrap; min-height:60vh; padding-top:86px;">
+    <div style="flex:1 1 480px; background:#0A1730; display:flex; flex-direction:column; justify-content:center; padding:48px 6vw;">
+      <div style="font-size:13.5px; color:#8A95AC; margin-bottom:18px;">AVS Enterprises / About Us</div>
+      <h1 style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; text-transform:uppercase; color:#FFFFFF; font-size:clamp(32px,5.2vw,62px); line-height:1.02; letter-spacing:-0.01em; margin:0 0 22px; max-width:16ch;">Your Partner for Electrical Testing, Measurement and Protection</h1>
+      <p style="font-size:17px; line-height:1.65; color:#C7CEDB; max-width:46ch; margin:0 0 32px;">Honest advice, dependable instruments and a team that stays available after the sale.</p>
+      <div style="display:flex; align-items:center; gap:28px; flex-wrap:wrap; margin-bottom:40px;">
+        <a href="contact.dc.html" style="font-size:15px; font-weight:700; background:#D9A21B; color:#0A1730; padding:16px 28px; text-decoration:none;">Talk to Our Team</a>
+        <a href="products-overview.dc.html" style="display:inline-flex; align-items:center; gap:8px; font-size:16px; color:#FFFFFF; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.4); padding-bottom:3px;">View Products
+          <svg width="13" height="9" viewBox="0 0 13 9"><path d="M0 4.5h11M7 0.5l4 4-4 4" stroke="#FFFFFF" stroke-width="1.4" fill="none"></path></svg>
+        </a>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; border-top:1px solid rgba(255,255,255,0.22); padding:20px 0;">
+        <div style="padding-right:26px; border-right:1px solid rgba(255,255,255,0.22); margin-right:26px; color:#FFFFFF; font-size:14px;">Partnership firm</div>
+        <div style="padding-right:26px; border-right:1px solid rgba(255,255,255,0.22); margin-right:26px; color:#FFFFFF; font-size:14px;">Kalyan-Bhiwandi MIDC</div>
+        <div style="color:#FFFFFF; font-size:14px;">GST-registered</div>
+      </div>
+    </div>
+    <div style="flex:1 1 400px; position:relative; min-height:40vh; clip-path:polygon(8% 0,100% 0,100% 100%,0 100%);">
+      <image-slot id="about-hero" shape="rect" placeholder="Team portrait or a tidy instrument display shelf at the Bhiwandi office"></image-slot>
+    </div>
+  </section>
+
+  <main style="max-width:1400px; margin:0 auto; padding:0 6vw;">
+
+    <!-- WHO WE ARE: split screen -->
+    <section style="padding:100px 0 90px; display:flex; flex-wrap:wrap-reverse; gap:56px;">
+      <div style="flex:1 1 380px;">
+        <image-slot id="who-we-are" shape="rect" placeholder="Technician reviewing an instrument at the AVS warehouse" style="aspect-ratio:4/5; display:block;"></image-slot>
+      </div>
+      <div style="flex:1 1 420px; display:flex; flex-direction:column; justify-content:center;">
+        <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(26px,3.2vw,36px); margin:0 0 24px; max-width:18ch;">Instruments you can rely on, from people who understand how they are used</h2>
+        <p style="font-size:16px; line-height:1.75; color:#5E6672; margin:0 0 20px;">AVS Enterprises is a partnership firm located in the Kalyan-Bhiwandi MIDC industrial area of Maharashtra. We supply electrical testing, measuring and protection equipment to the people who build, inspect and maintain India's electrical infrastructure.</p>
+        <p style="font-size:16px; line-height:1.75; color:#5E6672; margin:0 0 20px;">Our customers include electrical contractors, panel builders, factories, power utilities, solar developers, inspection agencies, calibration laboratories and technical institutes. They come to us because they need instruments that give dependable readings, and a supplier who understands how those instruments are used on site.</p>
+        <p style="font-size:14px; line-height:1.6; color:#A3780F; background:#FBF2DD; padding:14px 18px; margin:8px 0 0; border-left:3px solid #D9A21B;">[Optional: add the year the business started, founders' names and a short paragraph about how AVS Enterprises began.]</p>
+      </div>
+    </section>
+
+    <!-- MISSION / VISION -->
+    <section style="margin:0 -6vw 0;">
+      <div style="display:flex; flex-wrap:wrap;">
+        <div style="flex:1 1 400px; background:#0A1730; padding:72px 6vw; min-height:280px;">
+          <div style="font-size:13px; font-weight:700; color:#D9A21B; letter-spacing:0.04em; margin-bottom:18px;">OUR MISSION</div>
+          <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:700; color:#FFFFFF; font-size:clamp(22px,2.6vw,30px); line-height:1.3; max-width:20ch;">To make dependable electrical testing and protection equipment easy to find, easy to understand and easy to buy, supported by honest advice and responsive service.</div>
+        </div>
+        <div style="flex:1 1 400px; background:#EDF0F4; padding:72px 6vw; min-height:280px;">
+          <div style="font-size:13px; font-weight:700; color:#A3780F; letter-spacing:0.04em; margin-bottom:18px;">OUR VISION</div>
+          <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:700; color:#0A1730; font-size:clamp(22px,2.6vw,30px); line-height:1.3; max-width:22ch;">To be a trusted name in electrical test, measurement and protection supply across India, known for integrity, technical understanding and long-term relationships with our customers.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALUES -->
+    <section style="padding:100px 0;">
+      <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(28px,4vw,42px); margin:0 0 48px;">What our values mean for you</h2>
+      <div>
+        <sc-for list="{{ values }}" as="v" hint-placeholder-count="6">
+          <div onMouseEnter="{{ v.onHover }}" onMouseLeave="{{ v.onLeave }}" style="display:flex; align-items:baseline; gap:20px; padding:26px 0; border-bottom:1px solid #E3E7ED; cursor:default;">
+            <div style="width:0; height:0; flex-shrink:0; border-top:7px solid transparent; border-bottom:7px solid transparent; border-left:11px solid #D9A21B; opacity:{{ v.markerOpacity }}; transition:opacity 200ms ease;"></div>
+            <span style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(22px,2.6vw,28px); flex:0 0 260px;">{{ v.name }}</span>
+            <span style="font-size:16px; line-height:1.6; color:#5E6672; flex:1 1 320px;">{{ v.meaning }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- COMPANY DETAILS -->
+    <section style="padding:0 0 100px;">
+      <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(26px,3.4vw,36px); margin:0 0 36px;">Registered business information</h2>
+      <div style="border-top:1px solid #E3E7ED;">
+        <sc-for list="{{ companyDetails }}" as="d" hint-placeholder-count="5">
+          <div style="display:flex; flex-wrap:wrap; gap:8px 40px; padding:20px 0; border-bottom:1px solid #E3E7ED;">
+            <span style="flex:0 0 220px; font-size:14px; font-weight:700; color:#5E6672;">{{ d.label }}</span>
+            <span style="flex:1 1 400px; font-size:16px; color:#0A1730;">{{ d.value }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+
+  <!-- CTA BAND -->
+  <section style="position:relative; background:#D9A21B; padding:100px 6vw; clip-path:polygon(0 4%,100% 0,100% 100%,0 100%);">
+    <div style="max-width:1200px; margin:0 auto;">
+      <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; color:#0A1730; font-size:clamp(26px,3.6vw,38px); margin:0 0 16px;">Let's talk about your testing needs.</h2>
+      <p style="color:#4A3A0F; font-size:16px; line-height:1.6; margin:0 0 26px; max-width:50ch;">Our team is happy to discuss your application and recommend the right instruments.</p>
+      <div style="display:flex; gap:28px; align-items:center; flex-wrap:wrap;">
+        <a href="contact.dc.html" style="font-size:15px; font-weight:700; background:#0A1730; color:#FFFFFF; padding:16px 30px; text-decoration:none;">Contact Us</a>
+        <a href="tel:+919819360334" style="font-size:16px; font-weight:700; color:#0A1730; text-decoration:none;">Call +91 98193 60334</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:#0F2B5B; color:#C7CEDB; padding:72px 6vw 32px;">
+    <div style="max-width:1400px; margin:0 auto;">
+      <div style="display:flex; flex-wrap:wrap; gap:48px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.14);">
+        <div style="flex:1 1 220px;">
+          <img src="./assets/logo-on-dark-bg.png" alt="AVS Enterprises" style="height:36px; width:auto; margin-bottom:16px;"/>
+        </div>
+        <div style="flex:1 1 160px;">
+          <div style="font-size:13px; font-weight:700; color:#8A95AC; margin-bottom:16px;">Site</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="index.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Home</a>
+            <a href="about-us.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">About</a>
+            <a href="products-overview.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Products</a>
+            <a href="instrument-selection-guide.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Selection Guide</a>
+            <a href="industries-applications.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Industries</a>
+            <a href="services-support.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Services</a>
+            <a href="how-to-buy.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">How to Buy</a>
+            <a href="faq.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">FAQ</a>
+            <a href="contact.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Contact</a>
+          </div>
+        </div>
+        <div style="flex:1 1 220px;">
+          <div style="font-size:13px; font-weight:700; color:#8A95AC; margin-bottom:16px;">Instrument families</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <sc-for list="{{ familyLinks }}" as="fam" hint-placeholder-count="7">
+              <a href="{{ fam.href }}" style="color:#C7CEDB; text-decoration:none; font-size:14px;">{{ fam.name }}</a>
+            </sc-for>
+          </div>
+        </div>
+        <div style="flex:1 1 260px;">
+          <div style="font-size:13px; font-weight:700; color:#8A95AC; margin-bottom:16px;">Contact</div>
+          <div style="font-size:14px; line-height:1.7; color:#C7CEDB;">
+            B-14/2, Asmeeta Textile Park, Plot No. 1,<br/>Addl. Kalyan-Bhiwandi MIDC Industrial Area,<br/>Village Kon, Bhiwandi - 421311, Maharashtra<br/><br/>
+            Phone: +91 98193 60334<br/>Email: [your email]<br/>GSTIN: 27ABCFA8291N1ZW
+          </div>
+        </div>
+      </div>
+      <div style="padding-top:28px; font-size:13px; color:#8A95AC;">&copy; 2026 AVS Enterprises. All rights reserved.</div>
+      <p style="font-size:12px; line-height:1.6; color:#5E6B85; max-width:900px; margin:18px 0 0;">All product names, logos and brands mentioned on this website are the property of their respective owners. Specifications are indicative and may change. Please refer to the manufacturer's datasheet for exact details.</p>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isNarrow: typeof matchMedia === 'function' ? matchMedia('(max-width: 1040px)').matches : false,
+      mobileNavOpen: false, productsOpen: false, hoveredValue: -1
+    };
+  }
+  componentDidMount() {
+    this._mql = matchMedia('(max-width: 1040px)');
+    this._onMql = (e) => this.setState({ isNarrow: e.matches });
+    if (this._mql.addEventListener) this._mql.addEventListener('change', this._onMql);
+  }
+  componentWillUnmount() {
+    if (this._mql && this._mql.removeEventListener) this._mql.removeEventListener('change', this._onMql);
+  }
+  renderVals() {
+    const isNarrow = this.state.isNarrow;
+    const familyLinks = [
+      { name: 'Installation & Earthing Testers', href: 'family-installation-earthing.dc.html' },
+      { name: 'Insulation & Resistance Testers', href: 'family-insulation-resistance.dc.html' },
+      { name: 'Power System Test Equipment', href: 'family-power-system-test.dc.html' },
+      { name: 'Power Quality, Energy & Solar', href: 'family-power-quality-solar.dc.html' },
+      { name: 'Handheld & Safety Testers', href: 'family-handheld-safety.dc.html' },
+      { name: 'Calibration, Lab & Software', href: 'family-calibration-lab-software.dc.html' },
+      { name: 'Lightning & Surge Protection', href: 'family-lightning-surge.dc.html' }
+    ];
+    const mobileNavItems = [
+      { href: 'index.html', label: 'Home' },
+      { href: 'about-us.dc.html', label: 'About' },
+      { href: 'products-overview.dc.html', label: 'Products' },
+      { href: 'instrument-selection-guide.dc.html', label: 'Selection Guide' },
+      { href: 'industries-applications.dc.html', label: 'Industries' },
+      { href: 'services-support.dc.html', label: 'Services' },
+      { href: 'how-to-buy.dc.html', label: 'How to Buy' },
+      { href: 'contact.dc.html', label: 'Contact' }
+    ];
+    const valuesBase = [
+      { name: 'Integrity', meaning: 'We tell you clearly what an instrument can and cannot do. We do not oversell.' },
+      { name: 'Accuracy', meaning: 'Measurement is our business, so we take care to get details, quotations and documents right.' },
+      { name: 'Safety', meaning: 'Every recommendation puts the safety of the user and the installation first.' },
+      { name: 'Transparency', meaning: 'Prices, delivery timelines and warranty terms are stated clearly in advance.' },
+      { name: 'Service', meaning: 'Your question does not end when the invoice is issued. We stay available after the sale.' },
+      { name: 'Continuous learning', meaning: 'We keep up with new instruments, standards and testing methods so that our advice stays current.' }
+    ];
+    const hoveredValue = this.state.hoveredValue;
+    const values = valuesBase.map((v, i) => ({
+      ...v,
+      onHover: () => this.setState({ hoveredValue: i }),
+      onLeave: () => this.setState({ hoveredValue: -1 }),
+      markerOpacity: hoveredValue === i ? 1 : 0
+    }));
+    const companyDetails = [
+      { label: 'Legal name', value: 'AVS Enterprises' },
+      { label: 'Constitution of business', value: 'Partnership firm' },
+      { label: 'GST registration number', value: '27ABCFA8291N1ZW' },
+      { label: 'Address', value: 'B-14/2, Asmeeta Textile Park, Plot No. 1, Addl. Kalyan-Bhiwandi MIDC Industrial Area, Village Kon, Bhiwandi - 421311, Maharashtra, India' },
+      { label: 'Phone', value: '+91 98193 60334' },
+      { label: 'Email', value: '[your email address]' }
+    ];
+    return {
+      desktopNavDisplay: isNarrow ? 'none' : 'flex',
+      mobileNavBtnDisplay: isNarrow ? 'flex' : 'none',
+      mobileBarDisplay: isNarrow ? 'block' : 'none',
+      mobileOverlayDisplay: this.state.mobileNavOpen ? 'flex' : 'none',
+      toggleMobileNav: () => this.setState((s) => ({ mobileNavOpen: !s.mobileNavOpen })),
+      openProducts: () => this.setState({ productsOpen: true }),
+      closeProducts: () => this.setState({ productsOpen: false }),
+      productsPanelDisplay: this.state.productsOpen && !isNarrow ? 'block' : 'none',
+      familyLinks, mobileNavItems, values, companyDetails
+    };
+  }
+}
+
+</script>
+</body>
+</html>

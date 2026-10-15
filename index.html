@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="./assets/favicon-32.png">
+  <script src="./image-slot.js"></script>
+  <style>
+    :focus-visible { outline:2px solid #D9A21B; outline-offset:2px; }
+    body { margin:0; background:#FFFFFF; color:#0A1730; -webkit-font-smoothing:antialiased; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; overflow-x:clip; scroll-padding-top:100px; }
+    a { color:#0F2B5B; }
+    a:hover { color:#D9A21B; }
+    @media (prefers-color-scheme: dark) { body { background:#0F1726; color:#EDF0F4; } }
+    @keyframes avsBob { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+    @keyframes avsMarquee2 { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AVS Enterprises","image":"./assets/logo-on-light-bg.png","telephone":"+91-98193-60334","address":{"@type":"PostalAddress","streetAddress":"B-14/2, Asmeeta Textile Park, Plot No. 1, Addl. Kalyan-Bhiwandi MIDC Industrial Area, Village Kon","addressLocality":"Bhiwandi","addressRegion":"Maharashtra","postalCode":"421311","addressCountry":"IN"},"taxID":"27ABCFA8291N1ZW","description":"Supplier of electrical testing, measuring and protection equipment in Bhiwandi, Maharashtra.","url":"./index.html"}</script>
+</helmet>
+
+<div style="font-family:'Schibsted Grotesk',system-ui,sans-serif; background:#FFFFFF; color:#0A1730; overflow-x:hidden;">
+
+  <a href="#top" style="position:absolute; left:-9999px; top:0; background:#D9A21B; color:#0A1730; padding:12px 20px; font-size:14px; font-weight:700; text-decoration:none; z-index:999;" style-focus="left:12px; top:12px;">Skip to content</a>
+
+  <!-- HEADER -->
+  <header onMouseLeave="{{ closeProducts }}" style="position:fixed; top:0; left:0; right:0; z-index:200; background:#FFFFFF; border-bottom:1px solid #E3E7ED;">
+    <div style="max-width:1400px; margin:0 auto; padding:{{ headerPad }}; display:flex; align-items:center; justify-content:space-between; gap:20px; transition:padding 250ms ease;">
+      <img src="./assets/logo-on-light-bg.png" alt="AVS Enterprises" style="height:34px; width:auto;"/>
+      <nav style="display:{{ desktopNavDisplay }}; align-items:center; gap:28px;">
+        <a href="#top" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Home</a>
+        <a href="about-us.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">About</a>
+        <div onMouseEnter="{{ openProducts }}" onMouseLeave="{{ closeProducts }}" style="position:relative;">
+          <button type="button" aria-expanded="{{ productsOpen }}" aria-controls="products-menu" onClick="{{ toggleProducts }}" style="font:inherit; color:#0A1730; font-weight:500; cursor:pointer; background:none; border:0; padding:0;">Products</button>
+        </div>
+        <a href="instrument-selection-guide.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Selection Guide</a>
+        <a href="industries-applications.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Industries</a>
+        <a href="services-support.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Services</a>
+        <a href="how-to-buy.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">How to Buy</a>
+        <a href="contact.dc.html" style="font-size:15px; text-decoration:none; color:#0A1730; font-weight:500;">Contact</a>
+      </nav>
+      <div style="display:{{ desktopNavDisplay }}; align-items:center; gap:18px;">
+        <a href="contact.dc.html" style="font-size:14px; font-weight:700; background:#D9A21B; color:#0A1730; padding:13px 24px; text-decoration:none;">Get a Quotation</a>
+        <a href="tel:+919819360334" style="font-size:14px; color:#5E6672; text-decoration:none; white-space:nowrap;">+91 98193 60334</a>
+      </div>
+      <button onClick="{{ toggleMobileNav }}" aria-label="Open menu" style="display:{{ mobileNavBtnDisplay }}; background:none; border:1px solid #0A1730; width:44px; height:44px; align-items:center; justify-content:center; cursor:pointer;">
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none"><line x1="0" y1="1" x2="18" y2="1" stroke="#0A1730" stroke-width="1.5"></line><line x1="0" y1="7" x2="18" y2="7" stroke="#0A1730" stroke-width="1.5"></line><line x1="0" y1="13" x2="18" y2="13" stroke="#0A1730" stroke-width="1.5"></line></svg>
+      </button>
+    </div>
+    <div id="products-menu" style="display:{{ productsPanelDisplay }}; position:absolute; top:100%; left:0; right:0; background:#FFFFFF; border-bottom:1px solid #E3E7ED;" onMouseEnter="{{ openProducts }}" onMouseLeave="{{ closeProducts }}">
+      <div style="max-width:1400px; margin:0 auto; padding:40px; display:flex; gap:56px;">
+        <div style="flex:1 1 320px; display:flex; flex-direction:column;">
+          <sc-for list="{{ families }}" as="fam" hint-placeholder-count="7">
+            <a href="{{ fam.familyPageHref }}" onMouseEnter="{{ fam.onMenuHover }}" style="padding:12px 0; border-bottom:1px solid #E3E7ED; text-decoration:none; color:{{ fam.menuColor }}; font-family:'Big Shoulders Display',sans-serif; font-weight:700; font-size:22px;">{{ fam.name }}</a>
+          </sc-for>
+        </div>
+        <div style="flex:1 1 360px; aspect-ratio:4/3;">
+          <image-slot id="mega-panel-preview" shape="rect" placeholder="{{ menuFamily.imageCaptionFull }}"></image-slot>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div style="position:fixed; inset:0; z-index:300; background:#0F2B5B; display:{{ mobileOverlayDisplay }}; flex-direction:column; padding:28px 28px 40px;">
+    <div style="display:flex; justify-content:flex-end; margin-bottom:24px;">
+      <button onClick="{{ toggleMobileNav }}" aria-label="Close menu" style="background:none; border:none; font-size:30px; cursor:pointer; color:#FFFFFF;">×</button>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:18px; flex:1; justify-content:center;">
+      <sc-for list="{{ mobileNavItems }}" as="item" hint-placeholder-count="7">
+        <a href="{{ item.href }}" onClick="{{ toggleMobileNav }}" style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:34px; text-decoration:none; color:#FFFFFF; opacity:{{ mobileNavOpenNum }}; transform:{{ item.transform }}; transition:opacity 380ms ease {{ item.delay }}, transform 380ms ease {{ item.delay }};">{{ item.label }}</a>
+      </sc-for>
+    </div>
+    <a href="contact.dc.html" onClick="{{ toggleMobileNav }}" style="text-align:center; font-size:15px; font-weight:700; background:#D9A21B; color:#0A1730; padding:17px; text-decoration:none;">Get a Quotation</a>
+  </div>
+
+  <!-- MOBILE STICKY BAR -->
+  <div style="display:{{ mobileBarDisplay }}; position:fixed; left:0; right:0; bottom:0; z-index:150; padding-bottom:env(safe-area-inset-bottom);">
+    <div style="display:flex;">
+      <a href="tel:+919819360334" style="flex:1; text-align:center; background:#0F2B5B; color:#FFFFFF; text-decoration:none; padding:16px; font-size:14px; font-weight:600;">Call Now</a>
+      <a href="contact.dc.html" style="flex:1; text-align:center; background:#D9A21B; color:#0A1730; text-decoration:none; padding:16px; font-size:14px; font-weight:700;">Get a Quotation</a>
+    </div>
+  </div>
+
+  <!-- 1 HERO -->
+  <section id="top" style="display:flex; flex-wrap:wrap; min-height:100vh; padding-top:{{ headerHeight }}; padding-bottom:{{ mobileBarPad }};">
+    <div style="flex:1 1 480px; background:#0F2B5B; display:flex; flex-direction:column; justify-content:center; padding:48px 6vw 0; position:relative;">
+      <h1 style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; text-transform:uppercase; color:#FFFFFF; font-size:clamp(38px,6.6vw,88px); line-height:0.98; letter-spacing:-0.01em; margin:0 0 28px; overflow:hidden;">
+        <span style="display:block; overflow:hidden;"><span style="display:block; transform:{{ heroT1 }}; transition:transform 700ms cubic-bezier(.22,1,.36,1);">Reliable Testing</span></span>
+        <span style="display:block; overflow:hidden;"><span style="display:block; transform:{{ heroT2 }}; transition:transform 700ms cubic-bezier(.22,1,.36,1) 100ms;">and Measuring</span></span>
+        <span style="display:block; overflow:hidden;"><span style="display:block; transform:{{ heroT3 }}; transition:transform 700ms cubic-bezier(.22,1,.36,1) 200ms; color:#D9A21B;">Instruments</span></span>
+      </h1>
+      <p style="font-size:18px; line-height:1.65; color:#C7CEDB; max-width:46ch; margin:0 0 36px;">AVS Enterprises supplies electrical testing, measuring and protection equipment from Bhiwandi, Maharashtra. We help contractors, factories, utilities, solar developers and laboratories choose the right instruments and support them after the sale.</p>
+      <div style="display:flex; align-items:center; gap:30px; flex-wrap:wrap; margin-bottom:56px;">
+        <a href="contact.dc.html" style="font-size:15px; font-weight:700; background:#D9A21B; color:#0A1730; padding:17px 30px; text-decoration:none;">Get a Quotation</a>
+        <a href="products-overview.dc.html" style="display:inline-flex; align-items:center; gap:8px; font-size:16px; color:#FFFFFF; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.4); padding-bottom:3px;">
+          Browse Instruments
+          <svg width="13" height="9" viewBox="0 0 13 9" style="transition:transform 250ms ease;" style-hover="transform:translateX(4px);"><path d="M0 4.5h11M7 0.5l4 4-4 4" stroke="#FFFFFF" stroke-width="1.4" fill="none"></path></svg>
+        </a>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:0; border-top:1px solid rgba(255,255,255,0.22); padding:20px 0; margin-bottom:0;">
+        <div style="padding-right:26px; border-right:1px solid rgba(255,255,255,0.22); margin-right:26px; color:#FFFFFF; font-size:14.5px;">14 product categories</div>
+        <div style="padding-right:26px; border-right:1px solid rgba(255,255,255,0.22); margin-right:26px; color:#FFFFFF; font-size:14.5px;">Itemised quotations</div>
+        <div style="color:#FFFFFF; font-size:14.5px;">After-sales support</div>
+      </div>
+    </div>
+    <div style="flex:1 1 400px; position:relative; min-height:50vh; clip-path:{{ heroClip }}; margin-left:{{ heroClipMargin }}; transition:clip-path 900ms cubic-bezier(.22,1,.36,1);">
+      <image-slot id="hero-visual" shape="rect" placeholder="Technician checking a switchboard with an installation tester — cinematic portrait"></image-slot>
+      <div style="position:absolute; left:-14px; top:38%; width:0; height:0; border-top:16px solid transparent; border-bottom:16px solid transparent; border-right:26px solid #D9A21B; animation:avsBob 4.5s ease-in-out infinite;"></div>
+    </div>
+  </section>
+
+  <main style="max-width:1400px; margin:0 auto; padding:0 6vw;">
+
+    <!-- 2 WHO WE SERVE -->
+    <section id="about" style="padding:110px 0 90px;" ref="{{ registerReveal }}">
+      <div style="display:flex; flex-wrap:wrap; gap:48px; margin-bottom:44px;">
+        <h2 style="flex:1 1 380px; font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(26px,3.4vw,38px); max-width:20ch; line-height:1.2; margin:0;">Built for the people who build, inspect and maintain India's electrical infrastructure</h2>
+        <p style="flex:1 1 320px; font-size:16px; line-height:1.7; color:#5E6672; margin:0; align-self:flex-end;">From a single multimeter for a technician to a complete substation test kit for a utility, we help customers choose equipment that fits their work, their standards and their budget.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); border-top:1px solid #E3E7ED; border-left:1px solid #E3E7ED;">
+        <sc-for list="{{ audienceRows }}" as="aud" hint-placeholder-count="8">
+          <div onMouseEnter="{{ aud.onHover }}" onMouseLeave="{{ aud.onLeave }}" style="display:flex; align-items:flex-start; gap:16px; padding:22px; border-bottom:1px solid #E3E7ED; border-right:1px solid #E3E7ED; cursor:default; transition:background 200ms ease; background:{{ aud.rowBg }};">
+            <svg width="26" height="26" viewBox="0 0 26 26" style="flex-shrink:0; margin-top:4px;"><path d="{{ aud.iconPath }}" stroke="{{ aud.color }}" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <div>
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+                <span style="font-family:'Big Shoulders Display',sans-serif; font-weight:700; font-size:21px; color:{{ aud.color }}; transition:color 200ms ease;">{{ aud.name }}</span>
+                <div style="width:0; height:0; flex-shrink:0; border-top:5px solid transparent; border-bottom:5px solid transparent; border-left:8px solid #D9A21B; opacity:{{ aud.markerOpacity }}; transition:opacity 200ms ease;"></div>
+              </div>
+              <div style="font-size:13.5px; line-height:1.5; color:#5E6672;">{{ aud.desc }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+
+  <!-- 3 TAGLINE BAND -->
+  <section style="position:relative; background:#D9A21B; padding:110px 6vw; clip-path:polygon(0 0,100% 4%,100% 96%,0 100%); overflow:hidden;" ref="{{ registerReveal }}">
+    <div style="max-width:1300px; margin:0 auto; display:flex; flex-direction:column; align-items:center; gap:4px;">
+      <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; text-transform:uppercase; color:#0A1730; font-size:clamp(28px,5.6vw,58px); line-height:1.02; transform:{{ taglineT1 }}; transition:transform 700ms cubic-bezier(.22,1,.36,1);">Test with Confidence.</div>
+      <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; text-transform:uppercase; color:#0A1730; font-size:clamp(28px,5.6vw,58px); line-height:1.02; transform:{{ taglineT2 }}; transition:transform 700ms cubic-bezier(.22,1,.36,1) 100ms;">Measure with Accuracy.</div>
+    </div>
+  </section>
+
+  <main style="max-width:1400px; margin:0 auto; padding:0 6vw;">
+
+    <!-- 4 INSTRUMENT FAMILIES -->
+    <section id="families" style="padding:120px 0;">
+      <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(28px,4vw,44px); margin:0 0 56px;">Explore our instrument families</h2>
+      <div style="display:flex; flex-wrap:wrap; gap:0;">
+        <div style="flex:1 1 380px; display:{{ familyStickyDisplay }};">
+          <div style="position:sticky; top:96px; height:calc(100vh - 136px); max-height:620px; overflow:hidden;">
+            <image-slot id="families-sticky-preview" shape="rect" placeholder="{{ activeFamilyObj.imageCaptionFull }}"></image-slot>
+          </div>
+        </div>
+        <div style="flex:1 1 480px; padding-left:{{ familyListPad }};">
+          <sc-for list="{{ families }}" as="fam" hint-placeholder-count="7">
+            <div ref="{{ fam.registerRow }}" style="display:flex; flex-direction:column; min-height:{{ familyRowMinHeight }}; justify-content:center; border-bottom:1px solid #E3E7ED; padding:32px 0;">
+              <div style="display:{{ familyImgInlineDisplay }}; aspect-ratio:4/5; margin-bottom:24px;">
+                <image-slot id="family-row-img-{{ fam.n }}" shape="rect" placeholder="{{ fam.imageCaptionFull }}"></image-slot>
+              </div>
+              <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:10px;">
+                <div style="width:0; height:0; border-top:7px solid transparent; border-bottom:7px solid transparent; border-left:11px solid #D9A21B; opacity:{{ fam.markerOpacity }};"></div>
+                <span style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(24px,3vw,34px); color:{{ fam.rowColor }};">{{ fam.name }}</span>
+              </div>
+              <div style="font-size:15.5px; color:#5E6672; margin-bottom:14px; max-width:48ch;">{{ fam.desc }}</div>
+              <a href="{{ fam.familyPageHref }}" style="display:inline-flex; align-items:center; gap:8px; font-size:14.5px; color:#0F2B5B; text-decoration:none; border-bottom:1px solid #0F2B5B; width:max-content; padding-bottom:2px;">
+                View family
+                <svg width="11" height="8" viewBox="0 0 11 8" style="transition:transform 250ms ease;" style-hover="transform:translateX(3px);"><path d="M0 4h9M6 1l3 3-3 3" stroke="#0F2B5B" stroke-width="1.3" fill="none"></path></svg>
+              </a>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 FEATURED CATEGORIES -->
+    <section style="padding:0 0 120px;" ref="{{ registerReveal }}">
+      <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(28px,4vw,44px); margin:0 0 36px;">A closer look at what each family covers</h2>
+      <div style="display:flex; gap:28px; flex-wrap:wrap; border-bottom:1px solid #E3E7ED; padding-bottom:20px; margin-bottom:40px;">
+        <sc-for list="{{ families }}" as="fam" hint-placeholder-count="7">
+          <button onClick="{{ fam.onSelectTab }}" style="background:none; border:none; padding:6px 0; border-bottom:2px solid {{ fam.tabBorder }}; color:{{ fam.tabColor }}; font-size:15px; font-weight:600; cursor:pointer;">{{ fam.shortName }}</button>
+        </sc-for>
+      </div>
+      <sc-for list="{{ families }}" as="fam" hint-placeholder-count="7">
+        <div style="display:{{ fam.tabContentDisplay }}; gap:48px; flex-wrap:wrap;">
+          <div style="flex:1 1 340px; aspect-ratio:4/3; min-height:240px;">
+            <image-slot id="featured-tab-img-{{ fam.n }}" shape="rect" placeholder="{{ fam.imageCaptionFull }}"></image-slot>
+          </div>
+          <div style="flex:1 1 400px;">
+            <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:28px; margin-bottom:22px;">{{ fam.name }}</div>
+            <div style="margin-bottom:18px;">
+              <div style="font-size:14px; font-weight:700; color:#0A1730; margin-bottom:6px;">What it measures</div>
+              <div style="font-size:15.5px; line-height:1.65; color:#5E6672;">{{ fam.whatMeasures }}</div>
+            </div>
+            <div style="margin-bottom:22px;">
+              <div style="font-size:14px; font-weight:700; color:#0A1730; margin-bottom:6px;">Where it's used</div>
+              <div style="font-size:15.5px; line-height:1.65; color:#5E6672;">{{ fam.whereUsed }}</div>
+            </div>
+            <div style="border-left:4px solid #D9A21B; padding-left:18px;">
+              <div style="font-size:13px; font-weight:700; color:#A3780F; margin-bottom:4px;">Buying tip</div>
+              <div style="font-size:15px; line-height:1.6; color:#0A1730;">{{ fam.buyingTip }}</div>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </section>
+
+    <!-- 6 BY THE NUMBERS -->
+    <section style="padding:0 0 90px; border-top:1px solid #E3E7ED;" ref="{{ registerStats }}">
+      <div style="display:flex; flex-wrap:wrap;">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+          <div style="flex:1 1 200px; padding:40px 28px 0 0; border-right:{{ s.border }};">
+            <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:clamp(46px,7vw,86px); line-height:1; font-variant-numeric:tabular-nums;">{{ s.display }}</div>
+            <div style="font-size:15px; color:#5E6672; margin-top:10px;">{{ s.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+
+  <!-- MARQUEE -->
+  <section style="background:#EDF0F4; padding:26px 0; overflow:hidden; border-top:1px solid #E3E7ED; border-bottom:1px solid #E3E7ED;">
+    <div style="display:flex; width:max-content; animation:avsMarquee2 38s linear infinite;" style-hover="animation-play-state:paused;">
+      <sc-for list="{{ marqueeCats }}" as="m" hint-placeholder-count="28">
+        <div style="padding:0 28px; white-space:nowrap; font-size:16px; color:#5E6672; border-right:1px solid #D1D7E0;">{{ m }}</div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- 7 TESTING STAGES -->
+  <section style="background:#0F2B5B; padding:110px 6vw;" ref="{{ registerReveal }}">
+    <div style="max-width:1400px; margin:0 auto;">
+      <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; color:#FFFFFF; font-size:clamp(28px,4vw,44px); margin:0 0 56px;">Which instruments belong at which stage</h2>
+      <div style="display:flex; gap:0; overflow-x:auto; margin-bottom:12px;">
+        <sc-for list="{{ stages }}" as="st" hint-placeholder-count="6">
+          <div onClick="{{ st.onSelect }}" style="flex:1 1 140px; min-width:120px; text-align:center; cursor:pointer; padding:0 6px;">
+            <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:40px; color:{{ st.numColor }};">{{ st.n }}</div>
+            <div style="font-size:13.5px; color:{{ st.labelColor }}; margin-top:6px;">{{ st.name }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="height:3px; background:rgba(255,255,255,0.15); margin-bottom:48px;">
+        <div style="height:100%; width:{{ stageProgress }}; background:#D9A21B; transition:width 400ms ease;"></div>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:40px;">
+        <div style="flex:1 1 280px;">
+          <div style="font-size:13px; font-weight:700; color:#D9A21B; margin-bottom:10px;">What happens</div>
+          <div style="color:#FFFFFF; font-size:19px; line-height:1.6;">{{ activeStage.happens }}</div>
+        </div>
+        <div style="flex:1 1 280px;">
+          <div style="font-size:13px; font-weight:700; color:#D9A21B; margin-bottom:10px;">Typical instruments</div>
+          <div style="color:#FFFFFF; font-size:19px; line-height:1.6;">{{ activeStage.instruments }}</div>
+        </div>
+      </div>
+      <a href="testing-guide.dc.html" style="display:inline-flex; align-items:center; gap:8px; margin-top:36px; font-size:15px; color:#FFFFFF; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.4); padding-bottom:3px;">
+        Read the Testing Guide
+        <svg width="13" height="9" viewBox="0 0 13 9" style="transition:transform 250ms ease;" style-hover="transform:translateX(4px);"><path d="M0 4.5h11M7 0.5l4 4-4 4" stroke="#FFFFFF" stroke-width="1.4" fill="none"></path></svg>
+      </a>
+    </div>
+  </section>
+
+  <main style="max-width:1400px; margin:0 auto; padding:0 6vw;">
+
+    <!-- 8 WHY CUSTOMERS CHOOSE US -->
+    <section id="services" style="padding:120px 0;" ref="{{ registerReveal }}">
+      <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(28px,4vw,44px); margin:0 0 56px;">Six reasons customers come back</h2>
+      <div style="display:flex; flex-wrap:wrap; gap:56px;">
+        <div style="flex:1 1 320px; aspect-ratio:3/4; min-height:320px;">
+          <image-slot id="why-choose-img" shape="rect" placeholder="AVS team or a tidy instrument display shelf. Recommended 1200 x 1600, portrait."></image-slot>
+        </div>
+        <div style="flex:1 1 420px;">
+          <sc-for list="{{ reasons }}" as="r" hint-placeholder-count="6">
+            <div ref="{{ r.registerLine }}" style="display:flex; gap:16px; padding:22px 0; border-bottom:1px solid #E3E7ED;">
+              <div style="flex-shrink:0; width:0; height:0; border-top:7px solid transparent; border-bottom:7px solid transparent; border-left:11px solid #D9A21B; margin-top:5px;"></div>
+              <div>
+                <div style="font-size:17px; line-height:1.6; color:#0A1730; margin-bottom:10px;">{{ r.text }}</div>
+                <div style="height:2px; background:#D9A21B; width:{{ r.lineWidth }}; transition:width 700ms cubic-bezier(.22,1,.36,1);"></div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 INSTRUMENT FINDER -->
+    <section id="selection" style="padding:0 0 120px;" ref="{{ registerReveal }}">
+      <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(28px,4vw,44px); margin:0 0 48px;">Not sure which instrument you need?</h2>
+      <div style="display:flex; flex-wrap:wrap; gap:56px; background:#EDF0F4; padding:48px;">
+        <div style="flex:1 1 320px;">
+          <sc-for list="{{ tasks }}" as="tsk" hint-placeholder-count="8">
+            <div onClick="{{ tsk.onSelect }}" style="padding:16px 0; border-bottom:1px solid #D1D7E0; cursor:pointer;">
+              <span style="font-size:16.5px; color:{{ tsk.color }}; font-weight:{{ tsk.weight }};">{{ tsk.task }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="flex:1 1 360px; display:flex; flex-direction:column; gap:24px;">
+          <div style="aspect-ratio:4/3;">
+            <image-slot id="finder-workbench-img" shape="rect" placeholder="Technician comparing instruments at a workbench. Recommended 1200 x 900, landscape."></image-slot>
+          </div>
+          <div style="opacity:{{ answerOpacity }}; transition:opacity 350ms ease;">
+            <div style="font-size:13px; font-weight:700; color:#5E6672; margin-bottom:8px;">Recommended</div>
+            <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:26px; margin-bottom:10px;">{{ activeTaskResult.instrument }}</div>
+            <a href="{{ activeTaskResult.familyHref }}" style="font-size:14.5px; color:#0F2B5B; margin-right:20px;">{{ activeTaskResult.family }}</a>
+            <a href="contact.dc.html" style="font-size:14.5px; font-weight:700; background:#D9A21B; color:#0A1730; padding:12px 22px; text-decoration:none; display:inline-block; margin-top:12px;">Get a Quotation</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 10 INDUSTRIES -->
+  <section id="industries" style="background:#0F2B5B; padding:110px 6vw;">
+    <div style="max-width:1400px; margin:0 auto;">
+      <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; color:#FFFFFF; font-size:clamp(28px,4vw,44px); margin:0 0 48px;">Test and protection equipment for every electrical environment</h2>
+      <div style="display:flex; gap:4px; height:{{ sectorHeight }}; flex-direction:{{ sectorDirection }}; overflow-x:auto;">
+        <sc-for list="{{ sectors }}" as="sec" hint-placeholder-count="6">
+          <div onMouseEnter="{{ sec.onHover }}" onClick="{{ sec.onHover }}" style="position:relative; flex:{{ sec.flexGrow }}; min-width:{{ sec.minWidth }}; min-height:{{ sec.minHeight }}; background:#12306A; overflow:hidden; cursor:pointer; transition:flex-grow 450ms cubic-bezier(.22,1,.36,1);">
+            <div style="position:absolute; inset:0;"><image-slot id="sector-img-{{ sec.idx }}" shape="rect" placeholder="{{ sec.imageCaptionFull }}"></image-slot></div>
+            <div style="position:absolute; inset:0; background:rgba(10,23,48,0.5); pointer-events:none;"></div>
+            <div style="position:absolute; left:18px; right:18px; bottom:18px; display:{{ sec.textDisplay }}; pointer-events:none;">
+              <span style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; color:#FFFFFF; font-size:17px;">{{ sec.name }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <main style="max-width:1400px; margin:0 auto; padding:0 6vw;">
+    <!-- 11 HOW TO BUY -->
+    <section id="how-to-buy" style="padding:120px 0;" ref="{{ registerBuySteps }}">
+      <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:clamp(28px,4vw,44px); margin:0 0 64px;">Six clear steps from enquiry to dispatch</h2>
+      <div style="position:relative; display:flex; flex-wrap:wrap; gap:0;">
+        <div style="position:absolute; left:0; right:0; top:22px; height:2px; background:#E3E7ED;"><div style="height:100%; width:{{ buyProgress }}; background:#D9A21B; transition:width 600ms ease;"></div></div>
+        <sc-for list="{{ buySteps }}" as="b" hint-placeholder-count="6">
+          <div style="flex:1 1 150px; min-width:140px; position:relative; z-index:1; padding-right:16px;">
+            <div style="font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:44px; color:{{ b.numColor }}; background:#fff; width:44px;">{{ b.n }}</div>
+            <div style="font-size:16px; font-weight:700; margin:14px 0 8px;">{{ b.title }}</div>
+            <div style="font-size:14px; line-height:1.55; color:#5E6672;">{{ b.desc }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+
+  <!-- 12 CLOSING ENQUIRY -->
+  <section id="contact" style="position:relative; background:#D9A21B; padding:110px 6vw; clip-path:polygon(0 4%,100% 0,100% 100%,0 100%);">
+    <div style="max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; gap:56px;">
+      <div style="flex:1 1 320px;">
+        <h2 style="font-family:'Big Shoulders Display',sans-serif; font-weight:800; color:#0A1730; font-size:clamp(28px,4vw,42px); margin:0 0 18px;">Tell us what you want to test.</h2>
+        <p style="color:#4A3A0F; font-size:16.5px; line-height:1.7; margin:0 0 28px;">Share your application, the voltage or current range and any standards you follow. We will reply with suitable options.</p>
+        <a href="tel:+919819360334" style="font-size:17px; font-weight:700; color:#0A1730; text-decoration:none;">Call +91 98193 60334</a>
+      </div>
+      <div style="flex:1 1 420px;">
+        <div style="display:{{ formDisplay }}; flex-direction:column; gap:22px;">
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:22px;">
+            <label style="display:flex; flex-direction:column; gap:8px;">
+              <span style="font-size:13px; font-weight:600; color:#4A3A0F;">Name *</span>
+              <input type="text" value="{{ formData.name }}" onInput="{{ setName }}" style="background:transparent; border:none; border-bottom:1px solid #0A1730; color:#0A1730; font-size:16px; padding:8px 0; outline:none;"/>
+            </label>
+            <label style="display:flex; flex-direction:column; gap:8px;">
+              <span style="font-size:13px; font-weight:600; color:#4A3A0F;">Company</span>
+              <input type="text" style="background:transparent; border:none; border-bottom:1px solid #0A1730; color:#0A1730; font-size:16px; padding:8px 0; outline:none;"/>
+            </label>
+            <label style="display:flex; flex-direction:column; gap:8px;">
+              <span style="font-size:13px; font-weight:600; color:#4A3A0F;">Phone *</span>
+              <input type="tel" value="{{ formData.phone }}" onInput="{{ setPhone }}" style="background:transparent; border:none; border-bottom:1px solid #0A1730; color:#0A1730; font-size:16px; padding:8px 0; outline:none;"/>
+            </label>
+            <label style="display:flex; flex-direction:column; gap:8px;">
+              <span style="font-size:13px; font-weight:600; color:#4A3A0F;">Email</span>
+              <input type="email" style="background:transparent; border:none; border-bottom:1px solid #0A1730; color:#0A1730; font-size:16px; padding:8px 0; outline:none;"/>
+            </label>
+          </div>
+          <label style="display:flex; flex-direction:column; gap:8px;">
+            <span style="font-size:13px; font-weight:600; color:#4A3A0F;">Category</span>
+            <select style="background:transparent; border:none; border-bottom:1px solid #0A1730; color:#0A1730; font-size:16px; padding:8px 0; outline:none;">
+              <sc-for list="{{ families }}" as="fam" hint-placeholder-count="7">
+                <option>{{ fam.name }}</option>
+              </sc-for>
+            </select>
+          </label>
+          <label style="display:flex; flex-direction:column; gap:8px;">
+            <span style="font-size:13px; font-weight:600; color:#4A3A0F;">What you want to test</span>
+            <textarea rows="3" style="background:transparent; border:none; border-bottom:1px solid #0A1730; color:#0A1730; font-size:16px; padding:8px 0; outline:none; resize:vertical; font-family:inherit;"></textarea>
+          </label>
+          <div style="display:{{ formErrorDisplay }}; color:#6B1414; font-size:14px;">Please fill in your name and phone number.</div>
+          <button onClick="{{ submitForm }}" style="align-self:flex-start; font-size:15px; font-weight:700; background:#0A1730; color:#FFFFFF; padding:16px 30px; border:none; cursor:pointer;">Request My Quotation</button>
+        </div>
+        <div style="display:{{ successDisplay }}; align-items:center; gap:14px; background:#0A1730; padding:26px;">
+          <div style="color:#FFFFFF; font-size:15.5px;">Thank you. We will review your requirement and reply shortly.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 FOOTER -->
+  <footer style="background:#0F2B5B; color:#C7CEDB; padding:80px 6vw 32px;">
+    <div style="max-width:1400px; margin:0 auto;">
+      <div style="display:flex; flex-wrap:wrap; gap:48px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.14);">
+        <div style="flex:1 1 220px;">
+          <img src="./assets/logo-on-dark-bg.png" alt="AVS Enterprises" style="height:38px; width:auto; margin-bottom:16px;"/>
+        </div>
+        <div style="flex:1 1 160px;">
+          <div style="font-size:13px; font-weight:700; color:#8A95AC; margin-bottom:16px;">Site</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="#top" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Home</a>
+            <a href="about-us.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">About</a>
+            <a href="instrument-selection-guide.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Selection Guide</a>
+            <a href="industries-applications.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Industries</a>
+            <a href="how-to-buy.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">How to Buy</a>
+            <a href="contact.dc.html" style="color:#C7CEDB; text-decoration:none; font-size:14px;">Contact</a>
+          </div>
+        </div>
+        <div style="flex:1 1 220px;">
+          <div style="font-size:13px; font-weight:700; color:#8A95AC; margin-bottom:16px;">Instrument families</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <sc-for list="{{ families }}" as="fam" hint-placeholder-count="7">
+              <a href="{{ fam.familyPageHref }}" style="color:#C7CEDB; text-decoration:none; font-size:14px;">{{ fam.name }}</a>
+            </sc-for>
+          </div>
+        </div>
+        <div style="flex:1 1 260px;">
+          <div style="font-size:13px; font-weight:700; color:#8A95AC; margin-bottom:16px;">Contact</div>
+          <div style="font-size:14px; line-height:1.7; color:#C7CEDB;">
+            B-14/2, Asmeeta Textile Park, Plot No. 1,<br/>Addl. Kalyan-Bhiwandi MIDC Industrial Area,<br/>Village Kon, Bhiwandi - 421311, Maharashtra<br/><br/>
+            Phone: +91 98193 60334<br/>Email: [your email]<br/>GSTIN: 27ABCFA8291N1ZW
+          </div>
+        </div>
+      </div>
+      <div style="padding-top:28px; font-size:13px; color:#8A95AC;">© 2026 AVS Enterprises. All rights reserved.</div>
+      <p style="font-size:12px; line-height:1.6; color:#5E6B85; max-width:900px; margin:18px 0 0;">All product names, logos and brands mentioned on this website are the property of their respective owners. Specifications are indicative and may change. Please refer to the manufacturer's datasheet for exact details.</p>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.reducedMotion = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.state = {
+      isNarrow: typeof matchMedia === 'function' ? matchMedia('(max-width: 1040px)').matches : false,
+      isFamilyNarrow: typeof matchMedia === 'function' ? matchMedia('(max-width: 680px)').matches : false,
+      mobileNavOpen: false, scrolled: false, productsOpen: false,
+      heroRevealed: this.reducedMotion, taglineRevealed: this.reducedMotion,
+      hoveredAudience: -1,
+      menuHoverFamily: 0,
+      activeFamilyRow: 0,
+      activeTab: 0,
+      activeTask: 0,
+      activeStage: 2,
+      activeSector: 0,
+      statsStarted: this.reducedMotion, statValues: [0,0,0,0],
+      buyStepsLit: this.reducedMotion ? 6 : 0,
+      linesDrawn: this.reducedMotion ? new Array(6).fill(true) : [],
+      formData: { name: '', phone: '' },
+      formError: false,
+      formSubmitted: false
+    };
+    this._revealEls = []; this._revealed = new Set();
+    this._lineRefs = [];
+    this._familyRowRefs = [];
+    this._productsCloseTimer = null;
+  }
+
+  componentDidMount() {
+    this._mql = matchMedia('(max-width: 1040px)');
+    this._onMql = (e) => this.setState({ isNarrow: e.matches });
+    if (this._mql.addEventListener) this._mql.addEventListener('change', this._onMql);
+    this._mqlFam = matchMedia('(max-width: 680px)');
+    this._onMqlFam = (e) => this.setState({ isFamilyNarrow: e.matches });
+    if (this._mqlFam.addEventListener) this._mqlFam.addEventListener('change', this._onMqlFam);
+    this._onScroll = () => this.setState({ scrolled: window.scrollY > 10 });
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+
+    if (!this.reducedMotion) {
+      setTimeout(() => this.setState({ heroRevealed: true }), 250);
+      this._io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'none'; this._io.unobserve(e.target); } });
+      }, { threshold: 0.1 });
+      setTimeout(() => this._revealEls.forEach((el) => this._io.observe(el)), 50);
+
+      this._tagIo = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { this.setState({ taglineRevealed: true }); this._tagIo.disconnect(); } });
+      }, { threshold: 0.4 });
+      const tagSection = document.querySelector('[data-tagline]');
+    }
+    // safety fallback: reveal everything after 2.5s regardless
+    this._fallback = setTimeout(() => {
+      this._revealEls.forEach((el) => { el.style.opacity = '1'; el.style.transform = 'none'; });
+      this.setState({ heroRevealed: true, taglineRevealed: true });
+    }, 2500);
+  }
+
+  componentWillUnmount() {
+    if (this._mql && this._mql.removeEventListener) this._mql.removeEventListener('change', this._onMql);
+    if (this._mqlFam && this._mqlFam.removeEventListener) this._mqlFam.removeEventListener('change', this._onMqlFam);
+    window.removeEventListener('scroll', this._onScroll);
+    if (this._io) this._io.disconnect();
+    if (this._tagIo) this._tagIo.disconnect();
+    if (this._statInterval) clearInterval(this._statInterval);
+    if (this._buyInterval) clearInterval(this._buyInterval);
+    clearTimeout(this._fallback);
+  }
+
+  registerReveal(el) {
+    if (!el || this.reducedMotion || this._revealed.has(el)) return;
+    this._revealed.add(el);
+    el.style.opacity = '0'; el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 600ms ease-out, transform 600ms ease-out';
+    this._revealEls.push(el);
+    if (el.hasAttribute && el.tagName === 'SECTION') {
+      if (!this._tagObserved && el.textContent.indexOf('Test with Confidence') === -1) {}
+    }
+  }
+
+  registerFamilyRow(idx, el) {
+    if (!el || this._familyRowRefs[idx]) return;
+    this._familyRowRefs[idx] = el;
+    if (!this._familyIo) {
+      this._familyIo = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            const i = this._familyRowRefs.indexOf(e.target);
+            if (i !== -1) this.setState({ activeFamilyRow: i });
+          }
+        });
+      }, { threshold: 0, rootMargin: '-40% 0px -40% 0px' });
+    }
+    this._familyIo.observe(el);
+  }
+
+  registerLine(idx, el) {
+    if (!el || this.reducedMotion) return;
+    if (!this._lineIo) {
+      this._lineIo = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            const i = this._lineRefs.indexOf(e.target);
+            if (i !== -1 && !this.state.linesDrawn[i]) {
+              this.setState((s) => { const ld = s.linesDrawn.slice(); ld[i] = true; return { linesDrawn: ld }; });
+            }
+            this._lineIo.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.4 });
+    }
+    if (this._lineRefs[idx] !== el) { this._lineRefs[idx] = el; this._lineIo.observe(el); }
+  }
+
+  registerStats(el) {
+    if (!el || this._statsObs) return;
+    this._statsObs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting && !this.state.statsStarted) { this.startStats(); this._statsObs.disconnect(); } });
+    }, { threshold: 0.3 });
+    this._statsObs.observe(el);
+  }
+
+  startStats() {
+    if (this.reducedMotion) { this.setState({ statsStarted: true, statValues: [14,7,6,8] }); return; }
+    this.setState({ statsStarted: true });
+    const targets = [14,7,6,8]; const steps = 30; let i = 0;
+    this._statInterval = setInterval(() => {
+      i++; this.setState({ statValues: targets.map((t) => Math.round(t * Math.min(1, i / steps))) });
+      if (i >= steps) clearInterval(this._statInterval);
+    }, 30);
+  }
+
+  registerBuySteps(el) {
+    if (!el || this._buyObs || this.reducedMotion) return;
+    this._buyObs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting && this.state.buyStepsLit === 0) { this.litBuySteps(); this._buyObs.disconnect(); } });
+    }, { threshold: 0.3 });
+    this._buyObs.observe(el);
+  }
+
+  litBuySteps() {
+    let n = 0;
+    this._buyInterval = setInterval(() => { n++; this.setState({ buyStepsLit: n }); if (n >= 6) clearInterval(this._buyInterval); }, 180);
+  }
+
+  renderVals() {
+    const isNarrow = this.state.isNarrow;
+    const familyBase = [
+      { n:'01', name:'Installation & Earthing Testers', shortName:'Installation & Earthing', desc:'Prove wiring and earthing safe.',
+        whatMeasures:'Insulation resistance, continuity of protective conductors, earth loop and line impedance, prospective short-circuit current, RCD trip time and trip current, earth resistance.',
+        whereUsed:'Testing and commissioning of new wiring, periodic inspection, fault finding on tripping breakers and RCDs.',
+        buyingTip:'Choose a multifunction model if you inspect many types of installations. Choose single-function units if your team always performs the same one or two tests.',
+        imageCaption:'installation tester connected to a socket, earth rod kit beside it' },
+      { n:'02', name:'Insulation & Resistance Testers', shortName:'Insulation & Resistance', desc:'Spot weak insulation and poor joints.',
+        whatMeasures:'Insulation resistance at selectable test voltages, polarisation index, and micro-ohm/milli-ohm contact resistance across bonds, joints and busbars.',
+        whereUsed:'Motors, generators, cables, transformers, switchgear and busbar joints.',
+        buyingTip:'Match the test voltage to the equipment rating. For breaker and busbar work, look for at least 100 A on a micro-ohmmeter.',
+        imageCaption:'insulation tester on a motor terminal box, micro-ohmmeter on a breaker' },
+      { n:'03', name:'Power System Test Equipment', shortName:'Power System', desc:'Transformers, breakers and protection.',
+        whatMeasures:'Transformer turns ratio, winding resistance and vector group; breaker contact timing and synchronism; CT ratio and relay pickup via primary injection.',
+        whereUsed:'Factory and site acceptance testing, pre-energisation checks, substation breaker maintenance, protection scheme verification.',
+        buyingTip:'Winding resistance test current should be matched to transformer size — larger transformers need higher test current to stabilise in reasonable time.',
+        imageCaption:'field engineer testing a transformer with a TTR kit in a substation yard' },
+      { n:'04', name:'Power Quality, Energy & Solar', shortName:'Power Quality & Solar', desc:'Understand supply quality and PV performance.',
+        whatMeasures:'Voltage, current, harmonics, flicker, dips and swells; string open-circuit voltage, I-V curves and insulation resistance of DC cables.',
+        whereUsed:'Energy audits, troubleshooting sensitive equipment, rooftop and ground-mounted solar commissioning and maintenance.',
+        buyingTip:'If results may be used in a contract or regulatory dispute, choose a Class A analyser; Class S is usually sufficient for maintenance work.',
+        imageCaption:'power analyser at an incoming panel, I-V curve tracer on a rooftop string' },
+      { n:'05', name:'Handheld & Safety Testers', shortName:'Handheld & Safety', desc:'Everyday meters, cameras and appliance testers.',
+        whatMeasures:'Voltage, current, resistance, temperature, presence of voltage, and protective earth resistance, insulation resistance and leakage currents on appliances and machines.',
+        whereUsed:'Routine maintenance, panel checks, hot-spot detection, workplace appliance inspection programmes.',
+        buyingTip:'Always select the safety category (CAT III or CAT IV) that matches the highest-risk point where you will work.',
+        imageCaption:'clamp meter in a panel, thermal camera view of a breaker' },
+      { n:'06', name:'Calibration, Lab & Software', shortName:'Calibration & Lab', desc:'References, training kits, reporting and accessories.',
+        whatMeasures:'Generation and measurement of voltage, current, resistance and frequency for checking other instruments; reporting and data handling for test records.',
+        whereUsed:'Calibration laboratories, instrumentation departments, technical colleges and ITIs.',
+        buyingTip:'A reference should be several times more accurate than the instrument you are checking.',
+        imageCaption:'calibrator on a lab bench next to a laptop showing a test report' },
+      { n:'07', name:'Lightning & Surge Protection', shortName:'Lightning & Surge', desc:'Components for protecting structures and electronics.',
+        whatMeasures:'Not a measuring category — components are designed, installed and verified against standards; the earth system is verified with earth testers.',
+        whereUsed:'Buildings, factories, telecom towers, data centres, solar plants and hospitals.',
+        buyingTip:'Protection design should come from a qualified designer. We supply the components and testing equipment, and can help with selection.',
+        imageCaption:'air terminal on a rooftop and a surge protective device inside a panel' }
+    ];
+    const activeFamilyRow = this.state.activeFamilyRow, activeTab = this.state.activeTab, menuHoverFamily = this.state.menuHoverFamily;
+    const families = familyBase.map((f, i) => ({
+      ...f,
+      imageCaptionFull: f.imageCaption.charAt(0).toUpperCase() + f.imageCaption.slice(1) + '. Recommended 1200 x 1500, portrait.',
+      onMenuHover: () => this.setState({ menuHoverFamily: i }),
+      menuColor: menuHoverFamily === i ? '#D9A21B' : '#0A1730',
+      registerRow: (el) => this.registerFamilyRow(i, el),
+      familyPageHref: ['family-installation-earthing.dc.html','family-insulation-resistance.dc.html','family-power-system-test.dc.html','family-power-quality-solar.dc.html','family-handheld-safety.dc.html','family-calibration-lab-software.dc.html','family-lightning-surge.dc.html'][i],
+      rowColor: activeFamilyRow === i ? '#0A1730' : '#AEB8C8',
+      markerOpacity: activeFamilyRow === i ? 1 : 0,
+      onSelectTab: () => this.setState({ activeTab: i }),
+      tabContentDisplay: activeTab === i ? 'flex' : 'none',
+      tabColor: activeTab === i ? '#0A1730' : '#5E6672',
+      tabBorder: activeTab === i ? '#D9A21B' : 'transparent'
+    }));
+    const menuFamily = families[menuHoverFamily];
+    const activeFamilyObj = families[activeFamilyRow];
+
+    const audienceBase = [
+      { name:'Electrical contractors', desc:'Verify wiring and earthing on new and existing installations.', iconPath:'M4 22l9-15 9 15M13 7v2M8 22h10' },
+      { name:'Panel builders', desc:'Confirm switchboards and panels are safe before handover.', iconPath:'M5 3h16v20H5zM9 7h8M9 11h8M9 15h8M9 19h4' },
+      { name:'Factories', desc:'Keep motors, drives and process equipment running reliably.', iconPath:'M3 21V11l6 4v-4l6 4v-4l6 4v6H3z' },
+      { name:'Power utilities', desc:'Test transformers, breakers and protection at scale.', iconPath:'M13 2L4 14h7l-2 8 10-13h-7z' },
+      { name:'Solar developers', desc:'Commission and maintain PV strings, inverters and earthing.', iconPath:'M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 11h3M18 11h3M4.2 17.8l2.1-2.1M17.7 4.3l2.1-2.1M12 7a4 4 0 100 8 4 4 0 000-8z' },
+      { name:'Inspection agencies', desc:'Produce dependable, report-ready verification results.', iconPath:'M9 11l2 2 4-4M4 5l8-3 8 3v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5z' },
+      { name:'Calibration laboratories', desc:'Check and adjust instruments against a trusted reference.', iconPath:'M12 3v4M12 17v4M3 12h4M17 12h4M12 9a3 3 0 100 6 3 3 0 000-6z' },
+      { name:'Technical institutes', desc:'Teach safe, hands-on electrical testing practice.', iconPath:'M3 9l9-5 9 5-9 5-9-5zM7 11v5c0 1.5 2.5 3 6 3s6-1.5 6-3v-5' }
+    ];
+    const hoveredAudience = this.state.hoveredAudience;
+    const audienceRows = audienceBase.map((aud, i) => ({
+      ...aud,
+      onHover: () => this.setState({ hoveredAudience: i }),
+      onLeave: () => this.setState({ hoveredAudience: -1 }),
+      color: hoveredAudience === i ? '#D9A21B' : '#0A1730',
+      markerOpacity: hoveredAudience === i ? 1 : 0,
+      rowBg: hoveredAudience === i ? '#F7F8FA' : 'transparent'
+    }));
+
+    const marqueeCatsBase = [
+      'Electrical Installation Safety Testers','Earth Resistance and Earthing Testers','Insulation Resistance and HV Insulation Testers',
+      'Continuity, Low Resistance and Contact Resistance Testers','Power and Distribution Transformer Testing Equipment',
+      'Circuit Breaker and Switchgear Testing Equipment','Primary Injection Test Sets','Machine, Appliance and Switchboard Safety Testers',
+      'Power Quality Analysers, Energy Loggers and Power Calibrators','Solar (Photovoltaic) Test Equipment',
+      'Multimeters, Clamp Meters, Voltage Testers and Thermal Cameras','Calibrators and Laboratory / Training Equipment',
+      'Lightning and Surge Protection Components','Software, Cloud Tools and Accessories'
+    ];
+    const marqueeCats = marqueeCatsBase.concat(marqueeCatsBase);
+
+    const reasonTexts = [
+      'Advice matched to your application and your budget',
+      'A broad range covering installation testing, power system diagnostics, power quality, solar and lightning protection',
+      'Clear, itemised quotations and straightforward answers on availability',
+      'Help with set-up, usage questions, accessories and spares after purchase',
+      'Support for bulk, project and repeat orders',
+      "A location in the Bhiwandi industrial belt, well connected to Mumbai's industrial and logistics network"
+    ];
+    const linesDrawn = this.state.linesDrawn;
+    const reasons = reasonTexts.map((text, i) => ({
+      text, registerLine: (el) => this.registerLine(i, el),
+      lineWidth: linesDrawn[i] ? '56px' : '0px'
+    }));
+
+    const stageBase = [
+      { name:'Design & survey', happens:'Soil, load and site measurements before construction.', instruments:'Soil resistivity tester, power analyser.' },
+      { name:'Installation', happens:'Checks on wiring and equipment as it is built.', instruments:'Continuity and insulation testers.' },
+      { name:'Commissioning', happens:'Full verification before energising.', instruments:'Installation tester, earth tester, primary injection set.' },
+      { name:'Routine maintenance', happens:'Scheduled checks to track condition.', instruments:'Insulation, contact resistance, transformer and breaker testers.' },
+      { name:'Fault finding', happens:'Investigating a trip, failure or poor performance.', instruments:'Clamp meter, thermal camera, power quality analyser.' },
+      { name:'Calibration', happens:'Verifying the instruments themselves.', instruments:'Calibrators and reference meters.' }
+    ];
+    const activeStageIdx = this.state.activeStage;
+    const stages = stageBase.map((s, i) => ({
+      ...s, n: i + 1,
+      onSelect: () => this.setState({ activeStage: i }),
+      numColor: activeStageIdx === i ? '#D9A21B' : '#4A6190',
+      labelColor: activeStageIdx === i ? '#FFFFFF' : '#8A95AC'
+    }));
+    const activeStage = stages[activeStageIdx];
+    const stageProgress = ((activeStageIdx + 1) / 6 * 100) + '%';
+
+    const taskBase = [
+      { task:'Check new wiring before power-up', instrument:'Multifunction installation tester', family:'Installation & Earthing', familyHref:'family-installation-earthing.dc.html' },
+      { task:'Verify RCD and breaker protection', instrument:'Installation tester with RCD and loop impedance functions', family:'Installation & Earthing', familyHref:'family-installation-earthing.dc.html' },
+      { task:'Measure the resistance of an earth pit', instrument:'Earth resistance tester, or clamp-on earth tester', family:'Installation & Earthing', familyHref:'family-installation-earthing.dc.html' },
+      { task:'Check the condition of motor or cable insulation', instrument:'Insulation resistance tester (diagnostic type for trending)', family:'Insulation & Resistance', familyHref:'family-insulation-resistance.dc.html' },
+      { task:'Find overheated joints in a panel', instrument:'Thermal camera, then micro-ohmmeter to confirm', family:'Handheld & Safety / Insulation & Resistance', familyHref:'family-handheld-safety.dc.html' },
+      { task:'Test a transformer before commissioning', instrument:'Turns ratio tester, winding resistance meter, insulation tester', family:'Power System Test', familyHref:'family-power-system-test.dc.html' },
+      { task:'Investigate voltage dips or harmonics', instrument:'Power quality analyser', family:'Power Quality & Solar', familyHref:'family-power-quality-solar.dc.html' },
+      { task:'Inspect portable appliances in a workplace', instrument:'PAT tester', family:'Handheld & Safety', familyHref:'family-handheld-safety.dc.html' }
+    ];
+    const activeTaskIdx = this.state.activeTask;
+    const tasks = taskBase.map((t, i) => ({
+      ...t, onSelect: () => this.setState({ activeTask: i }),
+      color: activeTaskIdx === i ? '#0A1730' : '#5E6672',
+      weight: activeTaskIdx === i ? 700 : 400
+    }));
+    const activeTaskResult = taskBase[activeTaskIdx];
+
+    const sectorBase = ['Electrical Energy & Utilities','Buildings & Facilities','Electrical Equipment & Manufacturing','Transportation','Healthcare Facilities','Education & Laboratories'];
+    const activeSectorIdx = this.state.activeSector;
+    const sectorImageCaptions = [
+      'Substation with transformers and switchgear. Recommended 1200 x 1600, portrait.',
+      'Electrical riser and distribution board in a commercial building. Recommended 1200 x 1600, portrait.',
+      'Production line with a safety testing station. Recommended 1200 x 1600, portrait.',
+      'EV charging point being tested. Recommended 1200 x 1600, portrait.',
+      'Hospital electrical distribution room. Recommended 1200 x 1600, portrait.',
+      'Students using a test instrument in a training lab. Recommended 1200 x 1600, portrait.'
+    ];
+    const sectors = sectorBase.map((name, i) => ({
+      name, idx: i, imageCaptionFull: sectorImageCaptions[i],
+      onHover: () => this.setState({ activeSector: i }),
+      flexGrow: isNarrow ? 1 : (activeSectorIdx === i ? 3 : 1),
+      minWidth: isNarrow ? '100%' : '60px',
+      minHeight: isNarrow ? '220px' : 'auto',
+      textDisplay: 'block'
+    }));
+
+    const buyBase = [
+      { title:'Contact us', desc:'By phone, email or enquiry form with your requirement.' },
+      { title:'Get advice', desc:'We ask a few questions and recommend suitable options.' },
+      { title:'Receive quotation', desc:'A written quotation with specification, price and delivery time.' },
+      { title:'Confirm & pay', desc:'You confirm the order and make payment as per agreed terms.' },
+      { title:'Dispatch', desc:'We dispatch the goods with a GST invoice and documentation.' },
+      { title:'Support', desc:'We remain available for support after delivery.' }
+    ];
+    const buyStepsLit = this.state.buyStepsLit;
+    const buySteps = buyBase.map((b, i) => ({ ...b, n: i + 1, numColor: i < buyStepsLit ? '#D9A21B' : '#0A1730' }));
+    const buyProgress = (buyStepsLit / 6 * 100) + '%';
+
+    const sv = this.state.statValues;
+    const stats = [
+      { display: sv[0], label: 'Product categories', border: '1px solid #E3E7ED' },
+      { display: sv[1], label: 'Instrument families', border: '1px solid #E3E7ED' },
+      { display: sv[2], label: 'Testing stages', border: '1px solid #E3E7ED' },
+      { display: sv[3], label: 'Customer types', border: 'none' }
+    ];
+
+    const mobileNavDefs = [
+      { href:'#top', label:'Home' }, { href:'about-us.dc.html', label:'About' }, { href:'products-overview.dc.html', label:'Products' },
+      { href:'instrument-selection-guide.dc.html', label:'Selection Guide' }, { href:'industries-applications.dc.html', label:'Industries' },
+      { href:'how-to-buy.dc.html', label:'How to Buy' }, { href:'contact.dc.html', label:'Contact' }
+    ];
+    const mobileNavOpenNum = this.state.mobileNavOpen ? 1 : 0;
+    const mobileNavItems = mobileNavDefs.map((m, i) => ({
+      ...m, delay: (this.state.mobileNavOpen ? i * 50 : 0) + 'ms',
+      transform: this.state.mobileNavOpen ? 'translateY(0)' : 'translateY(14px)'
+    }));
+
+    const formData = this.state.formData;
+
+    return {
+      headerPad: this.state.scrolled ? '10px 0' : '18px 0',
+      headerHeight: this.state.scrolled ? '58px' : '74px',
+      desktopNavDisplay: isNarrow ? 'none' : 'flex',
+      mobileNavBtnDisplay: isNarrow ? 'flex' : 'none',
+      mobileBarDisplay: isNarrow ? 'block' : 'none',
+      mobileBarPad: isNarrow ? '68px' : '0',
+      mobileOverlayDisplay: this.state.mobileNavOpen ? 'flex' : 'none',
+      mobileNavOpenNum, mobileNavItems,
+      toggleMobileNav: () => this.setState((s) => ({ mobileNavOpen: !s.mobileNavOpen })),
+      openProducts: () => {
+        clearTimeout(this._productsCloseTimer);
+        this.setState({ productsOpen: true });
+      },
+      closeProducts: () => {
+        clearTimeout(this._productsCloseTimer);
+        this._productsCloseTimer = setTimeout(() => this.setState({ productsOpen: false }), 180);
+      },
+      toggleProducts: () => {
+        clearTimeout(this._productsCloseTimer);
+        this.setState((s) => ({ productsOpen: !s.productsOpen }));
+      },
+      productsPanelDisplay: this.state.productsOpen && !isNarrow ? 'block' : 'none',
+      menuFamily,
+      heroT1: this.state.heroRevealed ? 'translateY(0)' : 'translateY(100%)',
+      heroT2: this.state.heroRevealed ? 'translateY(0)' : 'translateY(100%)',
+      heroT3: this.state.heroRevealed ? 'translateY(0)' : 'translateY(100%)',
+      heroClip: this.state.heroRevealed ? 'polygon(0 0,100% 0,100% 100%,0 100%)' : 'polygon(30% 0,100% 0,100% 100%,30% 100%)',
+      heroClipMargin: '0',
+      registerReveal: (el) => this.registerReveal(el),
+      taglineT1: this.state.taglineRevealed ? 'translateX(0)' : 'translateX(-60px)',
+      taglineT2: this.state.taglineRevealed ? 'translateX(0)' : 'translateX(60px)',
+      families, activeFamilyObj,
+      familyStickyDisplay: this.state.isFamilyNarrow ? 'none' : 'block',
+      familyListPad: this.state.isFamilyNarrow ? '0' : '56px',
+      familyImgInlineDisplay: this.state.isFamilyNarrow ? 'flex' : 'none',
+      familyRowMinHeight: this.state.isFamilyNarrow ? 'auto' : '140px',
+      audienceRows, marqueeCats, reasons, stages, activeStage, stageProgress,
+      tasks, activeTaskResult, answerOpacity: 1,
+      sectors, sectorHeight: isNarrow ? 'auto' : '480px', sectorDirection: isNarrow ? 'column' : 'row',
+      buySteps, buyProgress, registerBuySteps: (el) => this.registerBuySteps(el),
+      registerStats: (el) => this.registerStats(el), stats,
+      formData,
+      setName: (e) => this.setState({ formData: { ...this.state.formData, name: e.target.value } }),
+      setPhone: (e) => this.setState({ formData: { ...this.state.formData, phone: e.target.value } }),
+      formDisplay: this.state.formSubmitted ? 'none' : 'flex',
+      successDisplay: this.state.formSubmitted ? 'flex' : 'none',
+      formErrorDisplay: this.state.formError ? 'block' : 'none',
+      submitForm: () => {
+        if (!this.state.formData.name || !this.state.formData.phone) { this.setState({ formError: true }); return; }
+        this.setState({ formSubmitted: true, formError: false });
+      }
+    };
+  }
+}
+
+</script>
+</body>
+</html>
